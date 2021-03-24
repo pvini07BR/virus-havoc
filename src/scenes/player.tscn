@@ -13,5 +13,6 @@ script = ExtResource( 2 )
 position = Vector2( 13.2433, 8.74057 )
 shape = SubResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="spr" type="Sprite" parent="col"]
+position = Vector2( -13.2433, -8.74057 )
 texture = ExtResource( 1 )

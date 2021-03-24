@@ -5,17 +5,60 @@
 
 [sub_resource type="Animation" id=1]
 resource_name = "bg1_scroll"
+length = 8.0
+loop = true
+step = 1.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("background1:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -1281, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("background2:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -2562, 0 ) ]
+}
 
-[node name="GameBackground" type="Node2D"]
+[node name="GameBackground" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="background1" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 1365.0
 texture = ExtResource( 1 )
+expand = true
+stretch_mode = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="background2" type="TextureRect" parent="."]
+modulate = Color( 1, 1, 1, 0.498039 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 2691.0
 texture = ExtResource( 2 )
+expand = true
+stretch_mode = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
