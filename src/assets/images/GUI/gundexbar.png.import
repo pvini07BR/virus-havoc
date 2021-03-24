@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bossbar.png-1854e5c118470f211493324748879b02.stex"
+path="res://.import/gundexbar.png-2fefe839b69d758cbaaf44816aa9f625.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/GUI/bossbar.png"
-dest_files=[ "res://.import/bossbar.png-1854e5c118470f211493324748879b02.stex" ]
+source_file="res://assets/images/GUI/gundexbar.png"
+dest_files=[ "res://.import/gundexbar.png-2fefe839b69d758cbaaf44816aa9f625.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bossbar.png-1854e5c118470f211493324748879b02.stex"
+path="res://.import/hpbar.png-65f399a9c3118990300d3127b12ab17f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/GUI/bossbar.png"
-dest_files=[ "res://.import/bossbar.png-1854e5c118470f211493324748879b02.stex" ]
+source_file="res://assets/images/GUI/hpbar.png"
+dest_files=[ "res://.import/hpbar.png-65f399a9c3118990300d3127b12ab17f.stex" ]
 
 [params]
 

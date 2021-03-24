@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bossbar.png-1854e5c118470f211493324748879b02.stex"
+path="res://.import/nokiafc22.svg-ee5301dd47666aa2057f2bbc2b8755a0.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/GUI/bossbar.png"
-dest_files=[ "res://.import/bossbar.png-1854e5c118470f211493324748879b02.stex" ]
+source_file="res://fonts/nokiafc22.svg"
+dest_files=[ "res://.import/nokiafc22.svg-ee5301dd47666aa2057f2bbc2b8755a0.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
