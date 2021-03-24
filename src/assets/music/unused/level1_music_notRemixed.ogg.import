@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/level1_music_notRemixed.ogg-9ea70f8a9320817dab44285d477d2a02.oggstr"
+
+[deps]
+
+source_file="res://assets/music/unused/level1_music_notRemixed.ogg"
+dest_files=[ "res://.import/level1_music_notRemixed.ogg-9ea70f8a9320817dab44285d477d2a02.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
