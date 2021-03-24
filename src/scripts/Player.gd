@@ -10,8 +10,8 @@ func _ready() -> void: # Essa função executa quando a cena do player começar
     pass # Simplesmente como não tem código, podemos pular.
 
 func _process(delta): # Essa função executa coisas dentro a todo frame. O argumento "delta" é a framerate/velocidade do jogo.
-    var rotacao = move.x * 0.2 # Ele pega o move.x e muliplica por 0.2
-    $col.rotation_degrees = lerp(0, rotacao, 0.5) # Isso fará uma interpolação que fará o nó girar de acordo com a var rotação.
+    var rotacao = move.x * 0.1 # Ele pega o move.x e muliplica por 0.2
+    $col.rotation_degrees = lerp($col.rotation_degrees, rotacao, 0.5) # Isso fará uma interpolação que fará o nó girar de acordo com a var rotação.
     
     var prev_move = move # Essa variável pega o movimento anterior do movimento atual.
     move.y = int(Input.is_action_pressed("ui_down")) - int(Input.is_action_pressed("ui_up"))
