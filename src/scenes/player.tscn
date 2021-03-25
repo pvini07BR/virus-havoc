@@ -1,10 +1,19 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/images/jogador.png" type="Texture" id=1]
 [ext_resource path="res://scripts/Player.gd" type="Script" id=2]
+[ext_resource path="res://assets/images/jogador2.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 37.0933, 19.8149 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 1 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
 
 [node name="player" type="KinematicBody2D"]
 script = ExtResource( 2 )
@@ -13,6 +22,7 @@ script = ExtResource( 2 )
 position = Vector2( 13.2433, 8.74057 )
 shape = SubResource( 1 )
 
-[node name="spr" type="Sprite" parent="col"]
+[node name="spr" type="AnimatedSprite" parent="col"]
 position = Vector2( -13.2433, -8.74057 )
-texture = ExtResource( 1 )
+frames = SubResource( 2 )
+playing = true
