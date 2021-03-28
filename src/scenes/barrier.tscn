@@ -6,7 +6,9 @@ extents = Vector2( 10, 359.182 )
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 660.362, 11.1859 )
 
-[node name="barrier" type="StaticBody2D"]
+[node name="barrier" type="StaticBody2D" groups=[
+"barrier",
+]]
 
 [node name="horizontal" type="CollisionShape2D" parent="."]
 position = Vector2( -10.0156, 359.188 )
