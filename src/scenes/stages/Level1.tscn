@@ -13,9 +13,7 @@ anchor_bottom = 0.0
 margin_right = 1280.0
 margin_bottom = 720.0
 
-[node name="CommonVirus" parent="." groups=[
-"tiro",
-] instance=ExtResource( 3 )]
+[node name="CommonVirus" parent="." instance=ExtResource( 3 )]
 position = Vector2( 1066.36, 376.533 )
 scale = Vector2( 0.335905, 0.335905 )
 
