@@ -9,16 +9,16 @@ const TIRO = preload(\"res://scenes/Tiro_padrão.tscn\")
 var tempo = false
 
 func _ready() -> void:
-    pass
+	pass
 
 func _input(Event):
-    if Event.is_action_pressed(\"ui_accept\") and !tempo:
-        get_parent().get_parent().add_child(TIRO.instance())
-        $Timer.start()
-        tempo = true
+	if Event.is_action_pressed(\"ui_accept\") and !tempo:
+		get_parent().get_parent().add_child(TIRO.instance())
+		$Timer.start()
+		tempo = true
 
 func _on_Timer_timeout() -> void:
-    tempo = false
+	tempo = false
 "
 
 [node name="gun" type="Node2D"]
@@ -34,6 +34,6 @@ offset = Vector2( -9.29274, -6.39668 )
 position = Vector2( 0.176971, -1.41581 )
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.5
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

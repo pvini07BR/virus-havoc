@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/GameBackground.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/viruses/CommonVirus.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/barrier.tscn" type="PackedScene" id=8]
 
 [node name="Level1" type="Node2D"]
@@ -11,6 +12,12 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 1280.0
 margin_bottom = 720.0
+
+[node name="CommonVirus" parent="." groups=[
+"tiro",
+] instance=ExtResource( 3 )]
+position = Vector2( 1066.36, 376.533 )
+scale = Vector2( 0.335905, 0.335905 )
 
 [node name="player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 258.251, 372.201 )

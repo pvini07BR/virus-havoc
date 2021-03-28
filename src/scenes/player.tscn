@@ -5,10 +5,10 @@
 [ext_resource path="res://assets/images/jogador2.png" type="Texture" id=3]
 [ext_resource path="res://scenes/gun.tscn" type="PackedScene" id=4]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 37.0933, 19.8149 )
 
-[sub_resource type="SpriteFrames" id=2]
+[sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 3 ), ExtResource( 1 ) ],
 "loop": true,
@@ -24,14 +24,14 @@ script = null
 
 [node name="col" type="CollisionShape2D" parent="."]
 position = Vector2( 13.2433, 8.74057 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="spr" type="AnimatedSprite" parent="col"]
 position = Vector2( -13.2433, -8.74057 )
-frames = SubResource( 2 )
+frames = SubResource( 1 )
 playing = true
 
 [node name="Reload" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.5
 
 [connection signal="timeout" from="Reload" to="." method="_on_Reload_timeout"]
