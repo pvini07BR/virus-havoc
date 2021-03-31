@@ -10,18 +10,18 @@ onready var virusSpawningTimer2 = $virusSpawningTimer2
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	virusSpawningTimer.start()
+    virusSpawningTimer.start()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if virusesKilled <= 20:
-		virusSpawningTimer2.start()
+    if virusesKilled <= 20:
+        virusSpawningTimer2.start()
 
 
 func _on_virusSpawningTimer_timeout():
-	add_child(commonVirus.instance())
+    add_child(commonVirus.instance())
 
 
 func _on_virusSpawningTimer2_timeout():
-	add_child(DualLaserVirus.instance())
+    add_child(DualLaserVirus.instance())
