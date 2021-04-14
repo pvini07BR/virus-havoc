@@ -3,8 +3,9 @@ extends Area2D
 var direction : Vector2 = Vector2.LEFT
 var speed : float = 500
 
-func _init():
-	pass
+func _ready():
+	z_index = 1
+	z_as_relative = false
 
 func _process(delta):
 	translate(direction*speed*delta)
@@ -18,7 +19,6 @@ func _physics_process(_delta):
 		queue_free()
 	if self.position.x >= 1280:
 		queue_free()
-		
 	if self.position.y <= 0:
 		queue_free()
 	if self.position.y >= 720:

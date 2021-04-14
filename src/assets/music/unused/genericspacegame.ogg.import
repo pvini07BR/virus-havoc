@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/genericspacegame.ogg-8e9ad8c614a22820680c9181739cde8a.oggstr"
+
+[deps]
+
+source_file="res://assets/music/unused/genericspacegame.ogg"
+dest_files=[ "res://.import/genericspacegame.ogg-8e9ad8c614a22820680c9181739cde8a.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

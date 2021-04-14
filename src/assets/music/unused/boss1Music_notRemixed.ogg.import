@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/boss1Music_notRemixed.ogg-3fdbcea193d4af868b9412e888bbee23.oggstr"
+
+[deps]
+
+source_file="res://assets/music/unused/boss1Music_notRemixed.ogg"
+dest_files=[ "res://.import/boss1Music_notRemixed.ogg-3fdbcea193d4af868b9412e888bbee23.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=12.04
