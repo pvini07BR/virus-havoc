@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/images/viruses/virus_doubleDiagonalLaser.png" type="Texture" id=1]
 [ext_resource path="res://scripts/viruses/DualDiagonalVirus.gd" type="Script" id=2]
 [ext_resource path="res://assets/images/viruses/virusBarProgressBg.png" type="Texture" id=3]
 [ext_resource path="res://assets/images/viruses/virusBarProgress.png" type="Texture" id=4]
 [ext_resource path="res://animations/virusesvirusDeath.tres" type="Animation" id=5]
+[ext_resource path="res://scenes/bullets/virus/VirusDiagonalBullet.tscn" type="PackedScene" id=6]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 51.836
@@ -61,6 +62,10 @@ tracks/0/keys = {
 "virus",
 ]]
 script = ExtResource( 2 )
+virusVelocity = 400
+health = 5.0
+scoreValue = 150
+projectile = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2( 0.4, 0.4 )

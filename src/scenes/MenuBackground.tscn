@@ -16,7 +16,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 12 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( -1260, -720 ), Vector2( 0, 0 ) ]
+"values": [ Vector2( -1280, -720 ), Vector2( 0, 0 ) ]
 }
 
 [node name="MenuBackground" type="Control"]
@@ -25,10 +25,10 @@ __meta__ = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="."]
-margin_left = -319.71
-margin_top = -182.692
-margin_right = 2220.29
-margin_bottom = 1257.31
+margin_right = 2560.0
+margin_bottom = 1440.0
+grow_horizontal = 0
+grow_vertical = 0
 texture = ExtResource( 1 )
 stretch_mode = 2
 __meta__ = {

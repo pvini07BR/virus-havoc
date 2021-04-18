@@ -64,7 +64,6 @@ shape = SubResource( 1 )
 [node name="spr" type="AnimatedSprite" parent="col/box2"]
 position = Vector2( -13.2433, -8.55331 )
 frames = SubResource( 2 )
-frame = 1
 playing = true
 
 [node name="playerEffects" type="AnimationPlayer" parent="."]

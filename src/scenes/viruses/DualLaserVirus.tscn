@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scripts/viruses/DualLaserVirus.gd" type="Script" id=1]
 [ext_resource path="res://animations/virusesvirusDeath.tres" type="Animation" id=2]
 [ext_resource path="res://assets/images/viruses/virusBarProgressBg.png" type="Texture" id=3]
 [ext_resource path="res://assets/images/viruses/virusBarProgress.png" type="Texture" id=4]
 [ext_resource path="res://assets/images/viruses/virus_doubleLaser.png" type="Texture" id=5]
+[ext_resource path="res://scenes/bullets/virus/VirusBullet.tscn" type="PackedScene" id=6]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 51.836
@@ -61,6 +62,10 @@ tracks/0/keys = {
 "virus",
 ]]
 script = ExtResource( 1 )
+virusVelocity = 400
+health = 4.0
+scoreValue = 135
+projectile = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2( 0.4, 0.4 )
@@ -104,7 +109,7 @@ one_shot = true
 
 [node name="ShootingPos" type="Position2D" parent="."]
 
-[connection signal="area_entered" from="." to="." method="_on_CommonVirus_area_entered"]
+[connection signal="area_entered" from="." to="." method="_on_DualLaserVirus_area_entered"]
 [connection signal="animation_finished" from="virusEffects" to="." method="_on_virusEffects_animation_finished"]
 [connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]
 [connection signal="timeout" from="DoubleLaserTimer" to="." method="_on_DoubleLaserTimer_timeout"]

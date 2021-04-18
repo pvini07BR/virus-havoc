@@ -12,7 +12,7 @@ func _ready():
 	z_index = 2
 	z_as_relative = false
 	
-func _process(delta):
+func _process(_delta):
 	if !bombExists:
 		$cooldownBar.visible = true
 		$cooldownBar.value += 1

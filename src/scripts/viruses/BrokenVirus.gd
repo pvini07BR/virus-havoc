@@ -1,8 +1,6 @@
 extends Area2D
 
 var direction : Vector2 = Vector2.LEFT
-var randomXpos = 0
-var randomYpos = 0
 var speed : float = 750
 var hasJustSpawned = false
 

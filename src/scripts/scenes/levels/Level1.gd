@@ -7,51 +7,66 @@ onready var viruses = {
 	dualDiagonalVirus = preload("res://scenes/viruses/DualDiagonalVirus.tscn"),
 	rainbowVirus_Boss = preload("res://scenes/viruses/bosses/rainbowVirus.tscn")
 }
+var lootBox = preload("res://scenes/LootBox.tscn")
+var lootBoxSpawningChance
+var lootBoxSpawnOnce = false
+
+var wave0 = false
+var wave1 = false
+var wave2 = false
+var wave3 = false
+
 var virusesKilled = 0
 var score = 0
 var bitcoins = 0
 var isBossFight = false
 var isBossFightTriggerOnce = false
-export (AudioStream) var bossMusic = preload("res://assets/music/unused/boss1Music_notRemixed.ogg")
+var music = preload("res://assets/music/level1_music.ogg")
+var bossMusic = preload("res://assets/music/unused/boss1Music_notRemixed.ogg")
 
 func _ready():
+	get_tree().paused = false
+	
+	get_tree().get_root().get_node("GameManager/musicChannel").set_stream(null)
+	get_tree().get_root().get_node("GameManager/musicChannel").set_stream(music)
+	get_tree().get_root().get_node("GameManager/musicChannel").play()
 	if !isBossFight:
-		$virusSpawningTimer.start()
+		if !wave0:
+			$virusSpawningTimer.start()
+			wave0 = true
 
 func _process(_delta):
 	if !isBossFight:
-		if virusesKilled <= 20:
+		if virusesKilled == 20 and !wave1:
+			calculate_LootBoxProbab()
+			if lootBoxSpawningChance >= 2:
+				add_child(lootBox.instance())
 			$virusSpawningTimer2.start()
-		if virusesKilled <= 40:
+			wave1 = true
+		if virusesKilled == 40 and !wave2:
 			$virusSpawningTimer3.start()
-		if virusesKilled <= 50:
+			wave2 = true
+			
+		if virusesKilled == 50 and !wave3:
+			calculate_LootBoxProbab()
+			if lootBoxSpawningChance >= 2:
+				add_child(lootBox.instance())
 			$virusSpawningTimer4.start()
-	if virusesKilled >= 60:
+			wave3 = true
+	if virusesKilled >= 60 and !isBossFight:
 		isBossFight = true
 		
 	bitcoins = score / 6
 	if bitcoins <= 0:
 		bitcoins = 0
 		
-	$CanvasLayer/playerHealth.text = ("Health: %d" % $player.hp)
-	$CanvasLayer/playerHealth/virusesKilled.text = ("Killed: %d" % virusesKilled)
-	if GameManager.language == 0:
-		$CanvasLayer/gunEquipped.text = (get_tree().get_nodes_in_group("gun")[0].namePTBR)
-	elif GameManager.language == 1:
-		$CanvasLayer/gunEquipped.text = (get_tree().get_nodes_in_group("gun")[0].nameEng)
-	$CanvasLayer/score.text = ("Score: %d" % score)
-	$CanvasLayer/score/bitcoins.text = ("Bitcoins Earned: %d" % bitcoins)
-		
-	$CanvasLayer/gunEquipped/gunPreview.texture = get_tree().get_nodes_in_group("gun")[0].previewSprite
-	
 	if isBossFight == true:
 		if !isBossFightTriggerOnce:
-			$BackgroundMusic.set_stream(bossMusic)
-			$BackgroundMusic.play()
-			$CanvasLayer/bossHealth.visible = true
+			get_tree().get_root().get_node("GameManager/musicChannel").set_stream(null)
+			get_tree().get_root().get_node("GameManager/musicChannel").set_stream(bossMusic)
+			get_tree().get_root().get_node("GameManager/musicChannel").play()
 			add_child(viruses.rainbowVirus_Boss.instance())
 			isBossFightTriggerOnce = true
-		$CanvasLayer/bossHealth.text = ("Boss: %d" % get_node("rainbowVirus").health)
 		
 func _on_virusSpawningTimer_timeout():
 	if !isBossFight:
@@ -68,3 +83,7 @@ func _on_virusSpawningTimer3_timeout():
 func _on_virusSpawningTimer4_timeout():
 	if !isBossFight:
 		add_child(viruses.dualDiagonalVirus.instance())
+		
+func calculate_LootBoxProbab():
+	randomize()
+	lootBoxSpawningChance = [1, 2, 3][randi() % 3]

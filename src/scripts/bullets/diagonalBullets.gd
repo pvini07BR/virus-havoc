@@ -5,7 +5,6 @@ var velocity = Vector2.ZERO
 var howManyTimesBounced = 0
 
 func _ready():
-	randomize()
 	velocity.x = 0
 	velocity.y = 0
 	#colocar 1 e -0.8 para ir pra cima direita

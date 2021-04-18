@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="VIRUS HAVOC!"
-run/main_scene="res://scenes/stages/Level1.tscn"
+run/main_scene="res://scenes/stages/menus/DebugMenu.tscn"
 boot_splash/image="res://assets/images/logo2.png"
 boot_splash/use_filter=false
 config/icon="res://icon.png"
@@ -19,7 +19,7 @@ config/windows_native_icon="res://icon.ico"
 
 [autoload]
 
-GameManager="*res://scripts/managers/GameManager.gd"
+GameManager="*res://scenes/managers/GameManager.tscn"
 
 [display]
 
@@ -118,4 +118,5 @@ quality/driver/driver_name="GLES2"
 quality/driver/fallback_to_gles2=true
 quality/intended_usage/framebuffer_allocation=0
 quality/intended_usage/framebuffer_allocation.mobile=1
+vram_compression/import_etc=true
 environment/default_environment="res://default_env.tres"

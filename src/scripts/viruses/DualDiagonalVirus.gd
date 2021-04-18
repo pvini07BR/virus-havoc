@@ -1,29 +1,15 @@
-extends Area2D
+extends "res://scripts/viruses/virus.gd"
 
-var direction : Vector2 = Vector2.LEFT
-var rng = RandomNumberGenerator.new()
-var stopMoving = false
-var shooted = false
-var vulnerable = true
 var randomXPos = 0
-var virusVelocity = 400
-var heartDropProbability = 0
-var health = 5
-var maxHealth = 5
-export var bullet = preload("res://scenes/bullets/virus/VirusDiagonalBullet.tscn")
-export var heartDrop = preload("res://scenes/healthHeart.tscn")
+
+func _init():
+	direction = Vector2.LEFT
 
 func _ready():
-	rng.randomize()
 	var randomYPos = rng.randi_range(60, 680)
 	randomXPos = rng.randi_range(640, 1245)
 	self.position.y = randomYPos
 	self.position.x = 1300
-	
-	heartDropProbability = rng.randi_range(1, 100)
-	
-	z_index = 4
-	z_as_relative = false
 	
 func _physics_process(_delta):
 	if !stopMoving:
@@ -39,16 +25,8 @@ func _physics_process(_delta):
 		
 func _process(_delta):
 	translate(direction*virusVelocity*_delta)
-	if health <= 0:
-		vulnerable = false
-		$virusEffects.play("virusDeath")
-		$healthBar.visible = false
-		
-	$healthBar.value = health
-	
 	if get_parent().isBossFight == true:
 		stopMoving = false
-		$ShootTimer.stop()
 		if self.position.x <= 0:
 			queue_free()
 		if self.position.x >= 1280:
@@ -61,30 +39,13 @@ func _process(_delta):
 func _on_CommonVirus_area_entered(area: Area2D):
 	if area.is_in_group("projectile"):
 		if vulnerable == true:
-			$virusEffects.play("virusHit")
-			$healthBarAnim.play("healthBarAppear")
-			health -= get_tree().get_nodes_in_group("gun")[0].damage
+			takeDamage()
 
 func _on_ShootTimer_timeout():
-	var bull = bullet.instance()
-	get_tree().get_root().add_child(bull)
-	bull.global_position = global_position
-	bull.velocity.x = -1
-	bull.velocity.y = -0.8
-	
-	var bull2 = bullet.instance()
-	get_tree().get_root().add_child(bull2)
-	bull2.global_position = global_position
-	bull2.velocity.x = -1
-	bull2.velocity.y = 0.8
-
-func _on_virusEffects_animation_finished(anim_name):
-	if anim_name == "virusDeath":
-		if heartDropProbability >= 90:
-			var heart = heartDrop.instance()
-			heart.global_position = global_position
-			get_tree().get_root().add_child(heart)
+	if vulnerable == true:
+		shoot2()
+		bull.velocity.x = -1
+		bull.velocity.y = -0.8
 		
-		get_parent().virusesKilled += 1
-		get_parent().score += 100
-		queue_free()
+		bull2.velocity.x = -1
+		bull2.velocity.y = 0.8

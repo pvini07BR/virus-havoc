@@ -28,5 +28,8 @@ func _physics_process(_delta):
 func _on_Area2D_area_entered(area):
 	if area.is_in_group("projectile"):
 		if vulnerable == true:
-			health -= get_tree().get_nodes_in_group("gun")[0].damage
+			if get_parent().get_node("player").slotSelected == 0:
+				health -= get_parent().get_node("player").gunInstance.damage
+			if get_parent().get_node("player").slotSelected == 1:
+				health -= get_parent().get_node("player").gun2Instance.damage
 			$damage.play("damage")
