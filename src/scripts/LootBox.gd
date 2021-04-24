@@ -62,21 +62,37 @@ func _process(_delta):
 func gotLootBox():
 	if !boxOpen:
 		if get_parent().get_node("player").doesHaveASecondGun == true and get_parent().get_node("player").doesHaveAFirstGun == true:
-			get_parent().get_node("CanvasLayer").isSubAGun = true
-		else:
-			if get_parent().get_node("player").doesHaveAFirstGun == true:
-				if GameManager.equippedGuns[0] == decidedGun:
-					pass
-				else:
-					GameManager.equippedGuns[1] = decidedGun
-					get_parent().get_node("player").slotSelected = 1
+			if GameManager.equippedGuns[0] == decidedGun:
+				get_parent().get_node("player").slotSelected = 0
+			if GameManager.equippedGuns[1] == decidedGun:
+				get_parent().get_node("player").slotSelected = 1
+			if !GameManager.equippedGuns[0] == decidedGun and !GameManager.equippedGuns[1] == decidedGun:
+				get_parent().get_node("CanvasLayer").isSubAGun = true
+				
+		if get_parent().get_node("player").doesHaveAFirstGun == true and get_parent().get_node("player").doesHaveASecondGun == false:
+			if GameManager.equippedGuns[0] == decidedGun:
+				get_parent().get_node("player").slotSelected = 0
+			else:
+				GameManager.equippedGuns[1] = decidedGun
+				get_parent().get_node("player").slotSelected = 1
+				
+		if get_parent().get_node("player").doesHaveAFirstGun == false and get_parent().get_node("player").doesHaveASecondGun == true:
+			if GameManager.equippedGuns[1] == decidedGun:
+				get_parent().get_node("player").slotSelected = 1
 			else:
 				GameManager.equippedGuns[0] = decidedGun
 				get_parent().get_node("player").slotSelected = 0
+					
+		if get_parent().get_node("player").doesHaveAFirstGun == false and get_parent().get_node("player").doesHaveASecondGun == false:
+			GameManager.equippedGuns[0] = decidedGun
+			get_parent().get_node("player").slotSelected = 0
+				
 		stopMoving = true
 		$col/AnimationPlayer.stop()
 		$col.rotation_degrees = 0
 		$col/AnimationPlayer.play("lootBox_open")
+		get_parent().obtainedLootBoxBefore = true
+		get_parent().get_node("player").get_node("gunSwitching").play()
 		boxOpen = true
 
 func _on_AnimationPlayer_animation_finished(anim_name):

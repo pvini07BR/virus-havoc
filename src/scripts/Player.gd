@@ -1,5 +1,7 @@
 extends KinematicBody2D 
 
+onready var hitSound = load("res://assets/sounds/playerDamage.wav")
+
 var rng = RandomNumberGenerator.new()
 
 const VEL_MAXIMA = 500 
@@ -11,6 +13,7 @@ var maxhp = 10
 
 var gotHit = false
 
+var cameFromInput
 var existingGun
 var gunInstance
 var gun2Instance
@@ -40,7 +43,7 @@ func _process(_delta):
 		
 	if hp >= 10:
 		hp = 10
-	
+		
 	if isOverlappingAVirus == true:
 		hit()
 		
@@ -72,6 +75,10 @@ func _process(_delta):
 			gunInstance.position.x = 16
 			gunInstance.position.y = 22
 			gunInstance.set_as_toplevel(false)
+		if cameFromInput == true:
+			$gunSwitching.play()
+			cameFromInput = false
+		$gunShoot.stream = gunInstance.shootingSound
 		slot1Selected = true
 		slot2Selected = false
 	if slotSelected == 1 and !slot2Selected and doesHaveASecondGun == true:
@@ -83,15 +90,21 @@ func _process(_delta):
 			gun2Instance.position.x = 16
 			gun2Instance.position.y = 22
 			gun2Instance.set_as_toplevel(false)
+		if cameFromInput == true:
+			$gunSwitching.play()
+			cameFromInput = false
+		$gunShoot.stream = gun2Instance.shootingSound
 		slot1Selected = false
 		slot2Selected = true
 		
 func replace_gun():
 	if get_parent().get_node("CanvasLayer").gunSelected == 1:
+		$gunSwitching.play()
 		gunInstance.queue_free()
 		doesHaveAFirstGun = false
 		slotSelected = 0
 	if get_parent().get_node("CanvasLayer").gunSelected == 2:
+		$gunSwitching.play()
 		gun2Instance.queue_free()
 		doesHaveASecondGun = false
 		slotSelected = 1
@@ -114,8 +127,10 @@ func _input(Event):
 				gun2Instance.fire()
 		pass
 	if Event.is_action_pressed("ui_selectWeapon0"):
+		cameFromInput = true
 		slotSelected = 0
 	elif Event.is_action_pressed("ui_selectWeapon1") and doesHaveASecondGun == true:
+		cameFromInput = true
 		slotSelected = 1
 
 func _on_col_area_entered(area):
@@ -126,8 +141,10 @@ func _on_col_area_entered(area):
 		get_parent().get_node("LootBox").gotLootBox()
 			
 	if area.is_in_group("heart"):
-		randomize()
-		hp += [1,2][randi() % 2]
+		if hp < 10:
+			$getHeart.play()
+			randomize()
+			hp += [1,2][randi() % 2]
 	
 	if area.is_in_group("virus"):
 		isOverlappingAVirus = true
@@ -141,6 +158,8 @@ func _on_damageCooldown_timeout():
 	
 func hit():
 	if !gotHit:
+		$Hits.play()
+		
 		$playerEffects.play("playerHit")
 		hp -= 1
 		get_parent().score -= 100

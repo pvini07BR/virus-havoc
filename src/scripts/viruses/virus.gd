@@ -5,13 +5,14 @@ var direction: Vector2
 var stopMoving = false
 var shooted = false
 var vulnerable = true
-export var virusVelocity: int
+var virusVelocity: int
 var heartDropProbability = 0
 export var health: float
 export var scoreValue: int
 var maxHealth = health
 var heartDrop = preload("res://scenes/healthHeart.tscn")
 export var projectile: PackedScene
+export var damageSound: AudioStreamSample
 
 var bull
 var bull2
@@ -30,11 +31,13 @@ func takeDamage():
 		health -= get_parent().get_node("player").gunInstance.damage
 	if get_parent().get_node("player").slotSelected == 1:
 		health -= get_parent().get_node("player").gun2Instance.damage
+	$damage.play()
 
 func shoot():
 	bull = projectile.instance()
 	get_tree().get_nodes_in_group("level")[0].add_child(bull)
 	bull.global_position = global_position
+	$shooting.play()
 	
 func shoot2():
 	bull = projectile.instance()
@@ -45,6 +48,7 @@ func shoot2():
 	get_tree().get_nodes_in_group("level")[0].add_child(bull2)
 	bull2.global_position = global_position
 	
+	$shooting.play()
 func _process(_delta):
 	$healthBar.value = health
 	

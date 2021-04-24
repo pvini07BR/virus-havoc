@@ -9,6 +9,13 @@ func _init():
 	howManyGuns = 0
 
 func _ready():	
+	if GameManager.language == 1:
+		$languageCheckBox.pressed = true
+	elif GameManager.language == 0:
+		$languageCheckBox.pressed = false
+	
+	GameManager.wasInBossBattle = false
+	
 	get_tree().paused = false
 	get_tree().get_root().get_node("GameManager/musicChannel").set_stream(null)
 	get_tree().get_root().get_node("GameManager/musicChannel").set_stream(music)
@@ -55,7 +62,7 @@ func _process(_delta):
 		if $GunSelectSlot1.selected == $GunSelectSlot2.selected:
 			$GunSelectSlot2.selected = $GunSelectSlot2.get_item_count() - 1
 	if GameManager.language == 0:
-		$logo/logoText.text = "(Versão de Acesso Antecipado)"
+		$logo/logoText.text = "Versão de Acesso Antecipado!"
 		$languageCheckBox.text = "Habilitar Idioma Inglês / Enable English Language"
 		$playButton.text = "Jogar (Nível 1)"
 		$GunsListText.text = "Selecione sua(s) arma(s):"
@@ -69,7 +76,7 @@ func _process(_delta):
 			howManyGuns += 1
 		howManyGuns = 0
 	if GameManager.language == 1:
-		$logo/logoText.text = "(Early Access Version)"
+		$logo/logoText.text = "Early Access Version!"
 		$languageCheckBox.text = "Enable English Language / Habilitar Idioma Inglês"
 		$playButton.text = "Play (Stage 1)"
 		$GunsListText.text = "Select your gun(s):"

@@ -26,6 +26,7 @@ func fire():
 		if bombExists == true:
 			damage = [2,3,4][randi() % 3]
 			bom.launch()
+			get_parent().get_node("gunShoot").play()
 			$cooldown.start()
 			cooldown = true
 

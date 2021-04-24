@@ -8,4 +8,8 @@ func _ready():
 
 func _on_explosion2_animation_finished(anim_name):
 	if anim_name == "explosion":
-		queue_free()
+		position.x = -666
+		position.y = -666
+
+func _on_BOOM_finished():
+	queue_free()

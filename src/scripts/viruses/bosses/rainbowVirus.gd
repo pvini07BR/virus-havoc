@@ -14,11 +14,13 @@ func _ready():
 
 func _process(_delta):
 	translate(direction*velocity*_delta)
+	
 	if health <= 0:
 		vulnerable = false
 		direction = Vector2.DOWN
 		velocity = 500
 		health = 0
+		$ambient.stop()
 	
 func _physics_process(_delta):
 	if position.x <= 1000:
@@ -33,3 +35,4 @@ func _on_Area2D_area_entered(area):
 			if get_parent().get_node("player").slotSelected == 1:
 				health -= get_parent().get_node("player").gun2Instance.damage
 			$damage.play("damage")
+			$damageS.play()

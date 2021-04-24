@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/images/guns/gun_dualCannonDiagonalLaserGun.png" type="Texture" id=1]
 [ext_resource path="res://scripts/guns/dualDiagonalLaserGun.gd" type="Script" id=2]
 [ext_resource path="res://scenes/bullets/diagonalBullets.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/images/guns/preview/gunPreview_dualCannonDiagonalLaserGun.png" type="Texture" id=4]
+[ext_resource path="res://assets/sounds/laser.wav" type="AudioStream" id=5]
 
 [node name="dualDiagonalLaserGun" type="Node2D" groups=[
 "gun",
@@ -14,6 +15,7 @@ projectile = ExtResource( 3 )
 previewSprite = ExtResource( 4 )
 namePTBR = "Arma Laser Dupla Diagonal"
 nameEng = "Dual-Cannon Diagonal Laser Gun"
+shootingSound = ExtResource( 5 )
 
 [node name="sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
@@ -26,5 +28,6 @@ position = Vector2( 38, 21 )
 position = Vector2( 38, 2 )
 
 [node name="cooldown" type="Timer" parent="."]
+wait_time = 1.5
 
 [connection signal="timeout" from="cooldown" to="." method="_on_cooldown_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/images/viruses/virus_doubleDiagonalLaser.png" type="Texture" id=1]
 [ext_resource path="res://scripts/viruses/DualDiagonalVirus.gd" type="Script" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://assets/images/viruses/virusBarProgress.png" type="Texture" id=4]
 [ext_resource path="res://animations/virusesvirusDeath.tres" type="Animation" id=5]
 [ext_resource path="res://scenes/bullets/virus/VirusDiagonalBullet.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/sounds/laser.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/sounds/virusDamage.wav" type="AudioStream" id=8]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 51.836
@@ -62,8 +64,6 @@ tracks/0/keys = {
 "virus",
 ]]
 script = ExtResource( 2 )
-virusVelocity = 400
-health = 5.0
 scoreValue = 150
 projectile = ExtResource( 6 )
 
@@ -103,8 +103,21 @@ anims/healthBarAppear = SubResource( 4 )
 [node name="ShootTimer" type="Timer" parent="."]
 wait_time = 5.0
 
+[node name="RammingTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
 [node name="ShootingPos" type="Position2D" parent="."]
 
-[connection signal="area_entered" from="." to="." method="_on_CommonVirus_area_entered"]
+[node name="damage" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+volume_db = -10.0
+
+[node name="shooting" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = -15.0
+
+[connection signal="area_entered" from="." to="." method="_on_DualDiagonalVirus_area_entered"]
 [connection signal="animation_finished" from="virusEffects" to="." method="_on_virusEffects_animation_finished"]
 [connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]
+[connection signal="timeout" from="RammingTimer" to="." method="_on_RammingTimer_timeout"]

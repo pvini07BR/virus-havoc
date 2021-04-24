@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://assets/images/laserBullet.png" type="Texture" id=1]
 [ext_resource path="res://scripts/bullets/defaultSingleLaserBullet.gd" type="Script" id=2]
-[ext_resource path="res://scenes/viruses/bosses/rainbowVirusShader.tres" type="Material" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 1.47683
@@ -25,7 +24,6 @@ shape = SubResource( 1 )
 [node name="laserBullet" type="Sprite" parent="col" groups=[
 "projectile",
 ]]
-material = ExtResource( 3 )
 position = Vector2( -0.138103, 0.943873 )
 rotation = -1.5708
 scale = Vector2( 0.8, 0.8 )

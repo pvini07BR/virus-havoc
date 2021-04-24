@@ -8,7 +8,7 @@ pause_mode = 2
 script = ExtResource( 1 )
 
 [node name="musicChannel" type="AudioStreamPlayer" parent="."]
-pause_mode = 1
+pause_mode = 2
 
 [node name="Fade" parent="." instance=ExtResource( 2 )]
 pause_mode = 2

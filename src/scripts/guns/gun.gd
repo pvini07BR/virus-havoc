@@ -5,6 +5,7 @@ export var previewSprite: Texture
 export var namePTBR: String
 export var nameEng: String
 export var damage: float
+export var shootingSound: AudioStreamSample
 var cooldown = false
 
 func _ready():

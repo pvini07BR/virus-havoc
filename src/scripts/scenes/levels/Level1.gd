@@ -10,6 +10,7 @@ onready var viruses = {
 var lootBox = preload("res://scenes/LootBox.tscn")
 var lootBoxSpawningChance
 var lootBoxSpawnOnce = false
+var obtainedLootBoxBefore = false
 
 var wave0 = false
 var wave1 = false
@@ -25,6 +26,9 @@ var music = preload("res://assets/music/level1_music.ogg")
 var bossMusic = preload("res://assets/music/unused/boss1Music_notRemixed.ogg")
 
 func _ready():
+	if GameManager.wasInBossBattle == true:
+		isBossFight = true
+	
 	get_tree().paused = false
 	
 	get_tree().get_root().get_node("GameManager/musicChannel").set_stream(null)
@@ -48,9 +52,10 @@ func _process(_delta):
 			wave2 = true
 			
 		if virusesKilled == 50 and !wave3:
-			calculate_LootBoxProbab()
-			if lootBoxSpawningChance >= 2:
-				add_child(lootBox.instance())
+			if !obtainedLootBoxBefore:
+				calculate_LootBoxProbab()
+				if lootBoxSpawningChance >= 2:
+					add_child(lootBox.instance())
 			$virusSpawningTimer4.start()
 			wave3 = true
 	if virusesKilled >= 60 and !isBossFight:
@@ -66,6 +71,7 @@ func _process(_delta):
 			get_tree().get_root().get_node("GameManager/musicChannel").set_stream(bossMusic)
 			get_tree().get_root().get_node("GameManager/musicChannel").play()
 			add_child(viruses.rainbowVirus_Boss.instance())
+			GameManager.wasInBossBattle = true
 			isBossFightTriggerOnce = true
 		
 func _on_virusSpawningTimer_timeout():

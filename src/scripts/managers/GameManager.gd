@@ -4,6 +4,7 @@ export var equippedGuns = []
 var language = 0
 var guns := {}
 var currentScene = null
+var wasInBossBattle = false
 
 func _init():
 	var gunsDir := Directory.new()

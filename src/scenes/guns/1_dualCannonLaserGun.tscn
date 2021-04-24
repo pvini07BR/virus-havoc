@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/images/guns/gun_dualCannonLaserGun.png" type="Texture" id=1]
 [ext_resource path="res://scripts/guns/dualCannonLaserGun.gd" type="Script" id=2]
 [ext_resource path="res://scenes/bullets/defaultSingleLaserBullet.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/images/guns/preview/gunPreview_dualCannonLaserGun.png" type="Texture" id=4]
+[ext_resource path="res://assets/sounds/laser.wav" type="AudioStream" id=5]
 
 [node name="dualCannonLaserGun" type="Node2D" groups=[
 "gun",
@@ -14,6 +15,7 @@ previewSprite = ExtResource( 4 )
 namePTBR = "Arma Laser de Canhão Duplo"
 nameEng = "Dual-Cannon Laser Gun"
 damage = 1.0
+shootingSound = ExtResource( 5 )
 
 [node name="sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )

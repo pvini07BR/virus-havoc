@@ -15,6 +15,9 @@ func fire():
 		bull2.global_position = $pos.global_position
 		bull2.velocity.x = 1
 		bull2.velocity.y = 0.8
+		
+		get_parent().get_node("gunShoot").play()
+		
 		$cooldown.start()
 		cooldown = true
 
