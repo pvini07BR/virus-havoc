@@ -1,10 +1,13 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://fonts/nokiafc22.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scripts/LevelUI.gd" type="Script" id=2]
+[ext_resource path="res://fonts/gameFont.tres" type="DynamicFont" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 80
+outline_size = 5
+outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=2]
@@ -13,25 +16,51 @@ font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 40
+outline_size = 5
+outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=4]
 size = 40
+outline_size = 5
+outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=5]
 size = 40
+outline_size = 5
+outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=6]
 size = 40
+outline_size = 5
+outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
+
+[sub_resource type="Animation" id=8]
+resource_name = "healthCritic"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("playerHealth:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 0.447059, 0.447059, 1 ), Color( 1, 1, 1, 1 ) ]
+}
 
 [sub_resource type="DynamicFont" id=7]
 size = 40
+outline_size = 5
+outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
 
-[node name="CanvasLayer" type="CanvasLayer"]
+[node name="LevelUI" type="CanvasLayer"]
 pause_mode = 2
 script = ExtResource( 2 )
 
@@ -41,10 +70,10 @@ script = ExtResource( 2 )
 anchor_left = 0.797
 anchor_right = 1.0
 anchor_bottom = 0.069
-margin_left = -713.16
-margin_top = 197.0
-margin_right = -293.0
-margin_bottom = 247.32
+margin_left = -710.424
+margin_top = 204.721
+margin_right = -290.264
+margin_bottom = 255.041
 rect_pivot_offset = Vector2( 257, 0 )
 custom_fonts/font = SubResource( 1 )
 align = 1
@@ -53,21 +82,34 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="resume" type="Button" parent="pauseMenu"]
+margin_left = 400.0
+margin_top = 318.0
+margin_right = 892.0
+margin_bottom = 374.0
+focus_mode = 0
+custom_fonts/font = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="resumeGameButton" type="Button" parent="pauseMenu"]
-margin_left = 393.567
-margin_top = 379.846
-margin_right = 885.567
-margin_bottom = 435.846
+margin_left = 397.567
+margin_top = 396.846
+margin_right = 889.567
+margin_bottom = 452.846
+focus_mode = 0
 custom_fonts/font = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="goBackButton" type="Button" parent="pauseMenu"]
-margin_left = 393.567
-margin_top = 458.846
-margin_right = 885.567
-margin_bottom = 514.846
+margin_left = 397.567
+margin_top = 475.846
+margin_right = 889.567
+margin_bottom = 531.846
+focus_mode = 0
 custom_fonts/font = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -144,6 +186,22 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="critic" type="AnimationPlayer" parent="."]
+playback_speed = 3.0
+anims/healthCritic = SubResource( 8 )
+
+[node name="virusesKilled" type="Label" parent="."]
+margin_left = 6.1099
+margin_top = 53.7093
+margin_right = 398.11
+margin_bottom = 152.709
+rect_scale = Vector2( 0.7, 0.7 )
+custom_fonts/font = SubResource( 6 )
+text = "Killed:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="playerHealth" type="Label" parent="."]
 margin_left = 8.0
 margin_top = 8.0
@@ -155,23 +213,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="virusesKilled" type="Label" parent="playerHealth"]
-margin_left = -1.8901
-margin_top = 45.7093
-margin_right = 390.11
-margin_bottom = 144.709
-rect_scale = Vector2( 0.7, 0.7 )
-custom_fonts/font = SubResource( 6 )
-text = "Killed:"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="gunsEquippedSlot1BG" type="ColorRect" parent="."]
 margin_left = 499.0
+margin_top = -0.44545
 margin_right = 575.0
-margin_bottom = 45.0
-color = Color( 1, 1, 1, 0.478431 )
+margin_bottom = 44.5546
+color = Color( 0.517647, 0.517647, 0.517647, 0.478431 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -180,7 +227,7 @@ __meta__ = {
 margin_left = 633.0
 margin_right = 709.0
 margin_bottom = 45.0
-color = Color( 1, 1, 1, 0.478431 )
+color = Color( 0.517647, 0.517647, 0.517647, 0.478431 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -245,5 +292,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[connection signal="pressed" from="pauseMenu/resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="pauseMenu/resumeGameButton" to="." method="_on_resumeGameButton_pressed"]
 [connection signal="pressed" from="pauseMenu/goBackButton" to="." method="_on_goBackButton_pressed"]

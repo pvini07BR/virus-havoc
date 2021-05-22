@@ -40,6 +40,6 @@ func _on_commonBomb_area_entered(area):
 			
 func explode():
 	var boom = explosion.instance()
-	get_tree().get_nodes_in_group("level")[0].call_deferred("add_child", boom)
+	get_tree().get_nodes_in_group("stage")[0].call_deferred("add_child", boom)
 	boom.global_position = global_position
 	queue_free()

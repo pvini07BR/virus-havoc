@@ -11,15 +11,20 @@ config_version=4
 [application]
 
 config/name="VIRUS HAVOC!"
-run/main_scene="res://scenes/stages/menus/DebugMenu.tscn"
+run/main_scene="res://scenes/runnables/menus/DebugMenu.tscn"
 boot_splash/image="res://assets/images/logo2.png"
 boot_splash/use_filter=false
-config/icon="res://icon.png"
-config/windows_native_icon="res://icon.ico"
+config/icon="res://icons/icon-hd.png"
+config/windows_native_icon="res://icons/favicon.ico"
 
 [autoload]
 
 GameManager="*res://scenes/managers/GameManager.tscn"
+
+[debug]
+
+settings/fps/force_fps=60
+settings/stdout/print_fps=true
 
 [display]
 
@@ -108,6 +113,10 @@ ui_selectWeapon1={
  ]
 }
 
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
 [network]
 
 ssl/certificates="res://addons/newgrounds/certs.pem"
@@ -116,7 +125,16 @@ ssl/certificates="res://addons/newgrounds/certs.pem"
 
 quality/driver/driver_name="GLES2"
 quality/driver/fallback_to_gles2=true
+2d/options/use_nvidia_rect_flicker_workaround=true
 quality/intended_usage/framebuffer_allocation=0
 quality/intended_usage/framebuffer_allocation.mobile=1
+threads/thread_model=2
 vram_compression/import_etc=true
+quality/shadows/filter_mode=0
+quality/reflections/high_quality_ggx=false
+quality/shading/force_vertex_shading.mobile=false
+quality/shading/force_lambert_over_burley.mobile=false
+quality/shading/force_blinn_over_ggx.mobile=false
+quality/depth_prepass/enable=false
+quality/lightmapping/use_bicubic_sampling=false
 environment/default_environment="res://default_env.tres"

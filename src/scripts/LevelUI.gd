@@ -2,11 +2,12 @@ extends CanvasLayer
 
 var isSubAGun = false
 var gunSelected = 1
+var pauseOnce = false
 
 func _process(_delta):
 	if GameManager.language == 0:
 		$playerHealth.text = ("Vida: %d" % get_parent().get_node("player").hp)
-		$playerHealth/virusesKilled.text = ("Matou: %d" % get_parent().virusesKilled)
+		$virusesKilled.text = ("Matou: %d" % get_parent().virusesKilled)
 		$score.text = ("Pontos: %d" % get_parent().score)
 		$score/bitcoins.text = ("Bitcoins ganhos: %d" % get_parent().bitcoins)
 		$pauseMenu/pauseText.text = "PAUSADO"
@@ -19,14 +20,16 @@ func _process(_delta):
 			$gunEquipped.text = get_parent().get_node("player").gun2Instance.namePTBR
 		$selectingGuntoSub/whichOne.text = "Qual Substituir?"
 		$discard.text = "Descartar"
+		$pauseMenu/resume.text = "Retomar Jogo"
 	if GameManager.language == 1:
 		$playerHealth.text = ("Health: %d" % get_parent().get_node("player").hp)
-		$playerHealth/virusesKilled.text = ("Killed: %d" % get_parent().virusesKilled)
+		$virusesKilled.text = ("Killed: %d" % get_parent().virusesKilled)
 		$score.text = ("Score: %d" % get_parent().score)
 		$score/bitcoins.text = ("Bitcoins Earned: %d" % get_parent().bitcoins)
 		$pauseMenu/pauseText.text = "PAUSED"
 		$pauseMenu/resumeGameButton.text = "Restart Stage"
 		$pauseMenu/goBackButton.text = "Go back to menu"
+		$pauseMenu/resume.text = "Resume Game"
 		
 		if get_parent().get_node("player").slotSelected == 0 and get_parent().get_node("player").doesHaveAFirstGun == true:
 			$gunEquipped.text = get_parent().get_node("player").gunInstance.nameEng
@@ -45,7 +48,7 @@ func _process(_delta):
 	if get_parent().get_node("player").slotSelected == 1 and get_parent().get_node("player").doesHaveASecondGun == true:
 		$gunEquipped/gunPreview.texture = get_parent().get_node("player").gun2Instance.previewSprite
 		$gunEquipped/gunPreview.offset.x = -get_parent().get_node("player").gun2Instance.previewSprite.get_width()
-		$gunEquipped/gunPreview.offset.y = -get_parent().get_node("player").gunInstance.previewSprite.get_height()
+		$gunEquipped/gunPreview.offset.y = -get_parent().get_node("player").gun2Instance.previewSprite.get_height()
 		$selecting.rect_position.x = 614
 		$selecting.rect_position.y = 18
 		
@@ -63,10 +66,14 @@ func _process(_delta):
 	
 	if get_parent().isBossFight == true:
 		$bossHealth.visible = true
-		$bossHealth.text = ("Boss: %d" % get_parent().get_node("rainbowVirus").health)
+		$bossHealth.text = ("Boss: %d" % get_tree().get_nodes_in_group("boss")[0].health)
+		if get_tree().get_nodes_in_group("boss")[0].health <= 0 and !get_parent().stageFinished:
+			$bossHealth.queue_free()
 		
 	if isSubAGun == true:
-		get_tree().paused = true
+		if !pauseOnce:
+			get_parent().get_node("pause").itsPaused += 1
+			pauseOnce = true
 		if gunSelected <= -1:
 			gunSelected = 0
 		if gunSelected == 0:
@@ -98,11 +105,18 @@ func _process(_delta):
 		$discard.visible = false
 		
 	if get_parent().get_node("pause").itsPaused == 1:
-		$pauseMenu.offset.x = 0
-		$pauseMenu.offset.y = 0
+		if !get_parent().get_node("LevelUI").isSubAGun:
+			$pauseMenu.offset.x = 0
+			$pauseMenu.offset.y = 0
 	else:
 		$pauseMenu.offset.x = -1280
 		$pauseMenu.offset.y = -720
+		
+	if get_parent().get_node("player").hp <= 3:
+		$critic.play("healthCritic")
+	else:
+		$critic.stop()
+		$playerHealth.modulate = Color(255, 255, 255)
 		
 func _input(Event):
 	if Event.is_action_pressed("ui_selectWeapon0") and isSubAGun == true:
@@ -112,35 +126,54 @@ func _input(Event):
 	if Event.is_action_pressed("ui_accept") and isSubAGun == true:
 		if gunSelected == 0:
 			isSubAGun = false
-			get_tree().paused = false
+			if pauseOnce == true:
+				get_parent().get_node("pause").itsPaused += 1
+				pauseOnce = false
 		if gunSelected == 1:
 			if GameManager.equippedGuns[1] == get_parent().get_node("LootBox").decidedGun or GameManager.equippedGuns[0] == get_parent().get_node("LootBox").decidedGun:
 				get_parent().get_node("player").changeToExistingGun()
 				isSubAGun = false
-				get_tree().paused = false
+				if pauseOnce == true:
+					get_parent().get_node("pause").itsPaused += 1
+					get_parent().get_node("player").get_node("gunSwitching").play()
+					pauseOnce = false
 			else:
 				GameManager.equippedGuns[0] = get_parent().get_node("LootBox").decidedGun
 				get_parent().get_node("player").replace_gun()
 				isSubAGun = false
-				get_tree().paused = false
+				if pauseOnce == true:
+					get_parent().get_node("pause").itsPaused += 1
+					get_parent().get_node("player").get_node("gunSwitching").play()
+					pauseOnce = false
 		if gunSelected == 2:
 			if GameManager.equippedGuns[1] == get_parent().get_node("LootBox").decidedGun or GameManager.equippedGuns[0] == get_parent().get_node("LootBox").decidedGun:
 				get_parent().get_node("player").changeToExistingGun()
 				isSubAGun = false
-				get_tree().paused = false
+				if pauseOnce == true:
+					get_parent().get_node("pause").itsPaused += 1
+					get_parent().get_node("player").get_node("gunSwitching").play()
+					pauseOnce = false
 			else:
 				GameManager.equippedGuns[1] = get_parent().get_node("LootBox").decidedGun
 				get_parent().get_node("player").replace_gun()
 				isSubAGun = false
-				get_tree().paused = false
+				if pauseOnce == true:
+					get_parent().get_node("pause").itsPaused += 1
+					get_parent().get_node("player").get_node("gunSwitching").play()
+					pauseOnce = false
 
 func _on_goBackButton_pressed():
 	get_parent().get_node("pause").itsPaused = 2
-	GameManager.get_node("Fade").path = "res://scenes/stages/menus/DebugMenu.tscn"
+	GameManager.get_node("Fade").path = "res://scenes/runnables/menus/DebugMenu.tscn"
 	GameManager.get_node("Fade/layer/anim").play("fadeOut")
+	get_tree().get_root().get_node("GameManager/musicChannel").set_stream(null)
 
 func _on_resumeGameButton_pressed():
 	get_parent().get_node("pause").itsPaused = 2
 	GameManager.wasInBossBattle = false
-	GameManager.get_node("Fade").path = "res://scenes/stages/levels/Level1.tscn"
+	GameManager.get_node("Fade").path = GameManager.stages.values()[GameManager.lastStagePlayed]
 	GameManager.get_node("Fade/layer/anim").play("fadeOut")
+	get_tree().get_root().get_node("GameManager/musicChannel").set_stream(null)
+
+func _on_resume_pressed():
+	get_parent().get_node("pause").itsPaused += 1

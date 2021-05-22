@@ -15,7 +15,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 8 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( -1281, 0 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( -2560, 0 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("background2:rect_position")
@@ -27,5 +27,5 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 8 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( -2562, 0 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( -1280, 0 ) ]
 }

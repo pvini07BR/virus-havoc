@@ -43,4 +43,4 @@ void fragment() {
 
 [resource]
 shader = SubResource( 1 )
-shader_param/Shift_Hue = 0.0
+shader_param/Shift_Hue = 1.0

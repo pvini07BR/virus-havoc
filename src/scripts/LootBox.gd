@@ -11,8 +11,8 @@ var randomXPos
 var randomYPos
 
 var gunsInTheBox = {
-	one = GameManager.guns.values()[1],
-	two = GameManager.guns.values()[2]
+	one = null,
+	two = null
 }
 
 var whatGunDecided = 0
@@ -21,6 +21,14 @@ var boxOpen = false
 var howManyGuns = 0
 
 func _ready():
+	match GameManager.lastStagePlayed:
+		0:
+			gunsInTheBox["one"] = GameManager.guns.values()[1]
+			gunsInTheBox["two"] = GameManager.guns.values()[2]
+		1:
+			gunsInTheBox["one"] = null
+			gunsInTheBox["two"] = null
+	
 	$hasJustSpawnedTimer.start()
 	randomize()
 	rng.randomize()
@@ -64,35 +72,41 @@ func gotLootBox():
 		if get_parent().get_node("player").doesHaveASecondGun == true and get_parent().get_node("player").doesHaveAFirstGun == true:
 			if GameManager.equippedGuns[0] == decidedGun:
 				get_parent().get_node("player").slotSelected = 0
+				get_parent().get_node("player").get_node("gunSwitching").play()
 			if GameManager.equippedGuns[1] == decidedGun:
 				get_parent().get_node("player").slotSelected = 1
+				get_parent().get_node("player").get_node("gunSwitching").play()
 			if !GameManager.equippedGuns[0] == decidedGun and !GameManager.equippedGuns[1] == decidedGun:
-				get_parent().get_node("CanvasLayer").isSubAGun = true
+				get_parent().get_node("LevelUI").isSubAGun = true
 				
 		if get_parent().get_node("player").doesHaveAFirstGun == true and get_parent().get_node("player").doesHaveASecondGun == false:
 			if GameManager.equippedGuns[0] == decidedGun:
 				get_parent().get_node("player").slotSelected = 0
+				get_parent().get_node("player").get_node("gunSwitching").play()
 			else:
 				GameManager.equippedGuns[1] = decidedGun
 				get_parent().get_node("player").slotSelected = 1
+				get_parent().get_node("player").get_node("gunSwitching").play()
 				
 		if get_parent().get_node("player").doesHaveAFirstGun == false and get_parent().get_node("player").doesHaveASecondGun == true:
 			if GameManager.equippedGuns[1] == decidedGun:
 				get_parent().get_node("player").slotSelected = 1
+				get_parent().get_node("player").get_node("gunSwitching").play()
 			else:
 				GameManager.equippedGuns[0] = decidedGun
 				get_parent().get_node("player").slotSelected = 0
+				get_parent().get_node("player").get_node("gunSwitching").play()
 					
 		if get_parent().get_node("player").doesHaveAFirstGun == false and get_parent().get_node("player").doesHaveASecondGun == false:
 			GameManager.equippedGuns[0] = decidedGun
 			get_parent().get_node("player").slotSelected = 0
+			get_parent().get_node("player").get_node("gunSwitching").play()
 				
 		stopMoving = true
 		$col/AnimationPlayer.stop()
 		$col.rotation_degrees = 0
 		$col/AnimationPlayer.play("lootBox_open")
 		get_parent().obtainedLootBoxBefore = true
-		get_parent().get_node("player").get_node("gunSwitching").play()
 		boxOpen = true
 
 func _on_AnimationPlayer_animation_finished(anim_name):

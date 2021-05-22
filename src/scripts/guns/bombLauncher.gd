@@ -1,4 +1,4 @@
-extends "res://scripts/guns/gun.gd"
+extends "res://scripts/bases/gun.gd"
 
 var bombExists = false
 var bom
@@ -15,7 +15,7 @@ func _ready():
 func _process(_delta):
 	if !bombExists:
 		$cooldownBar.visible = true
-		$cooldownBar.value += 1
+		$cooldownBar.value = $cooldown.time_left
 	else:
 		$cooldownBar.visible = false
 		$cooldownBar.value = 0

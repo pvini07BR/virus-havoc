@@ -34,9 +34,10 @@ margin_left = 3.0
 margin_top = 28.0
 margin_right = 42.0
 margin_bottom = 33.0
-max_value = 1000.0
-texture_under = ExtResource( 5 )
-texture_progress = ExtResource( 6 )
+max_value = 2.5
+texture_under = ExtResource( 6 )
+texture_progress = ExtResource( 5 )
+fill_mode = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }

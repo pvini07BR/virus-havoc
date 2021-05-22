@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scripts/runnables/stages/Stage2.gd" type="Script" id=1]
+[ext_resource path="res://scenes/backgrounds/level2_background.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/music/level2_music.ogg" type="AudioStream" id=3]
+[ext_resource path="res://scenes/viruses/bosses/rainbowVirus.tscn" type="PackedScene" id=5]
+
+[node name="Stage2" type="Node2D" groups=[
+"stage",
+]]
+script = ExtResource( 1 )
+namePTBR = "Nível 2"
+nameEng = "Stage 2"
+music = ExtResource( 3 )
+boss = ExtResource( 5 )
+background = ExtResource( 2 )

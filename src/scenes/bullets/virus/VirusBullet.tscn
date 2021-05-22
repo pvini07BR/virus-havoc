@@ -4,8 +4,8 @@
 [ext_resource path="res://scripts/VirusBullet.gd" type="Script" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 1.47683
-height = 9.04634
+radius = 4.41948
+height = 28.7261
 
 [node name="VirusBullet" type="Area2D" groups=[
 "virusBullet",
@@ -15,13 +15,14 @@ scale = Vector2( 0.8, 0.8 )
 script = ExtResource( 2 )
 
 [node name="col" type="CollisionShape2D" parent="."]
-rotation = 2.35619
+position = Vector2( 7.86781e-06, -1.76777 )
+rotation = -3.14159
 scale = Vector2( 0.8, 0.8 )
 shape = SubResource( 1 )
 
-[node name="laserBullet" type="Sprite" parent="col"]
-rotation = 2.35619
-scale = Vector2( 0.8, 0.8 )
+[node name="laserBullet" type="Sprite" parent="."]
+rotation = -1.57081
+scale = Vector2( 0.64, 0.64 )
 texture = ExtResource( 1 )
 
-[connection signal="body_entered" from="." to="." method="_on_VirusBullet_body_entered"]
+[connection signal="area_entered" from="." to="." method="_on_VirusBullet_area_entered"]

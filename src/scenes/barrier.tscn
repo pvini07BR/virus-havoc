@@ -9,27 +9,21 @@ extents = Vector2( 660.362, 11.1859 )
 [node name="barrier" type="StaticBody2D" groups=[
 "barrier",
 ]]
+collision_layer = 15
+collision_mask = 15
 
-[node name="horizontal" type="CollisionShape2D" parent="." groups=[
-"barrier",
-]]
+[node name="horizontal" type="CollisionShape2D" parent="."]
 position = Vector2( -10.0156, 359.188 )
 shape = SubResource( 1 )
 
-[node name="horizontal2" type="CollisionShape2D" parent="." groups=[
-"barrier",
-]]
+[node name="horizontal2" type="CollisionShape2D" parent="."]
 position = Vector2( 1290, 360 )
 shape = SubResource( 1 )
 
-[node name="vertical" type="CollisionShape2D" parent="." groups=[
-"barrier",
-]]
+[node name="vertical" type="CollisionShape2D" parent="."]
 position = Vector2( 660.366, -11.1875 )
 shape = SubResource( 2 )
 
-[node name="vertical2" type="CollisionShape2D" parent="." groups=[
-"barrier",
-]]
+[node name="vertical2" type="CollisionShape2D" parent="."]
 position = Vector2( 660.372, 731.063 )
 shape = SubResource( 2 )

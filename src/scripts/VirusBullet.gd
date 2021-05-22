@@ -10,8 +10,8 @@ func _ready():
 func _process(delta):
 	translate(direction*speed*delta)
 
-func _on_VirusBullet_body_entered(body):
-	if body.is_in_group("player"):
+func _on_VirusBullet_area_entered(area):
+	if area.is_in_group("player"):
 		queue_free()
 		
 func _physics_process(_delta):

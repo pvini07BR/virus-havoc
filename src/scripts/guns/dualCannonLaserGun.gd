@@ -1,14 +1,14 @@
-extends "res://scripts/guns/gun.gd"
+extends "res://scripts/bases/gun.gd"
 
 func fire():
 	if !cooldown:
 		var bull = projectile.instance()
-		get_tree().get_nodes_in_group("level")[0].add_child(bull)
+		get_tree().get_nodes_in_group("stage")[0].add_child(bull)
 		bull.global_position = $pos.global_position
 		#bull.change_color(0.65)
 		
 		var bull2 = projectile.instance()
-		get_tree().get_nodes_in_group("level")[0].add_child(bull2)
+		get_tree().get_nodes_in_group("stage")[0].add_child(bull2)
 		bull2.global_position = $pos2.global_position
 		get_parent().get_node("gunShoot").play()
 		$cooldown.start()

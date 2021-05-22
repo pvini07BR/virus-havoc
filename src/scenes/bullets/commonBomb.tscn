@@ -48,6 +48,7 @@ shape = SubResource( 1 )
 
 [node name="bombSprite" type="AnimatedSprite" parent="col"]
 frames = SubResource( 4 )
+frame = 1
 speed_scale = 5.0
 playing = true
 offset = Vector2( -0.5, -1.5 )

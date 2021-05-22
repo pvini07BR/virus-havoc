@@ -1,7 +1,7 @@
 extends Area2D
 
 var direction : Vector2 = Vector2.LEFT
-var speed : float = 750
+var speed : float = 600
 var hasJustSpawned = false
 
 func _ready():
