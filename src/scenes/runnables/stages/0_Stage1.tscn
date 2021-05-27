@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scripts/runnables/stages/Stage1.gd" type="Script" id=1]
-[ext_resource path="res://assets/music/unused/boss1Music_notRemixed.ogg" type="AudioStream" id=2]
+[ext_resource path="res://assets/music/boss1Music.ogg" type="AudioStream" id=2]
 [ext_resource path="res://assets/music/level1_music.ogg" type="AudioStream" id=3]
 [ext_resource path="res://scenes/backgrounds/level1_background.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/images/GUI/levelSelectionArts/art_level1.png" type="Texture" id=5]
