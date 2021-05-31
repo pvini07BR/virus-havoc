@@ -5,6 +5,7 @@ var virusSpaceRotDirection = 0
 var virusSpaceDir : Vector2 = Vector2.LEFT
 var virusSpaceWave = 1
 var virusWaveJustSpawned = false
+var bossBattleJustBegun = false
 
 var virusSpaceMoving = 0
 #número 0 para intervalo entre seções
@@ -217,6 +218,9 @@ func _process(delta):
 				virusSpaceMoving = 2
 	else:
 		$CanvasLayer/Label.text = "Boss Fight!"
+		if !bossBattleJustBegun:
+			$rainbowServantSpawningTimer.start()
+			bossBattleJustBegun = true
 		if stageFinished == true:
 			$CanvasLayer/Label.text = "Stage Clear!"
 func _on_virusSpawningTimer_timeout():
@@ -241,6 +245,11 @@ func _on_brokenVirusSpawningTimer_timeout():
 	if !isBossFight:
 		if virusSpaceMoving == 2:
 			add_child(viruses[3].instance())
+			
+func _on_rainbowServantSpawningTimer_timeout():
+	if isBossFight == true and !stageFinished:
+		add_child(viruses[4].instance())
+		$rainbowServantSpawningTimer.start()
 #var lootBox = preload("res://scenes/LootBox.tscn")
 #var lootBoxSpawningChance
 #var lootBoxSpawnOnce = false

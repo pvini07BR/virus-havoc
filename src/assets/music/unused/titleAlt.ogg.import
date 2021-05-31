@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/titleAlt.ogg-dc95457efa855b5598263addae7f9086.oggstr"
+
+[deps]
+
+source_file="res://assets/music/unused/titleAlt.ogg"
+dest_files=[ "res://.import/titleAlt.ogg-dc95457efa855b5598263addae7f9086.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

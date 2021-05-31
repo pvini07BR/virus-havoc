@@ -10,8 +10,11 @@ var canTakeDamage = true
 var bulletsSpawned = 0
 var timesShooted = 0
 var isRamming = false
+var isBeaming = false
 var shooted = false
 var rammingState = 0
+var beamingState = 0
+var shootedNrammed = 0
 
 func _ready():
 	position.x = 1760
@@ -22,6 +25,9 @@ func _ready():
 	
 	$deathTween.interpolate_property(self, "position", Vector2(1000, 360), Vector2(1000, 1000), 5, Tween.TRANS_LINEAR)
 	$movementTween.interpolate_property(self, "position", Vector2(1760, 360), Vector2(1000, 360), 12.1, Tween.TRANS_LINEAR)
+	$glowIntense.interpolate_property($Area2D/glow, "modulate", Color(1,1,1,0), Color(1,1,1,1),$beamingTimer.wait_time)
+	$intensifySpeed.interpolate_property($moving, "playback_speed", 1, 2, $beamingTimer.wait_time)
+	$intensifySpeed2.interpolate_property($effects, "playback_speed", 1, 2, $beamingTimer.wait_time)
 	$movementTween.start()
 
 #func _process(delta):
@@ -35,9 +41,17 @@ func _physics_process(_delta):
 		isRamming = false
 		vulnerable = true
 		timesShooted = 0
+		if !shootedNrammed == 5:
+			shootedNrammed += 1
+		elif shootedNrammed == 5 and !isBeaming:
+			$glowIntense.start()
+			$intensifySpeed.start()
+			$intensifySpeed2.start()
+			$beamingTimer.start()
+			isBeaming = true
 		rammingState = 0
 		
-	if isRamming == true and !shooted and vulnerable == true:
+	if isRamming == true and !shooted and vulnerable == true and !isBeaming:
 		$rammingTween.interpolate_property(self, "position", Vector2(1000, 360), Vector2(-240, 360), 2, Tween.TRANS_LINEAR)
 		$rammingTween.start()
 		#direction = Vector2.LEFT
@@ -96,7 +110,7 @@ func _on_Area2D_area_entered(area):
 
 func _on_shooting_timeout():
 	if !shooted:
-		if vulnerable == true:
+		if vulnerable == true and !isBeaming:
 			bulletsSpawned += 1
 			if !bulletsSpawned >= 11:
 				$shooting.start()
@@ -117,3 +131,12 @@ func _on_damageCooldown_timeout():
 
 func _on_shootingCooldown_timeout():
 	shooted = false
+
+func _on_beamingTimer_timeout():
+	if beamingState == 0:
+		beamingState += 1
+	if beamingState == 1:
+		var beam = laserBeam.instance()
+		get_tree().get_nodes_in_group("stage")[0].add_child(beam)
+		beam.global_position = global_position
+		beamingState += 1

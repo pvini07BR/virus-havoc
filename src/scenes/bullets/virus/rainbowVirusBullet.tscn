@@ -82,3 +82,4 @@ playback/repeat = true
 [node name="speed" type="Tween" parent="."]
 
 [connection signal="area_entered" from="." to="." method="_on_VirusBullet_area_entered"]
+[connection signal="tween_all_completed" from="fade" to="." method="_on_fade_tween_all_completed"]

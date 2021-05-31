@@ -11,7 +11,7 @@
 [ext_resource path="res://assets/images/backgroundElements/level2/9.png" type="Texture" id=9]
 [ext_resource path="res://assets/images/backgroundElements/level2/10.png" type="Texture" id=10]
 [ext_resource path="res://assets/images/backgroundElements/level2/11.png" type="Texture" id=11]
-[ext_resource path="res://assets/images/backgroundElements/level2/background.png" type="Texture" id=12]
+[ext_resource path="res://assets/images/backgroundElements/level2/background2.png" type="Texture" id=12]
 [ext_resource path="res://shaders/outline.tres" type="Material" id=13]
 [ext_resource path="res://assets/images/backgroundElements/level2/12.png" type="Texture" id=14]
 
@@ -319,58 +319,58 @@ anims/aaa = SubResource( 5 )
 
 [node name="1" type="Sprite" parent="."]
 material = ExtResource( 13 )
-position = Vector2( 0, 20 )
+position = Vector2( 1280, 20 )
 texture = ExtResource( 1 )
 offset = Vector2( 0, 10 )
 
 [node name="2" type="Sprite" parent="."]
 material = ExtResource( 13 )
-position = Vector2( 1280, 60 )
+position = Vector2( 0, 60 )
 texture = ExtResource( 2 )
 
 [node name="3" type="Sprite" parent="."]
 material = ExtResource( 13 )
-position = Vector2( 1280, 115 )
+position = Vector2( 0, 115 )
 texture = ExtResource( 3 )
 
 [node name="4" type="Sprite" parent="."]
 material = SubResource( 4 )
-position = Vector2( 0, 170 )
+position = Vector2( 1280, 170 )
 texture = ExtResource( 4 )
 
 [node name="5" type="Sprite" parent="."]
 material = ExtResource( 13 )
-position = Vector2( 1280, 240 )
+position = Vector2( 0, 240 )
 texture = ExtResource( 5 )
 
 [node name="6" type="Sprite" parent="."]
 material = ExtResource( 13 )
-position = Vector2( 1280, 315 )
+position = Vector2( 0, 315 )
 texture = ExtResource( 6 )
 
 [node name="7" type="Sprite" parent="."]
 material = ExtResource( 13 )
-position = Vector2( 0, 390 )
+position = Vector2( 1280, 390 )
 texture = ExtResource( 7 )
 
 [node name="8" type="Sprite" parent="."]
 material = ExtResource( 13 )
-position = Vector2( 1280, 470 )
+position = Vector2( 0, 470 )
 texture = ExtResource( 8 )
 
 [node name="9" type="Sprite" parent="."]
 material = ExtResource( 13 )
-position = Vector2( 0, 550 )
+position = Vector2( 1280, 550 )
 texture = ExtResource( 9 )
 
 [node name="10" type="Sprite" parent="."]
 material = ExtResource( 13 )
-position = Vector2( 0, 620 )
+position = Vector2( 1280, 620 )
 texture = ExtResource( 10 )
 
 [node name="11" type="Sprite" parent="."]
 material = ExtResource( 13 )
-position = Vector2( 1280, 680 )
+position = Vector2( 0, 680 )
 texture = ExtResource( 11 )
 
 [node name="cellsMoving" type="AnimationPlayer" parent="."]

@@ -36,6 +36,7 @@ maxHealth = 4.0
 shootingCooldownFrom = 5.0
 shootingCooldownTo = 8.0
 HeartDropChance = 75
+isInSlot = true
 projectile = ExtResource( 6 )
 damageSound = ExtResource( 8 )
 shootingSound = ExtResource( 7 )

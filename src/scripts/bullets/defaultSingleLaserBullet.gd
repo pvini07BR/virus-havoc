@@ -19,7 +19,3 @@ func _process(delta):
 func _physics_process(_delta):
 	if self.position.x > 1280:
 		queue_free()
-		
-#queria fazer a bala mudar de cor aff
-#func change_color(color):
-	#$col/laserBullet.get_canvas_item()

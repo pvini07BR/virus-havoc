@@ -34,6 +34,10 @@ var bossInst
 func _init():
 	if !GameManager.wasInBossBattle:
 		load_equippedGuns()
+	if GameManager.wasInBossBattle == true:
+		score = GameManager.storedScore
+		bitcoins = GameManager.storedBitcoins
+		virusesKilled = GameManager.storedKills
 
 func _ready():
 	bossInst = boss.instance()
@@ -62,6 +66,10 @@ func _ready():
 func _process(delta):
 	if bossInst.health <= 0 and !stageFinished:
 		endStage()
+		
+	bitcoins = score / 6
+	if bitcoins <= 0:
+		bitcoins = 0
 	
 func spawnLootBox():
 	if !obtainedLootBoxBefore:
@@ -92,6 +100,9 @@ func load_equippedGuns():
 func startBossFight():
 	isBossFight = true
 	GameManager.wasInBossBattle = true
+	GameManager.storedBitcoins = bitcoins
+	GameManager.storedKills = virusesKilled
+	GameManager.storedScore = score
 	isBossFightTriggerOnce = true
 	get_tree().get_root().get_node("GameManager/musicChannel").set_stream(null)
 	get_tree().get_root().get_node("GameManager/musicChannel").set_stream(bossMusic)

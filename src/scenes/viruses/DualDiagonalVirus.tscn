@@ -35,6 +35,7 @@ scoreValue = 150
 shootingCooldownFrom = 8.0
 shootingCooldownTo = 12.0
 HeartDropChance = 75
+isInSlot = true
 projectile = ExtResource( 6 )
 damageSound = ExtResource( 8 )
 shootingSound = ExtResource( 7 )

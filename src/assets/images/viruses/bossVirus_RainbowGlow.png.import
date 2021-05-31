@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bossVirus_RainbowExtremeBright.png-7482fe398d90ce64004dc36132132bfd.stex"
+path="res://.import/bossVirus_RainbowGlow.png-2064866baf0b49c120e48de00f95a7ad.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/viruses/bossVirus_RainbowExtremeBright.png"
-dest_files=[ "res://.import/bossVirus_RainbowExtremeBright.png-7482fe398d90ce64004dc36132132bfd.stex" ]
+source_file="res://assets/images/viruses/bossVirus_RainbowGlow.png"
+dest_files=[ "res://.import/bossVirus_RainbowGlow.png-2064866baf0b49c120e48de00f95a7ad.stex" ]
 
 [params]
 

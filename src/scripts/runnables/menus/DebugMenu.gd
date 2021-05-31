@@ -20,6 +20,9 @@ func _ready():
 	elif GameManager.language == 0:
 		$languageCheckBox.pressed = false
 	
+	GameManager.storedBitcoins = 0
+	GameManager.storedKills = 0
+	GameManager.storedScore = 0
 	GameManager.wasInBossBattle = false
 	
 	get_tree().paused = false

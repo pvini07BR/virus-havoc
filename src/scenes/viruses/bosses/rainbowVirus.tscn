@@ -5,57 +5,14 @@
 [ext_resource path="res://assets/sounds/laser.wav" type="AudioStream" id=3]
 [ext_resource path="res://assets/sounds/rainbowVirusAmbient.wav" type="AudioStream" id=4]
 [ext_resource path="res://assets/sounds/rainbowVirusDamage.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/images/viruses/bossVirus_RainbowGlow.png" type="Texture" id=6]
+[ext_resource path="res://scenes/viruses/bosses/rainbowVirusShader.tres" type="Material" id=7]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 211.0
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 232.009
-
-[sub_resource type="Shader" id=3]
-code = "shader_type canvas_item;
-render_mode unshaded;
-
-uniform float Shift_Hue;
-
-void fragment() {
-// Input:3
-	vec3 input_color;
-	vec4 texture_color = texture(TEXTURE, UV);
-	input_color = texture_color.rgb;
-
-// VectorFunc:2
-	vec3 color_hsv;
-	{
-		vec3 c = input_color;
-		vec4 K = vec4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);
-		vec4 p = mix(vec4(c.bg, K.wz), vec4(c.gb, K.xy), step(c.b, c.g));
-		vec4 q = mix(vec4(p.xyw, c.r), vec4(c.r, p.yzx), step(p.x, c.r));
-		float d = q.x - min(q.w, q.y);
-		float e = 1.0e-10;
-		color_hsv=vec3(abs(q.z + (q.w - q.y) / (6.0 * d + e)), d / (q.x + e), q.x);
-	}
-
-	color_hsv.x = mod((color_hsv.x + Shift_Hue), 1.0f);
-
-// VectorFunc:5
-	vec3 color_rgb;
-	{
-		vec3 c = color_hsv;
-		vec4 K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
-		vec3 p = abs(fract(c.xxx + K.xyz) * 6.0 - K.www);
-		color_rgb=c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
-	}
-
-// Output:0
-	texture_color = vec4(color_rgb.rgb,texture_color.a);
-	COLOR.rgba = texture_color;
-
-}"
-
-[sub_resource type="ShaderMaterial" id=4]
-shader = SubResource( 3 )
-shader_param/Shift_Hue = 0.0
 
 [sub_resource type="Animation" id=5]
 length = 2.5
@@ -84,6 +41,18 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
+"times": PoolRealArray( 0, 10 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Area2D/glow:material:shader_param/Shift_Hue")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
 "times": PoolRealArray( 0, 10 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
@@ -121,8 +90,13 @@ shape = SubResource( 1 )
 shape = SubResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="Area2D"]
-material = SubResource( 4 )
+material = ExtResource( 7 )
 texture = ExtResource( 1 )
+
+[node name="glow" type="Sprite" parent="Area2D"]
+modulate = Color( 1, 1, 1, 0 )
+material = ExtResource( 7 )
+texture = ExtResource( 6 )
 
 [node name="moving" type="AnimationPlayer" parent="."]
 autoplay = "Idle"
@@ -157,11 +131,20 @@ autostart = true
 
 [node name="deathTween" type="Tween" parent="."]
 
+[node name="glowIntense" type="Tween" parent="."]
+
+[node name="intensifySpeed" type="Tween" parent="."]
+
+[node name="intensifySpeed2" type="Tween" parent="."]
+
 [node name="damageCooldown" type="Timer" parent="."]
 wait_time = 0.1
 
 [node name="shootingCooldown" type="Timer" parent="."]
 wait_time = 0.5
+
+[node name="beamingTimer" type="Timer" parent="."]
+wait_time = 5.0
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
 [connection signal="timeout" from="shooting" to="." method="_on_shooting_timeout"]
@@ -169,3 +152,4 @@ wait_time = 0.5
 [connection signal="tween_all_completed" from="rammingTween" to="." method="_on_rammingTween_tween_all_completed"]
 [connection signal="timeout" from="damageCooldown" to="." method="_on_damageCooldown_timeout"]
 [connection signal="timeout" from="shootingCooldown" to="." method="_on_shootingCooldown_timeout"]
+[connection signal="timeout" from="beamingTimer" to="." method="_on_beamingTimer_timeout"]

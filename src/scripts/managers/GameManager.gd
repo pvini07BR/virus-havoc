@@ -5,8 +5,14 @@ var language = 0
 var lastStagePlayed = 0
 var guns := {}
 var stages := {}
+var loader
+var wait_frames
+var time_max = 100
 var currentScene = null
 var wasInBossBattle = false
+var storedKills = 0
+var storedScore = 0
+var storedBitcoins = 0
 var itsAlreadyPaused = false
 
 func _init():
@@ -53,6 +59,7 @@ func _init():
 func _process(_delta):
 	if equippedGuns[0] == equippedGuns[1]:
 		equippedGuns[1] = null
+		
 	
 func _ready():
 	var root = get_tree().get_root()
