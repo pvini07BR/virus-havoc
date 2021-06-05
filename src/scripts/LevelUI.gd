@@ -39,36 +39,41 @@ func _process(_delta):
 		$discard.text = "Discard"
 			
 	if get_parent().get_node("player").slotSelected == 0 and get_parent().get_node("player").doesHaveAFirstGun == true:
-		$gunEquipped/gunPreview.texture = get_parent().get_node("player").gunInstance.previewSprite
-		$gunEquipped/gunPreview.offset.x = -get_parent().get_node("player").gunInstance.previewSprite.get_width()
-		$gunEquipped/gunPreview.offset.y = -get_parent().get_node("player").gunInstance.previewSprite.get_height()
+		if !get_parent().get_node("player").gunInstance.previewSprite == null:
+			$gunEquipped/gunPreview.texture = get_parent().get_node("player").gunInstance.previewSprite
+		else:
+			$gunEquipped/gunPreview.texture = get_parent().get_node("player").gunInstance.gunNotFoundSprite
 				
 		$selecting.rect_position.x = 471
 		$selecting.rect_position.y = 18
 	if get_parent().get_node("player").slotSelected == 1 and get_parent().get_node("player").doesHaveASecondGun == true:
-		$gunEquipped/gunPreview.texture = get_parent().get_node("player").gun2Instance.previewSprite
-		$gunEquipped/gunPreview.offset.x = -get_parent().get_node("player").gun2Instance.previewSprite.get_width()
-		$gunEquipped/gunPreview.offset.y = -get_parent().get_node("player").gun2Instance.previewSprite.get_height()
+		if !get_parent().get_node("player").gun2Instance.previewSprite == null:
+			$gunEquipped/gunPreview.texture = get_parent().get_node("player").gun2Instance.previewSprite
+		else:
+			$gunEquipped/gunPreview.texture = get_parent().get_node("player").gun2Instance.gunNotFoundSprite
 		$selecting.rect_position.x = 614
 		$selecting.rect_position.y = 18
 		
 	if get_parent().get_node("player").doesHaveAFirstGun == true:
-		$gunsEquippedSlot1.texture = get_parent().get_node("player").gunInstance.previewSprite
+		if !get_parent().get_node("player").gunInstance.previewSprite == null:
+			$gunsEquippedSlot1.texture = get_parent().get_node("player").gunInstance.previewSprite
+		else:
+			$gunEquipped/gunPreview.texture = get_parent().get_node("player").gunInstance.gunNotFoundSprite
 		
-		$gunsEquippedSlot1BG.rect_size.x = get_parent().get_node("player").gunInstance.previewSprite.get_width()
-		$gunsEquippedSlot1BG.rect_size.y = get_parent().get_node("player").gunInstance.previewSprite.get_height()
 	if get_parent().get_node("player").doesHaveASecondGun == true:
-		$gunsEquippedSlot2.texture = get_parent().get_node("player").gun2Instance.previewSprite
+		if !get_parent().get_node("player").gun2Instance.previewSprite == null:
+			$gunsEquippedSlot2.texture = get_parent().get_node("player").gun2Instance.previewSprite
+		else:
+			$gunEquipped/gunPreview.texture = get_parent().get_node("player").gun2Instance.gunNotFoundSprite
 		
-		$gunsEquippedSlot2BG.rect_size.x = get_parent().get_node("player").gun2Instance.previewSprite.get_width()
-		$gunsEquippedSlot2BG.rect_size.y = get_parent().get_node("player").gun2Instance.previewSprite.get_height()
 		$gunsEquippedSlot2.visible = true
 	
 	if get_parent().isBossFight == true:
-		$bossHealth.visible = true
-		$bossHealth.text = ("Boss: %d" % get_tree().get_nodes_in_group("boss")[0].health)
-		if get_tree().get_nodes_in_group("boss")[0].health <= 0 and !get_parent().stageFinished:
-			$bossHealth.queue_free()
+		if !GameManager.currentScene.bossInst == null or !GameManager.currentScene.boss == null:
+			$bossHealth.visible = true
+			$bossHealth.text = ("Boss: %d" % GameManager.currentScene.bossInst.health)
+			if get_tree().get_nodes_in_group("boss")[0].health <= 0 and !get_parent().stageFinished:
+				$bossHealth.queue_free()
 		
 	if isSubAGun == true:
 		if !pauseOnce:

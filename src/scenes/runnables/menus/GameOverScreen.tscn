@@ -1,10 +1,35 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assets/images/gameOver2.png" type="Texture" id=1]
 [ext_resource path="res://scripts/runnables/menus/GameOverScreen.gd" type="Script" id=2]
 [ext_resource path="res://assets/images/gameOver.png" type="Texture" id=3]
 [ext_resource path="res://assets/sounds/shipCrashing_GameOver.wav" type="AudioStream" id=4]
-[ext_resource path="res://fonts/gameFont.tres" type="DynamicFont" id=5]
+[ext_resource path="res://fonts/nokiafc22.ttf" type="DynamicFontData" id=6]
+
+[sub_resource type="DynamicFont" id=5]
+resource_local_to_scene = true
+size = 40
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=6]
+resource_local_to_scene = true
+size = 40
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=7]
+resource_local_to_scene = true
+size = 40
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=8]
+resource_local_to_scene = true
+size = 40
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=9]
+resource_local_to_scene = true
+size = 40
+font_data = ExtResource( 6 )
 
 [sub_resource type="Animation" id=1]
 resource_name = "FadeIn"
@@ -128,7 +153,7 @@ margin_top = 592.0
 margin_right = 1216.0
 margin_bottom = 648.0
 focus_mode = 0
-custom_fonts/font = ExtResource( 5 )
+custom_fonts/font = SubResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -139,7 +164,7 @@ margin_top = 592.0
 margin_right = 361.0
 margin_bottom = 648.0
 focus_mode = 0
-custom_fonts/font = ExtResource( 5 )
+custom_fonts/font = SubResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -161,7 +186,7 @@ margin_left = 472.0
 margin_top = 199.0
 margin_right = 817.0
 margin_bottom = 249.0
-custom_fonts/font = ExtResource( 5 )
+custom_fonts/font = SubResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -172,7 +197,7 @@ margin_top = 280.0
 margin_right = 689.0
 margin_bottom = 336.0
 focus_mode = 0
-custom_fonts/font = ExtResource( 5 )
+custom_fonts/font = SubResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -183,7 +208,7 @@ margin_top = 354.0
 margin_right = 694.0
 margin_bottom = 410.0
 focus_mode = 0
-custom_fonts/font = ExtResource( 5 )
+custom_fonts/font = SubResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

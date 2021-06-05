@@ -1,7 +1,6 @@
 extends Area2D
 
 const explosion = preload("res://scenes/bullets/explosion.tscn")
-var explosionCounter = 0
 var direction : Vector2 = Vector2.RIGHT
 var speed = 0
 var bombLaunched = false
@@ -23,15 +22,11 @@ func launch():
 	set_as_toplevel(true)
 	position = get_parent().get_node("bombPos").global_position
 	$col/bombAnim.play("bombRotate")
+	$counter.start()
 	
 func _physics_process(_delta):
 	if self.position.x > 1280:
 		queue_free()
-	if get_parent().bombExists == false:
-		explosionCounter += 1
-	if explosionCounter >= 45:
-		if bombLaunched == true:
-			explode()
 	
 func _on_commonBomb_area_entered(area):
 	if area.is_in_group("virus"):
@@ -43,3 +38,7 @@ func explode():
 	get_tree().get_nodes_in_group("stage")[0].call_deferred("add_child", boom)
 	boom.global_position = global_position
 	queue_free()
+
+func _on_counter_timeout():
+	if bombLaunched == true:
+		explode()

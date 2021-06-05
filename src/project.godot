@@ -12,7 +12,7 @@ config_version=4
 
 config/name="VIRUS HAVOC!"
 run/main_scene="res://scenes/runnables/menus/DebugMenu.tscn"
-boot_splash/image="res://assets/images/logo2.png"
+boot_splash/image="res://assets/images/splash.png"
 boot_splash/use_filter=false
 config/icon="res://icons/icon-hd.png"
 config/windows_native_icon="res://icons/favicon.ico"
@@ -23,7 +23,7 @@ GameManager="*res://scenes/managers/GameManager.tscn"
 
 [debug]
 
-settings/fps/force_fps=60
+settings/fps/force_fps=120
 settings/stdout/print_fps=true
 
 [display]
@@ -120,6 +120,10 @@ pointing/emulate_touch_from_mouse=true
 [network]
 
 ssl/certificates="res://addons/newgrounds/certs.pem"
+
+[physics]
+
+common/physics_fps=120
 
 [rendering]
 

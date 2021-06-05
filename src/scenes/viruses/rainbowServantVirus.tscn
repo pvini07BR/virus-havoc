@@ -89,9 +89,12 @@ playback/repeat = true
 
 [node name="moving" type="Tween" parent="."]
 
+[node name="fleeing" type="Tween" parent="."]
+
 [node name="tripleShootingTimer" type="Timer" parent="."]
 wait_time = 0.3
 
-[connection signal="area_entered" from="." to="." method="_on_CommonVirus_area_entered"]
+[connection signal="area_entered" from="." to="." method="_on_virus_area_entered"]
 [connection signal="tween_all_completed" from="moving" to="." method="_on_moving_tween_all_completed"]
+[connection signal="tween_all_completed" from="fleeing" to="." method="_on_fleeing_tween_all_completed"]
 [connection signal="timeout" from="tripleShootingTimer" to="." method="_on_tripleShootingTimer_timeout"]

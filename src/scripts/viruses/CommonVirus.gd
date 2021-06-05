@@ -14,11 +14,6 @@ func _physics_process(delta):
 
 	if get_parent().get_parent().virusSpaceMoving == 2:
 		vulnerable = true
-		
-func _on_CommonVirus_area_entered(area: Area2D):
-	if area.is_in_group("projectile"):
-		if vulnerable == true:
-			takeDamage()
 
 func _on_ShootTimer_timeout():
 	if vulnerable == true:

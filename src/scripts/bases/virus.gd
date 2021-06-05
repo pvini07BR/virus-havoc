@@ -70,7 +70,7 @@ func _ready():
 	z_index = 4
 	z_as_relative = false
 
-func takeDamage():
+func takeDamageWithCooldown():
 	if vulnerable == true:
 		if canTakeDamage == true:
 			virusEffects.play("virusHit")
@@ -108,6 +108,42 @@ func takeDamage():
 			healthBar.visible = true
 			damageCooldown.start()
 			canTakeDamage = false
+			
+func takeDamage():
+	if vulnerable == true:
+		virusEffects.play("virusHit")
+		if isInSlot == true:
+			if get_parent().get_parent().get_node("player").slotSelected == 0:
+				health -= get_parent().get_parent().get_node("player").gunInstance.damage
+				var damageIndInst = damageIndicator.instance()
+				damageIndInst.amount = get_parent().get_parent().get_node("player").gunInstance.damage
+				damageIndInst.type = 0
+				get_tree().get_nodes_in_group("stage")[0].add_child(damageIndInst)
+				damageIndInst.global_position = global_position
+			if get_parent().get_parent().get_node("player").slotSelected == 1:
+				health -= get_parent().get_parent().get_node("player").gun2Instance.damage
+				var damageIndInst2 = damageIndicator.instance()
+				damageIndInst2.amount = get_parent().get_parent().get_node("player").gun2Instance.damage
+				damageIndInst2.type = 0
+				get_tree().get_nodes_in_group("stage")[0].add_child(damageIndInst2)
+				damageIndInst2.global_position = global_position
+		elif !isInSlot:
+			if get_parent().get_node("player").slotSelected == 0:
+				health -= get_parent().get_node("player").gunInstance.damage
+				var damageIndInst = damageIndicator.instance()
+				damageIndInst.amount = get_parent().get_node("player").gunInstance.damage
+				damageIndInst.type = 0
+				get_tree().get_nodes_in_group("stage")[0].add_child(damageIndInst)
+				damageIndInst.global_position = global_position
+			if get_parent().get_node("player").slotSelected == 1:
+				health -= get_parent().get_node("player").gun2Instance.damage
+				var damageIndInst2 = damageIndicator.instance()
+				damageIndInst2.amount = get_parent().get_node("player").gun2Instance.damage
+				damageIndInst2.type = 0
+				get_tree().get_nodes_in_group("stage")[0].add_child(damageIndInst2)
+				damageIndInst2.global_position = global_position
+		damageSoundStream.play()
+		healthBar.visible = true
 
 func shoot():
 	if vulnerable == true:
@@ -127,6 +163,14 @@ func shoot2():
 		bull2.global_position = global_position
 		
 		shootingSoundStream.play()
+		
+func _on_virus_area_entered(area):
+	if area.is_in_group("projectile"):
+		if vulnerable == true:
+			takeDamage()
+	if area.is_in_group("multiProjectile"):
+		if vulnerable == true:
+			takeDamageWithCooldown()
 		
 func _process(_delta):
 	healthBar.value = health

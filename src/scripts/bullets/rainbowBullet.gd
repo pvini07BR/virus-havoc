@@ -19,7 +19,7 @@ func _process(delta):
 	if moving == true and !shooted:
 		$speed.interpolate_property(self, "speed", 0, 750, 0.2, Tween.TRANS_LINEAR)
 		$speed.start()
-		self.add_to_group('projectile')
+		self.add_to_group('multiProjectile')
 		shooted = true
 
 func _on_VirusBullet_area_entered(area):

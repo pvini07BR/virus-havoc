@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/images/laserBullet.png" type="Texture" id=1]
 [ext_resource path="res://scripts/bullets/rainbowBullet.gd" type="Script" id=2]
+[ext_resource path="res://assets/sounds/rainbowBulletAppear.wav" type="AudioStream" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.41948
@@ -79,5 +80,10 @@ playback/repeat = true
 [node name="fade" type="Tween" parent="."]
 
 [node name="speed" type="Tween" parent="."]
+
+[node name="appearing" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -15.0
+autoplay = true
 
 [connection signal="area_entered" from="." to="." method="_on_VirusBullet_area_entered"]

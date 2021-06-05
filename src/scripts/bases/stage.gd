@@ -33,22 +33,25 @@ var bossInst
 
 func _init():
 	if !GameManager.wasInBossBattle:
-		load_equippedGuns()
+		GameManager.load_equippedGuns()
 	if GameManager.wasInBossBattle == true:
 		score = GameManager.storedScore
 		bitcoins = GameManager.storedBitcoins
 		virusesKilled = GameManager.storedKills
 
 func _ready():
-	bossInst = boss.instance()
+	if !boss == null:
+		bossInst = boss.instance()
 	
 	get_tree().paused = false
-
-	get_tree().get_root().get_node("GameManager/musicChannel").set_stream(null)
-	get_tree().get_root().get_node("GameManager/musicChannel").set_stream(music)
-	get_tree().get_root().get_node("GameManager/musicChannel").play()
 	
-	add_child(background.instance())
+	get_tree().get_root().get_node("GameManager/musicChannel").set_stream(null)
+	if !music == null:
+		get_tree().get_root().get_node("GameManager/musicChannel").set_stream(music)
+		get_tree().get_root().get_node("GameManager/musicChannel").play()
+	
+	if !background == null:
+		add_child(background.instance())
 	
 	var playerInst = player.instance()
 	playerInst.position.x = 213
@@ -63,12 +66,14 @@ func _ready():
 	if GameManager.wasInBossBattle == true:
 		startBossFight()
 	
-func _process(delta):
-	if bossInst.health <= 0 and !stageFinished:
-		endStage()
+func _process(_delta):
+	if !boss == null or !bossInst == null:
+		if bossInst.health <= 0 and !stageFinished:
+			endStage()
 		
-	bitcoins = score / 6
-	if bitcoins <= 0:
+	if score >= 0:
+		bitcoins = score / 6
+	if bitcoins < 0:
 		bitcoins = 0
 	
 func spawnLootBox():
@@ -77,25 +82,6 @@ func spawnLootBox():
 		lootBoxSpawningChance = [1, 2, 3][randi() % 3]
 		if lootBoxSpawningChance >= 2:
 			add_child(lootBox.instance())
-		
-func load_equippedGuns():
-	var file = File.new()
-	if not file.file_exists("user://equippedGuns.txt"):
-		return
-	if (file.open("user://equippedGuns.txt", File.READ)== OK):
-		var loadedSlot1 = (file.get_line())
-		var loadedSlot2 = (file.get_line())
-		file.close()
-		
-		if loadedSlot1 == "null":
-			GameManager.equippedGuns[0] = null
-		else:
-			GameManager.equippedGuns[0] = GameManager.guns.values()[int(loadedSlot1)]
-			
-		if loadedSlot2 == "null":
-			GameManager.equippedGuns[1] = null
-		else:
-			GameManager.equippedGuns[1] = GameManager.guns.values()[int(loadedSlot2)]
 			
 func startBossFight():
 	isBossFight = true
@@ -105,9 +91,11 @@ func startBossFight():
 	GameManager.storedScore = score
 	isBossFightTriggerOnce = true
 	get_tree().get_root().get_node("GameManager/musicChannel").set_stream(null)
-	get_tree().get_root().get_node("GameManager/musicChannel").set_stream(bossMusic)
-	get_tree().get_root().get_node("GameManager/musicChannel").play()
-	add_child(bossInst)
+	if !bossMusic == null:
+		get_tree().get_root().get_node("GameManager/musicChannel").set_stream(bossMusic)
+		get_tree().get_root().get_node("GameManager/musicChannel").play()
+	if !boss == null:
+		add_child(bossInst)
 	
 func endStage():
 	if !stageFinished:

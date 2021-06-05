@@ -25,13 +25,7 @@ func _ready():
 	
 	$deathTween.interpolate_property(self, "position", Vector2(1000, 360), Vector2(1000, 1000), 5, Tween.TRANS_LINEAR)
 	$movementTween.interpolate_property(self, "position", Vector2(1760, 360), Vector2(1000, 360), 12.1, Tween.TRANS_LINEAR)
-	$glowIntense.interpolate_property($Area2D/glow, "modulate", Color(1,1,1,0), Color(1,1,1,1),$beamingTimer.wait_time)
-	$intensifySpeed.interpolate_property($moving, "playback_speed", 1, 2, $beamingTimer.wait_time)
-	$intensifySpeed2.interpolate_property($effects, "playback_speed", 1, 2, $beamingTimer.wait_time)
 	$movementTween.start()
-
-#func _process(delta):
-	#translate(direction*velocity*delta)
 	
 func _physics_process(_delta):
 	if timesShooted >= 5:
@@ -44,10 +38,23 @@ func _physics_process(_delta):
 		if !shootedNrammed == 5:
 			shootedNrammed += 1
 		elif shootedNrammed == 5 and !isBeaming:
+			$beamingTimer.start()
+			$glowIntense.interpolate_property($Area2D/glow, "modulate", Color(1,1,1,0), Color(1,1,1,1),$beamingTimer.wait_time)
+			$intensifySpeed.interpolate_property($moving, "playback_speed", 1, 2, $beamingTimer.wait_time)
+			$intensifySpeed2.interpolate_property($effects, "playback_speed", 1, 2, $beamingTimer.wait_time)
+			$intensifySound.interpolate_property($ambient, "pitch_scale", 1, 2, $beamingTimer.wait_time)
+			$intensifySound2.interpolate_property($ambient, "volume_db", -15, -10, $beamingTimer.wait_time)
 			$glowIntense.start()
 			$intensifySpeed.start()
 			$intensifySpeed2.start()
-			$beamingTimer.start()
+			$intensifySound.start()
+			$intensifySound2.start()
+			$beamingRiser.play()
+			$intensifyBeamingSound.interpolate_property($beamingRiser, "pitch_scale", 1, 2, 5)
+			$intensifyBeamingSound2.interpolate_property($beamingRiser, "volume_db", -20, -10, 5)
+			$intensifyBeamingSound.start()
+			$intensifyBeamingSound2.start()
+			beamingState = 0
 			isBeaming = true
 		rammingState = 0
 		
@@ -62,6 +69,7 @@ func _physics_process(_delta):
 		for i in get_tree().get_nodes_in_group("rainbowVirusBullet").size():
 			get_tree().get_nodes_in_group("rainbowVirusBullet")[i].moving = true
 		$shootingCooldown.start()
+		$releasingBullets.play()
 		shooted = true
 		bulletsSpawned = 0
 		if !isRamming:
@@ -74,6 +82,10 @@ func _physics_process(_delta):
 		health = 0
 		$ambient.stop()
 		$Area2D/Sprite.texture = brokenSprite
+		$Area2D/glow.visible = false
+		$moving.playback_speed = 1
+		$moving.play("death")
+		$effects.playback_speed = 0.5
 		
 		$deathTween.start()
 		
@@ -85,7 +97,7 @@ func shoot():
 		bull.global_position.y = global_position.y + 300 - bulletsSpawned * 55
 
 func _on_Area2D_area_entered(area):
-	if area.is_in_group("projectile"):
+	if area.is_in_group("multiProjectile"):
 		if vulnerable == true:
 			if canTakeDamage == true:
 				if get_parent().get_node("player").slotSelected == 0:
@@ -98,7 +110,7 @@ func _on_Area2D_area_entered(area):
 				if get_parent().get_node("player").slotSelected == 1:
 					health -= get_parent().get_node("player").gun2Instance.damage
 					var damageIndInst = damageIndicator.instance()
-					damageIndInst.amount = get_parent().get_node("player").gunInstance.damage
+					damageIndInst.amount = get_parent().get_node("player").gun2Instance.damage
 					damageIndInst.type = 0
 					get_tree().get_nodes_in_group("stage")[0].add_child(damageIndInst)
 					damageIndInst.global_position = global_position
@@ -106,7 +118,24 @@ func _on_Area2D_area_entered(area):
 				$damageS.play()
 				$damageCooldown.start()
 				canTakeDamage = false
-
+	if area.is_in_group("projectile"):
+		if vulnerable == true:
+			if get_parent().get_node("player").slotSelected == 0:
+				health -= get_parent().get_node("player").gunInstance.damage
+				var damageIndInst = damageIndicator.instance()
+				damageIndInst.amount = get_parent().get_node("player").gunInstance.damage
+				damageIndInst.type = 0
+				get_tree().get_nodes_in_group("stage")[0].add_child(damageIndInst)
+				damageIndInst.global_position = global_position
+			if get_parent().get_node("player").slotSelected == 1:
+				health -= get_parent().get_node("player").gun2Instance.damage
+				var damageIndInst = damageIndicator.instance()
+				damageIndInst.amount = get_parent().get_node("player").gun2Instance.damage
+				damageIndInst.type = 0
+				get_tree().get_nodes_in_group("stage")[0].add_child(damageIndInst)
+				damageIndInst.global_position = global_position
+			$damage.play("damage")
+			$damageS.play()
 
 func _on_shooting_timeout():
 	if !shooted:
@@ -133,10 +162,23 @@ func _on_shootingCooldown_timeout():
 	shooted = false
 
 func _on_beamingTimer_timeout():
-	if beamingState == 0:
+	if isBeaming == true:
+		if beamingState == 0:
+			add_child(laserBeam.instance())
+		if beamingState == 1:
+			shootedNrammed = 0
+			$glowIntense.interpolate_property($Area2D/glow, "modulate", Color(1,1,1,1), Color(1,1,1,0),$beamingTimer.wait_time / 2)
+			$intensifySpeed.interpolate_property($moving, "playback_speed", 2, 1, $beamingTimer.wait_time / 2)
+			$intensifySpeed2.interpolate_property($effects, "playback_speed", 2, 1, $beamingTimer.wait_time / 2)
+			$intensifySound.interpolate_property($ambient, "pitch_scale", 2, 1, $beamingTimer.wait_time / 2)
+			$intensifySound2.interpolate_property($ambient, "volume_db", -10, -15, $beamingTimer.wait_time / 2)
+			$glowIntense.start()
+			$intensifySpeed.start()
+			$intensifySpeed2.start()
+			$intensifySound.start()
+			$intensifySound2.start()
+			isBeaming = false
 		beamingState += 1
-	if beamingState == 1:
-		var beam = laserBeam.instance()
-		get_tree().get_nodes_in_group("stage")[0].add_child(beam)
-		beam.global_position = global_position
-		beamingState += 1
+
+func _on_intensifyBeamingSound_tween_all_completed():
+	$beamingRiser.stop()

@@ -58,5 +58,5 @@ anims/virusRotate = SubResource( 2 )
 wait_time = 0.2
 one_shot = true
 
-[connection signal="area_entered" from="." to="." method="_on_DualLaserVirus_area_entered"]
+[connection signal="area_entered" from="." to="." method="_on_virus_area_entered"]
 [connection signal="timeout" from="doubleLaserTimer" to="." method="_on_doubleLaserTimer_timeout"]

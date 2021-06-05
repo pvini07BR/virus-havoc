@@ -30,7 +30,10 @@ func _process(delta):
 				$changingPosTween.start()
 	
 	if !isBossFight:
-		$CanvasLayer/Label.text = ("Wave %d" % virusSpaceWave)
+		if GameManager.language == 0:
+			$CanvasLayer/Label.text = ("%da Onda" % virusSpaceWave)
+		if GameManager.language == 1:
+			$CanvasLayer/Label.text = ("Wave %d" % virusSpaceWave)
 		
 		if virusSpaceMoving == 0:
 			$virusSpace.position.x = 1980
@@ -222,7 +225,10 @@ func _process(delta):
 			$rainbowServantSpawningTimer.start()
 			bossBattleJustBegun = true
 		if stageFinished == true:
-			$CanvasLayer/Label.text = "Stage Clear!"
+			if GameManager.language == 0:
+				$CanvasLayer/Label.text = "Nível Completo!"
+			if GameManager.language == 1:
+				$CanvasLayer/Label.text = "Stage Clear!"
 func _on_virusSpawningTimer_timeout():
 	if !isBossFight:
 		if virusSpaceMoving == 0:

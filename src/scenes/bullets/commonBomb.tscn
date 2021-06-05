@@ -56,4 +56,9 @@ offset = Vector2( -0.5, -1.5 )
 [node name="bombAnim" type="AnimationPlayer" parent="col"]
 anims/bombRotate = SubResource( 5 )
 
+[node name="counter" type="Timer" parent="."]
+wait_time = 0.7
+one_shot = true
+
 [connection signal="area_entered" from="." to="." method="_on_commonBomb_area_entered"]
+[connection signal="timeout" from="counter" to="." method="_on_counter_timeout"]

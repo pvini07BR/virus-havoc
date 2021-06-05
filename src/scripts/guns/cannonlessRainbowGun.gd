@@ -11,15 +11,27 @@ func _ready():
 	$rainbowEffect.interpolate_property($raytracing.get_material(), "shader_param/Shift_Hue", 0, 1, 2, Tween.TRANS_LINEAR)
 	$rainbowEffect.start()
 
-func _process(delta):
+func _process(_delta):
+	if !active and !shooted and pressed == true:
+		for i in get_tree().get_nodes_in_group("rainbowBullet").size():
+			get_tree().get_nodes_in_group("rainbowBullet")[i].moving = true
+		shootingState = 0
+		bulletsSpawned = 0
+		$shootingCooldown.start()
+		$release.play()
+		pressed = false
+		shooted = true
+		
 	if pressed == true:
 		$ray.playing = true
 		$ray.visible = true
 		$raytracing.visible = true
+		$active.playing = true
 	elif pressed == false:
 		$ray.playing = false
 		$ray.visible = false
 		$raytracing.visible = false
+		$active.playing = false
 	
 	if shootingState == 2 and !shooted:
 		for i in get_tree().get_nodes_in_group("rainbowBullet").size():
@@ -28,10 +40,6 @@ func _process(delta):
 		bulletsSpawned = 0
 		$shootingCooldown.start()
 		shooted = true
-
-func fire():
-	if !shooted:
-		shootingState += 1
 		
 func shoot():
 	if !pressed:
@@ -45,11 +53,18 @@ func shoot():
 		bulletsSpawned += 1
 
 func _input(event):
-	if !shooted:
-		if event.is_action_released("ui_accept"):
-			if pressed == true:
-				shootingState += 1
-				pressed = false
+	if active == true:
+		if !get_parent().get_parent().stageFinished:
+			if event.is_action_pressed("ui_accept"):
+				if !pressed:
+					if !shooted:
+						shootingState += 1
+			if !shooted:
+				if event.is_action_released("ui_accept"):
+					if pressed == true:
+						shootingState += 1
+						$release.play()
+						pressed = false
 
 func _on_cooldown_timeout():
 	if !shooted:

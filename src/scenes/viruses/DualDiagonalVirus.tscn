@@ -53,4 +53,4 @@ texture = ExtResource( 1 )
 autoplay = "virusRotate"
 anims/virusRotate = SubResource( 2 )
 
-[connection signal="area_entered" from="." to="." method="_on_DualDiagonalVirus_area_entered"]
+[connection signal="area_entered" from="." to="." method="_on_virus_area_entered"]

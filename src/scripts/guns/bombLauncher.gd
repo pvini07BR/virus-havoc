@@ -21,14 +21,17 @@ func _process(_delta):
 		$cooldownBar.value = 0
 		
 	
-func fire():
-	if !cooldown:
-		if bombExists == true:
-			damage = [2,3,4][randi() % 3]
-			bom.launch()
-			get_parent().get_node("gunShoot").play()
-			$cooldown.start()
-			cooldown = true
+func _input(Event):
+	if active == true:
+		if !get_parent().get_parent().stageFinished:
+			if Event.is_action_pressed("ui_accept"):
+				if !cooldown:
+					if bombExists == true:
+						damage = [2,3,4][randi() % 3]
+						bom.launch()
+						shootingPlayer.play()
+						$cooldown.start()
+						cooldown = true
 
 func _on_cooldown_timeout():
 	cooldown = false

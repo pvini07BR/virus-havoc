@@ -8,6 +8,9 @@ var rng = RandomNumberGenerator.new()
 var speed = 400
 var move = Vector2()
 
+var slot1Equipped = false
+var slot2Equipped = false
+
 var hp = 10
 var maxhp = 10
 
@@ -17,8 +20,6 @@ var cameFromInput
 var existingGun
 var gunInstance
 var gun2Instance
-var slot1Selected = false
-var slot2Selected = false
 var doesHaveASecondGun = false
 var doesHaveAFirstGun = false
 var isOverlappingAVirus = false
@@ -46,7 +47,7 @@ func _physics_process(delta):
 	if move.x < -0:
 		$col/waves/waveController.playback_speed = lerp(1, -move.x / -20, 10 * delta)
 
-func _process(delta):
+func _process(_delta):
 	if !get_parent().stageFinished:
 		#sistema de armas
 		if range(GameManager.equippedGuns.size()).has(1) and !GameManager.equippedGuns[1] == null and !doesHaveASecondGun:
@@ -64,36 +65,38 @@ func _process(delta):
 		if !doesHaveASecondGun and doesHaveAFirstGun == true:
 			slotSelected = 0
 			
-		if slotSelected == 0 and !slot1Selected and doesHaveAFirstGun == true:
-			if doesHaveASecondGun == true:
-				gun2Instance.global_position.x = 0
-				gun2Instance.global_position.y = 0
-				gun2Instance.set_as_toplevel(true)
-			if doesHaveAFirstGun == true:
-				gunInstance.position.x = 16
-				gunInstance.position.y = 22
-				gunInstance.set_as_toplevel(false)
-			if cameFromInput == true:
-				$gunSwitching.play()
-				cameFromInput = false
-			$gunShoot.stream = gunInstance.shootingSound
-			slot1Selected = true
-			slot2Selected = false
-		if slotSelected == 1 and !slot2Selected and doesHaveASecondGun == true:
-			if doesHaveAFirstGun == true:
-				gunInstance.global_position.x = 0
-				gunInstance.global_position.y = 0
-				gunInstance.set_as_toplevel(true)
+		if slotSelected == 0 and doesHaveAFirstGun == true and !slot1Equipped:
 			if doesHaveASecondGun == true:
 				gun2Instance.position.x = 16
 				gun2Instance.position.y = 22
-				gun2Instance.set_as_toplevel(false)
+				gun2Instance.visible = false
+				gun2Instance.active = false
+			if doesHaveAFirstGun == true:
+				gunInstance.position.x = 16
+				gunInstance.position.y = 22
+				gunInstance.visible = true
+				gunInstance.active = true
 			if cameFromInput == true:
 				$gunSwitching.play()
 				cameFromInput = false
-			$gunShoot.stream = gun2Instance.shootingSound
-			slot1Selected = false
-			slot2Selected = true
+			slot1Equipped = true
+			slot2Equipped = false
+		if slotSelected == 1 and doesHaveASecondGun == true and !slot2Equipped:
+			if doesHaveAFirstGun == true:
+				gunInstance.position.x = 16
+				gunInstance.position.y = 22
+				gunInstance.visible = false
+				gunInstance.active = false
+			if doesHaveASecondGun == true:
+				gun2Instance.position.x = 16
+				gun2Instance.position.y = 22
+				gun2Instance.visible = true
+				gun2Instance.active = true
+			if cameFromInput == true:
+				$gunSwitching.play()
+				cameFromInput = false
+			slot2Equipped = true
+			slot1Equipped = false
 			
 		if hp >= 10:
 				hp = 10
@@ -124,13 +127,6 @@ func changeToExistingGun():
 		
 func _input(Event):
 	if !get_parent().stageFinished:
-		if Event.is_action_pressed("ui_accept"):
-			if slotSelected == 0:
-				if doesHaveAFirstGun == true:
-					gunInstance.fire()
-			if slotSelected == 1:
-				if doesHaveASecondGun == true:
-					gun2Instance.fire()
 		if Event.is_action_pressed("ui_selectWeapon0") and doesHaveAFirstGun == true:
 			cameFromInput = true
 			slotSelected = 0

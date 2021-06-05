@@ -257,9 +257,6 @@ volume_db = -10.0
 stream = ExtResource( 5 )
 volume_db = -5.0
 
-[node name="gunShoot" type="AudioStreamPlayer" parent="."]
-volume_db = -10.0
-
 [connection signal="area_entered" from="col" to="." method="_on_col_area_entered"]
 [connection signal="area_exited" from="col" to="." method="_on_col_area_exited"]
 [connection signal="timeout" from="damageCooldown" to="." method="_on_damageCooldown_timeout"]

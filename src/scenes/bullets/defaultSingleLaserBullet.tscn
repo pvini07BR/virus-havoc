@@ -4,8 +4,8 @@
 [ext_resource path="res://scripts/bullets/defaultSingleLaserBullet.gd" type="Script" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 1.47683
-height = 9.12889
+radius = 4.13134
+height = 30.0026
 
 [node name="defaultSingleLaserBullet" type="Area2D" groups=[
 "projectile",
@@ -16,17 +16,16 @@ script = ExtResource( 2 )
 [node name="col" type="CollisionShape2D" parent="." groups=[
 "projectile",
 ]]
-position = Vector2( 0.943872, 0 )
+position = Vector2( 2.19387, 0 )
 rotation = 1.5708
 scale = Vector2( 0.8, 0.8 )
 shape = SubResource( 1 )
 
-[node name="laserBullet" type="Sprite" parent="col" groups=[
+[node name="laserBullet" type="Sprite" parent="." groups=[
 "projectile",
 ]]
-position = Vector2( -0.138103, 0.943873 )
-rotation = -1.5708
-scale = Vector2( 0.8, 0.8 )
+position = Vector2( 0.188774, -0.110485 )
+scale = Vector2( 0.64, 0.64 )
 texture = ExtResource( 1 )
 
 [connection signal="area_entered" from="." to="." method="_on_Tiro_area_entered"]
