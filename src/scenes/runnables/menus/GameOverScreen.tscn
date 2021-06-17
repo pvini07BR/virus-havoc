@@ -6,33 +6,32 @@
 [ext_resource path="res://assets/sounds/shipCrashing_GameOver.wav" type="AudioStream" id=4]
 [ext_resource path="res://fonts/nokiafc22.ttf" type="DynamicFontData" id=6]
 
+[sub_resource type="DynamicFont" id=1]
+resource_local_to_scene = true
+size = 40
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=2]
+resource_local_to_scene = true
+size = 40
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=3]
+resource_local_to_scene = true
+size = 40
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=4]
+resource_local_to_scene = true
+size = 40
+font_data = ExtResource( 6 )
+
 [sub_resource type="DynamicFont" id=5]
 resource_local_to_scene = true
 size = 40
 font_data = ExtResource( 6 )
 
-[sub_resource type="DynamicFont" id=6]
-resource_local_to_scene = true
-size = 40
-font_data = ExtResource( 6 )
-
-[sub_resource type="DynamicFont" id=7]
-resource_local_to_scene = true
-size = 40
-font_data = ExtResource( 6 )
-
-[sub_resource type="DynamicFont" id=8]
-resource_local_to_scene = true
-size = 40
-font_data = ExtResource( 6 )
-
-[sub_resource type="DynamicFont" id=9]
-resource_local_to_scene = true
-size = 40
-font_data = ExtResource( 6 )
-
-[sub_resource type="Animation" id=1]
-resource_name = "FadeIn"
+[sub_resource type="Animation" id=6]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Fade:color")
@@ -47,8 +46,7 @@ tracks/0/keys = {
 "values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "FadeOut"
+[sub_resource type="Animation" id=7]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Fade:color")
@@ -63,8 +61,7 @@ tracks/0/keys = {
 "values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "gameOver_recovered"
+[sub_resource type="Animation" id=8]
 length = 3.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("BrokenShip:position")
@@ -103,7 +100,7 @@ tracks/2/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=9]
 length = 4.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("BrokenShip:position")
@@ -153,7 +150,7 @@ margin_top = 592.0
 margin_right = 1216.0
 margin_bottom = 648.0
 focus_mode = 0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -164,7 +161,7 @@ margin_top = 592.0
 margin_right = 361.0
 margin_bottom = 648.0
 focus_mode = 0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -186,7 +183,7 @@ margin_left = 472.0
 margin_top = 199.0
 margin_right = 817.0
 margin_bottom = 249.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -197,7 +194,7 @@ margin_top = 280.0
 margin_right = 689.0
 margin_bottom = 336.0
 focus_mode = 0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -208,7 +205,7 @@ margin_top = 354.0
 margin_right = 694.0
 margin_bottom = 410.0
 focus_mode = 0
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -224,8 +221,8 @@ __meta__ = {
 }
 
 [node name="Fadeing" type="AnimationPlayer" parent="Fade"]
-anims/FadeIn = SubResource( 1 )
-anims/FadeOut = SubResource( 2 )
+anims/FadeIn = SubResource( 6 )
+anims/FadeOut = SubResource( 7 )
 
 [node name="BG" type="ColorRect" parent="."]
 margin_right = 1280.0
@@ -249,8 +246,8 @@ __meta__ = {
 }
 
 [node name="BrokenShip_Anim" type="AnimationPlayer" parent="."]
-anims/gameOver_recovered = SubResource( 3 )
-anims/gameOver_recovering = SubResource( 4 )
+anims/gameOver_recovered = SubResource( 8 )
+anims/gameOver_recovering = SubResource( 9 )
 
 [node name="Crash!" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )

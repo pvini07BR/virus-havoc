@@ -38,7 +38,7 @@ func _ready():
 		shooted = true
 		
 func _process(delta):
-	if get_parent().stageFinished == true and !finishedOnce:
+	if GameManager.currentScene.bossInst.health <= 0 and !finishedOnce:
 		$fleeing.interpolate_property(self, "position", self.position, Vector2(-30, self.position.y), 1)
 		$fleeing.start()
 		vulnerable = false

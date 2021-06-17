@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/images/jogador.png" type="Texture" id=1]
 [ext_resource path="res://scripts/Player.gd" type="Script" id=2]
@@ -7,12 +7,13 @@
 [ext_resource path="res://assets/sounds/gunEquip.wav" type="AudioStream" id=5]
 [ext_resource path="res://assets/sounds/heartGet.wav" type="AudioStream" id=6]
 
-[sub_resource type="CapsuleShape2D" id=1]
-radius = 20.2744
-height = 33.8055
+[sub_resource type="CircleShape2D" id=1]
+radius = 20.5015
 
-[sub_resource type="Animation" id=2]
-resource_name = "waveAnim"
+[sub_resource type="CircleShape2D" id=2]
+radius = 20.4263
+
+[sub_resource type="Animation" id=3]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("1:position")
@@ -159,7 +160,7 @@ tracks/11/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1.25, 1.25 ) ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=4]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("col/spr:rotation_degrees")
@@ -196,7 +197,7 @@ script = ExtResource( 2 )
 position = Vector2( 16, 22 )
 
 [node name="box" type="CollisionShape2D" parent="."]
-position = Vector2( 13.2433, 8.74058 )
+position = Vector2( 13.2433, 8.74059 )
 rotation = 1.5708
 shape = SubResource( 1 )
 
@@ -205,9 +206,9 @@ shape = SubResource( 1 )
 ]]
 
 [node name="box" type="CollisionShape2D" parent="col"]
-position = Vector2( 13.2433, 8.74058 )
+position = Vector2( 13.2433, 8.7406 )
 rotation = 1.5708
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="spr" type="Sprite" parent="col"]
 position = Vector2( 13.3333, 0.18726 )
@@ -237,10 +238,10 @@ texture = ExtResource( 3 )
 
 [node name="waveController" type="AnimationPlayer" parent="col/waves"]
 autoplay = "waveAnim"
-anims/waveAnim = SubResource( 2 )
+anims/waveAnim = SubResource( 3 )
 
 [node name="playerEffects" type="AnimationPlayer" parent="."]
-anims/playerHit = SubResource( 3 )
+anims/playerHit = SubResource( 4 )
 
 [node name="damageCooldown" type="Timer" parent="."]
 wait_time = 0.5

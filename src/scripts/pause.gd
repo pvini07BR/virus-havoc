@@ -1,7 +1,6 @@
 extends Node
 
 var itsPaused = 0
-onready var deathSound = load("res://assets/sounds/shipCrashing_GameOver.wav")
 
 func _process(_delta):
 	if itsPaused == 1:
@@ -19,7 +18,7 @@ func _process(_delta):
 
 func _input(Event):
 	if Event.is_action_pressed("ui_cancel"):
-		if !get_parent().get_node("LevelUI").isSubAGun and !get_parent().stageFinished:
+		if !get_parent().get_node("LevelUI").isSubAGun and !get_parent().stageFinished and get_parent().stageBegun == true:
 			itsPaused += 1
 
 func _notification(what):

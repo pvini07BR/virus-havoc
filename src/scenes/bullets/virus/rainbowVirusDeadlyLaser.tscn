@@ -57,7 +57,6 @@ volume_db = -10.0
 autoplay = true
 
 [connection signal="tween_all_completed" from="appearTween" to="." method="_on_appearTween_tween_all_completed"]
-[connection signal="tween_started" from="appearTween" to="." method="_on_appearTween_tween_started"]
 [connection signal="tween_all_completed" from="disappearTween" to="." method="_on_disappearTween_tween_all_completed"]
 [connection signal="tween_started" from="disappearTween" to="." method="_on_disappearTween_tween_started"]
 [connection signal="timeout" from="duration" to="." method="_on_duration_timeout"]

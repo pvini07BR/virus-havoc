@@ -1,8 +1,8 @@
 extends "res://scripts/bases/gun.gd"
 
 func _input(Event):
-	if active == true:
-		if !get_parent().get_parent().stageFinished:
+	if get_parent().isInputWorking == true:
+		if active == true:
 			if Event.is_action_pressed("ui_accept"):
 				if !cooldown:
 					randomize()

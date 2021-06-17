@@ -28,7 +28,7 @@ func _ready():
 	$aimTween.start()
 
 func _process(_delta):
-	if get_parent().get_parent().stageFinished == true and !finishOnce:
+	if get_parent().isDead == true and !finishOnce:
 		$disappearTween.interpolate_property($ColorRect, "rect_scale", Vector2(1,1), Vector2(1,0), 1)
 		$disappearTween2.interpolate_property($ambient, "pitch_scale", 1, 0, 1)
 		$disappearTween3.interpolate_property($ambient, "volume_db", -10, -80, 1)
@@ -38,6 +38,14 @@ func _process(_delta):
 		finishOnce = true
 
 func _on_disappearTween_tween_all_completed():
+	#end of beaming attack
+	if !get_parent().isDead:
+		get_parent().beamingState = 0
+		if !get_parent().repeatAttack <= 0:
+			get_parent().attackMoves(3)
+			get_parent().repeatAttack -= 1
+		else:
+			get_parent().randomizeAttack(false)
 	queue_free()
 
 func _on_duration_timeout():

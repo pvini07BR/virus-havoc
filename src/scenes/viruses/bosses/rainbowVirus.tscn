@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://assets/images/viruses/bossVirus_Rainbow.png" type="Texture" id=1]
 [ext_resource path="res://scripts/viruses/bosses/rainbowVirus.gd" type="Script" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://scenes/viruses/bosses/rainbowVirusShader.tres" type="Material" id=7]
 [ext_resource path="res://assets/sounds/beamRiser.wav" type="AudioStream" id=8]
 [ext_resource path="res://assets/sounds/rainbowBulletRelease.wav" type="AudioStream" id=9]
+[ext_resource path="res://assets/sounds/bossExploding.wav" type="AudioStream" id=10]
+[ext_resource path="res://assets/sounds/rainbowVirusDeath.wav" type="AudioStream" id=11]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 211.0
@@ -148,9 +150,17 @@ volume_db = -20.0
 stream = ExtResource( 9 )
 volume_db = -20.0
 
+[node name="exploding" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+volume_db = -10.0
+
+[node name="deathSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+volume_db = -10.0
+
 [node name="shooting" type="Timer" parent="."]
 wait_time = 0.07
-autostart = true
+one_shot = true
 
 [node name="movementTween" type="Tween" parent="."]
 
@@ -177,16 +187,23 @@ wait_time = 0.1
 
 [node name="shootingCooldown" type="Timer" parent="."]
 wait_time = 0.5
+one_shot = true
 
 [node name="beamingTimer" type="Timer" parent="."]
 wait_time = 5.0
+one_shot = true
+
+[node name="deathDuration" type="Timer" parent="."]
+wait_time = 0.1
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
 [connection signal="timeout" from="shooting" to="." method="_on_shooting_timeout"]
 [connection signal="tween_all_completed" from="movementTween" to="." method="_on_movementTween_tween_all_completed"]
 [connection signal="tween_all_completed" from="rammingTween" to="." method="_on_rammingTween_tween_all_completed"]
+[connection signal="tween_all_completed" from="deathTween" to="." method="_on_deathTween_tween_all_completed"]
 [connection signal="tween_all_completed" from="intensifyBeamingSound" to="." method="_on_intensifyBeamingSound_tween_all_completed"]
 [connection signal="tween_all_completed" from="intensifyBeamingSound2" to="." method="_on_intensifyBeamingSound_tween_all_completed"]
 [connection signal="timeout" from="damageCooldown" to="." method="_on_damageCooldown_timeout"]
 [connection signal="timeout" from="shootingCooldown" to="." method="_on_shootingCooldown_timeout"]
 [connection signal="timeout" from="beamingTimer" to="." method="_on_beamingTimer_timeout"]
+[connection signal="timeout" from="deathDuration" to="." method="_on_deathDuration_timeout"]

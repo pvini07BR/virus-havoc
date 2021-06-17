@@ -12,7 +12,7 @@ func _ready():
 	$rainbowEffect.start()
 
 func _process(_delta):
-	if !active and !shooted and pressed == true:
+	if shootingState == 2 and !shooted or !active and !shooted and pressed == true or !get_parent().isInputWorking and !shooted and pressed == true:
 		for i in get_tree().get_nodes_in_group("rainbowBullet").size():
 			get_tree().get_nodes_in_group("rainbowBullet")[i].moving = true
 		shootingState = 0
@@ -32,14 +32,6 @@ func _process(_delta):
 		$ray.visible = false
 		$raytracing.visible = false
 		$active.playing = false
-	
-	if shootingState == 2 and !shooted:
-		for i in get_tree().get_nodes_in_group("rainbowBullet").size():
-			get_tree().get_nodes_in_group("rainbowBullet")[i].moving = true
-		shootingState = 0
-		bulletsSpawned = 0
-		$shootingCooldown.start()
-		shooted = true
 		
 func shoot():
 	if !pressed:
@@ -53,8 +45,8 @@ func shoot():
 		bulletsSpawned += 1
 
 func _input(event):
-	if active == true:
-		if !get_parent().get_parent().stageFinished:
+	if get_parent().isInputWorking == true:
+		if active == true:
 			if event.is_action_pressed("ui_accept"):
 				if !pressed:
 					if !shooted:

@@ -10,7 +10,7 @@ func _ready():
 	z_index = 5
 	z_as_relative = false
 	
-	$fade.interpolate_property($laserBullet, "modulate", Color(1,1,1,0), Color(1,1,1,1),0.5,Tween.TRANS_LINEAR)
+	$fade.interpolate_property($laserBullet, "modulate", Color(190,1,1,0), Color(190,1,1,1),0.5,Tween.TRANS_LINEAR)
 	$fade.start()
 	
 	$Tween.interpolate_property($laserBullet.get_material(), "shader_param/Shift_Hue", 0, 1, 2, Tween.TRANS_LINEAR)
@@ -24,7 +24,7 @@ func _process(delta):
 		self.add_to_group('virusBullet')
 		shooted = true
 		
-	if get_parent().stageFinished == true and !finishOnce:
+	if GameManager.currentScene.bossInst.health <= 0 and !finishOnce:
 		$fade.interpolate_property($laserBullet, "modulate", Color(1,1,1,1), Color(1,1,1,0),0.5,Tween.TRANS_LINEAR)
 		$fade.start()
 		finishOnce = true
@@ -50,5 +50,5 @@ func _physics_process(_delta):
 		queue_free()
 
 func _on_fade_tween_all_completed():
-	if get_parent().stageFinished == true:
+	if GameManager.currentScene.bossInst.health <= 0:
 		queue_free()

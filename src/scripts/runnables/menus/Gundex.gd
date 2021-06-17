@@ -89,7 +89,7 @@ func _process(delta):
 				if GameManager.language == 0:
 					$EquipGun.text = "(Equipado)"
 				if GameManager.language == 1:
-					$EquipGun.text = "(Equipado)"
+					$EquipGun.text = "(Equipped)"
 				
 	$GunDesc.rect_position.y = $GunName.rect_position.y + $GunName.rect_size.y
 	$GunDesc.rect_size.y = 720 - $GunDesc.rect_position.y
@@ -136,6 +136,7 @@ func _input(event):
 			if !$GunList.get_selected_items().empty():
 				GameManager.equippedGuns[isSubAGunSelected] = GameManager.guns.values()[$GunList.get_selected_items()[0]]
 			isSubAGunOnce = false
+			$equippingGunSound.play()
 			GameManager.save_equippedGuns(true)
 			isSubAGun = false
 
@@ -158,10 +159,13 @@ func _on_EquipGun_pressed():
 				$EquippedGunsPreview/subCursor/sprite.texture = instanciatedGuns[$GunList.get_selected_items()[0]].previewSprite
 			if !GameManager.equippedGuns[0] == null and GameManager.equippedGuns[1] == null:
 				GameManager.equippedGuns[1] = GameManager.guns.values()[$GunList.get_selected_items()[0]]
+				$equippingGunSound.play()
 				GameManager.save_equippedGuns(true)
 			if !GameManager.equippedGuns[1] == null and GameManager.equippedGuns[0] == null:
 				GameManager.equippedGuns[0] = GameManager.guns.values()[$GunList.get_selected_items()[0]]
+				$equippingGunSound.play()
 				GameManager.save_equippedGuns(true)
 			if GameManager.equippedGuns[1] == null and GameManager.equippedGuns[0] == null:
 				GameManager.equippedGuns[0] = GameManager.guns.values()[$GunList.get_selected_items()[0]]
+				$equippingGunSound.play()
 				GameManager.save_equippedGuns(true)

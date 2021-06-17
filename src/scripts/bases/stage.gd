@@ -1,10 +1,14 @@
 extends Node2D
 
 onready var player = preload("res://scenes/Player.tscn")
+onready var playerInst
 onready var UI = preload("res://scenes/LevelUI.tscn")
+onready var UInst
 onready var barrier = preload("res://scenes/barrier.tscn")
 onready var pause = preload("res://scenes/pause.tscn")
 onready var lootBox = preload("res://scenes/LootBox.tscn")
+
+onready var victoryMusic = preload("res://assets/music/victoryTheme.ogg")
 
 export var namePTBR : String
 export var nameEng : String
@@ -27,9 +31,11 @@ var isBossFightTriggerOnce = false
 var obtainedLootBoxBefore = false
 var lootBoxSpawningChance = 0
 
+var stageBegun = false
 var stageFinished = false
 
 var bossInst
+var camera
 
 func _init():
 	if !GameManager.wasInBossBattle:
@@ -46,31 +52,50 @@ func _ready():
 	get_tree().paused = false
 	
 	get_tree().get_root().get_node("GameManager/musicChannel").set_stream(null)
-	if !music == null:
-		get_tree().get_root().get_node("GameManager/musicChannel").set_stream(music)
-		get_tree().get_root().get_node("GameManager/musicChannel").play()
 	
 	if !background == null:
 		add_child(background.instance())
 	
-	var playerInst = player.instance()
-	playerInst.position.x = 213
-	playerInst.position.y = 360
+	playerInst = player.instance()
+	if GameManager.wasInBossBattle == true:
+		playerInst.position.x = 213
+		playerInst.position.y = 360
+	else:
+		playerInst.position.x = -70
+		playerInst.position.y = 360
 	add_child(playerInst)
 	
-	add_child(UI.instance())
+	if !GameManager.wasInBossBattle:
+		var playerEntrance = Tween.new()
+		playerEntrance.connect("tween_all_completed", self, "_on_playerEntrance_completed")
+		add_child(playerEntrance)
+		playerEntrance.interpolate_property(playerInst, "position", Vector2(-200,360), Vector2(213,360),1.5,Tween.EASE_OUT)
+		playerEntrance.start()
+	else:
+		stageBegun = true
+		playerInst.isInputWorking = true
+	
+	UInst = UI.instance()
+	add_child(UInst)
 	
 	add_child(barrier.instance())
 	add_child(pause.instance())
+	
+	camera = Camera2D.new()
+	camera.anchor_mode = Camera2D.ANCHOR_MODE_FIXED_TOP_LEFT
+	camera.current = true
+	if GameManager.wasInBossBattle == true:
+		camera.zoom = Vector2(1,1)
+		camera.offset = Vector2(0,0)
+	else:
+		camera.zoom = Vector2(0.3,0.3)
+		camera.offset = Vector2(40,256)
+	add_child(camera)
 	
 	if GameManager.wasInBossBattle == true:
 		startBossFight()
 	
 func _process(_delta):
-	if !boss == null or !bossInst == null:
-		if bossInst.health <= 0 and !stageFinished:
-			endStage()
-		
 	if score >= 0:
 		bitcoins = score / 6
 	if bitcoins < 0:
@@ -100,14 +125,35 @@ func startBossFight():
 func endStage():
 	if !stageFinished:
 		get_tree().get_root().get_node("GameManager/musicChannel").set_stream(null)
-		var timer = Timer.new()
-		timer.wait_time = 5
-		timer.connect("timeout",self,"_on_timer_timeout") 
-		add_child(timer)
-		timer.start()
+		playerInst.isInputWorking = false
+		var victoryMusicPlayer = AudioStreamPlayer.new()
+		victoryMusicPlayer.stream = victoryMusic
+		victoryMusicPlayer.connect("finished", self, "_on_VictoryMusic_finished")
+		add_child(victoryMusicPlayer)
+		victoryMusicPlayer.play()
 		stageFinished = true
+		
+func beginStage():
+	if !stageBegun:
+		playerInst.isInputWorking = true
+		if !music == null:
+			get_tree().get_root().get_node("GameManager/musicChannel").set_stream(music)
+			get_tree().get_root().get_node("GameManager/musicChannel").play()
+		stageBegun = true
 	
-func _on_timer_timeout():
-	GameManager.get_node("Fade").path = "res://scenes/runnables/menus/DebugMenu.tscn"
-	GameManager.get_node("Fade/layer/anim").play("fadeOut")
-	get_tree().get_root().get_node("GameManager/musicChannel").set_stream(null)
+func _on_VictoryMusic_finished():
+	UInst.makeLevelFinishedAppear()
+	
+func _on_playerEntrance_completed():
+	var cameraZoomingOut = Tween.new()
+	var cameraZoomingOut2 = Tween.new()
+	cameraZoomingOut.connect("tween_all_completed", self, "_on_cameraZoomingOut_completed")
+	cameraZoomingOut.interpolate_property(camera, "zoom", camera.zoom, Vector2(1,1), 1, Tween.TRANS_CIRC)
+	cameraZoomingOut2.interpolate_property(camera, "offset", camera.offset, Vector2(0,0),1,Tween.TRANS_CIRC)
+	add_child(cameraZoomingOut)
+	add_child(cameraZoomingOut2)
+	cameraZoomingOut.start()
+	cameraZoomingOut2.start()
+		
+func _on_cameraZoomingOut_completed():
+	beginStage()

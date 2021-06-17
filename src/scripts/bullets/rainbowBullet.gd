@@ -21,23 +21,29 @@ func _process(delta):
 		$speed.start()
 		self.add_to_group('multiProjectile')
 		shooted = true
+		
+	if !moving:
+		var dir = (get_viewport().get_mouse_position() - global_position).normalized()
+		global_rotation = dir.angle() + PI / 2.0
+		direction = dir
+		
+		if position.x <= 0:
+			position.x = 15
+		if position.x >= 1280:
+			position.x = 1265
+		
+	if moving == true:
+		if position.x <= 0:
+			queue_free()
+		if position.x >= 1280:
+			queue_free()
+		if position.y <= 0:
+			queue_free()
+		if position.y >= 720:
+			queue_free()
 
 func _on_VirusBullet_area_entered(area):
 	if area.is_in_group("virus"):
 		if moving == true:
 			queue_free()
-		
-func _physics_process(_delta):
-	if !moving:
-		var dir = (get_viewport().get_mouse_position() - global_position).normalized()
-		global_rotation = dir.angle() + PI / 2.0
-		direction = dir
-	
-	if self.position.x <= 0:
-		queue_free()
-	if self.position.x >= 1280:
-		queue_free()
-	if self.position.y <= 0:
-		queue_free()
-	if self.position.y >= 720:
-		queue_free()
+

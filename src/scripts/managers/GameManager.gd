@@ -5,9 +5,6 @@ var language = 0
 var lastStagePlayed = 0
 var guns := {}
 var stages := {}
-var loader
-var wait_frames
-var time_max = 100
 var currentScene = null
 var wasInBossBattle = false
 var storedKills = 0

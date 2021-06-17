@@ -39,7 +39,6 @@ background = ExtResource( 4 )
 [node name="virusSpawningTimer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
-autostart = true
 
 [node name="brokenVirusSpawningTimer" type="Timer" parent="."]
 wait_time = 20.0
@@ -56,16 +55,20 @@ position = Vector2( 1980, 360 )
 [node name="Label" type="Label" parent="CanvasLayer"]
 anchor_top = -0.00349969
 anchor_bottom = -0.00349969
-margin_left = 7.0
-margin_top = 623.0
-margin_right = 137.0
-margin_bottom = 673.0
-rect_pivot_offset = Vector2( 0, 32 )
+margin_left = 7.392
+margin_top = 670.811
+margin_right = 137.392
+margin_bottom = 720.811
 custom_fonts/font = SubResource( 1 )
 text = "Wave"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="CanvasModulate" type="CanvasModulate" parent="CanvasLayer"]
+color = Color( 1, 1, 1, 0 )
+
+[node name="Tween" type="Tween" parent="CanvasLayer"]
 
 [node name="distancingTween" type="Tween" parent="."]
 repeat = true
