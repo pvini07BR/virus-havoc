@@ -19,13 +19,13 @@ Atirar: Aperta Espaço ou Enter (pode ser o Enter da esquerda ou o da direita, t
 Trocar de arma: Aperta Q para mudar para o primeiro slot. Tecla E para mudar para o segundo slot.
 
 NÍVEL 1:
-O nível usa um sistema de ondas. O nível no total tem 15 ondas. Cada onda tem uma quantidade fixa de vírus, e a partir da onda número 10, os vírus começam a ficar indo e voltando um pouco do centro.
-Na onda número 5, irá aparecer uma Loot Box (depois irei falar com mais detalhes o que é), e também irá aparecer na onda número 10 (somente se você não pegou a primeira loot box). Depois de passar das 15 ondas, irá começar a luta com o boss. Você irá vencer o nível se você derrotar o boss. As armas que forem pegas no nível 1 não serão salvas.
+O nível usa um sistema de ondas. O nível no total tem 10 ondas. Cada onda tem uma quantidade fixa de vírus, e a partir da onda número 7, os vírus começam a ficar indo e voltando um pouco do centro.
+Na onda número 4, irá aparecer uma Loot Box (depois irei falar com mais detalhes o que é), e também irá aparecer na onda número 7 (somente se você não pegou a primeira loot box). Depois de passar das 10 ondas, irá começar a luta com o boss. Você irá vencer o nível se você derrotar o boss. As armas que forem pegas no nível 1 não serão salvas.
 
 OBS: O nível 1 foi feito para jogar somente com as seguintes armas: Arma Laser Comum, Arma Laser de Canhão Duplo e Arma Laser Dupla Diagonal. Usar qualquer arma que não seja dessas, estará fora do balanceamento do nível 1.
 
 NÍVEL 2:
-Não tem nada por enquanto. Apenas música e background. Se você ativar o modo de forçar boss fight, não terá musica e nada acontecerá.
+Tem dois inimigos: o avião de papel bombardeador, e a pasta atiradora. Ambos tem 6 de vida. O avião atira uma .zip bomb, que pode dar entre 1-2 de dano no jogador e nos inimigos. Já a pasta atiradora, ela atira arquivos em sua direção. Dá apenas 1 de dano.
 
 LOOT BOXES:
 São caixas que contém uma arma aleatória, dependendo do nível que você for jogar. Tem 75% de chance de aparecer em uma fase, dependendo de em qual momento exatamente a loot box aparece. Se você já tiver pego a loot box antes em uma fase, ela não aparecerá novamente até que você renicie a fase.
@@ -64,11 +64,12 @@ Shoot: Press Space or Enter (can be the left Enter or the right Enter, whatever)
 Switch guns: Press Q for switching to the first slot. Press E to switch to the second slot.
 
 STAGE 1:
-This stage uses a "waves" system. In total, this stage has 15 waves. Each wave has a fixed amount of viruses, and from the wave 10, the viruses starts going back and forth a bit from the center. On the wave number 5, will appear a loot box (i will talk more about the loot boxes later), and it will also appear on the wave number 10 (only if you haven't get the first loot box on wave 5). After passing the 15 waves, the boss fight will begin. You will finish the stage if you defeat the boss. All the weapons that are caught on stage 1 will NOT be saved.
+This stage uses a "waves" system. In total, this stage has 10 waves. Each wave has a fixed amount of viruses, and from the wave 7, the viruses starts going back and forth a bit from the center. On the wave number 4, will appear a loot box (i will talk more about the loot boxes later), and it will also appear on the wave number 7 (only if you haven't get the first loot box on wave 5). After passing the 10 waves, the boss fight will begin. You will finish the stage if you defeat the boss. All the weapons that are caught on stage 1 will NOT be saved.
 
 OBS: The stage 1 was made to be played only with the following guns: Common Laser Gun, Dual-Cannon Laser Gun and Dual-Cannon Diagonal Laser Gun.
 
-STAGE 2: It has nothing yet. Only music and a background. If you turn on the override boss fight mode, there will not be any music and nothing will happen.
+STAGE 2:
+There are two enemies: the paper plane bomber, and the shooting folder, both has 6 of health. The plane shoots a .zip bomb, that can deal between 1-2 of damage on the player and the enemies. And the shooting folder, shoots files on your direction. Deals only 1 of damage.
 
 LOOT BOXES:
 They are boxes that contains a random gun, depending on the stage that you are playing. It has 75% of chance of appearing on a stage, depending on what moment exactly it was made to it appear. If you already got the loot box before, it will not appear again until you restart the stage.
