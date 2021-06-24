@@ -158,6 +158,7 @@ func _process(_delta):
 			$pauseMenu/pauseMusic_FadeIn.stop_all()
 			$pauseMenu/pauseMusic.stop()
 			$pauseMenu/pauseMusic.volume_db = -80
+			$pauseMenu/pauseMusic.stream = pauseMusic
 			easterEggCounter = 0
 			musicPlaying = false
 		
@@ -289,19 +290,14 @@ func _on_titleMoving_tween_all_completed():
 
 func _on_Timer_timeout():
 	if levelFinishedMenuState == 0:
-		if !get_parent().score == 0:
-			if get_parent().score > 0:
-				$levelFinished/Timer.wait_time = float(0.001) / float(get_parent().score)
-			elif get_parent().score < 0:
-				$levelFinished/Timer.wait_time = float(0.001) / float(+get_parent().score)
 		if scoreTemp < get_parent().score:
-			scoreTemp += 1
+			scoreTemp += int(get_parent().score / 100)
 			if GameManager.language == 0:
 				$levelFinished/score.text = ("Pontuação: %d" % scoreTemp)
 			if GameManager.language == 1:
 				$levelFinished/score.text = ("Score: %d" % scoreTemp)
 		if scoreTemp > get_parent().score:
-			scoreTemp -= 1
+			scoreTemp -= -int(get_parent().score / 100)
 			if GameManager.language == 0:
 				$levelFinished/score.text = ("Pontuação: %d" % scoreTemp)
 			if GameManager.language == 1:
@@ -314,20 +310,15 @@ func _on_Timer_timeout():
 			levelFinishedMenuState = 1
 		$levelFinished/Timer.start()
 	if levelFinishedMenuState == 1:
-		if !get_parent().bitcoins == 0:
-			if get_parent().bitcoins > 0:
-				$levelFinished/Timer.wait_time = float(0.001) / float(get_parent().bitcoins)
-			elif get_parent().bitcoins < 0:
-				$levelFinished/Timer.wait_time = float(0.001) / float(+get_parent().bitcoins)
 		$levelFinished/bitcoins.visible = true
 		if bitcoinsTemp < get_parent().bitcoins:
-			bitcoinsTemp += 1
+			bitcoinsTemp += int(get_parent().bitcoins / 6)
 			if GameManager.language == 0:
 				$levelFinished/bitcoins.text = ("Bitcoins Ganhos: %d" % bitcoinsTemp)
 			if GameManager.language == 1:
 				$levelFinished/bitcoins.text = ("Bitcoins Earned: %d" % bitcoinsTemp)
 		if bitcoinsTemp > get_parent().bitcoins:
-			bitcoinsTemp -= 1
+			bitcoinsTemp -= -int(get_parent().bitcoins / 6)
 			if GameManager.language == 0:
 				$levelFinished/bitcoins.text = ("Bitcoins Ganhos: %d" % bitcoinsTemp)
 			if GameManager.language == 1:

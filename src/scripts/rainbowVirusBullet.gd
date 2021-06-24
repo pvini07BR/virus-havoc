@@ -1,4 +1,4 @@
-extends Area2D
+extends "res://scripts/bases/virusBullet.gd"
 
 var direction : Vector2 = Vector2.LEFT
 var speed : float = 0

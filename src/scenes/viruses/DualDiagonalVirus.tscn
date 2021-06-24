@@ -27,9 +27,7 @@ tracks/0/keys = {
 "values": [ 0.0, 360.0 ]
 }
 
-[node name="DualDiagonalVirus" type="Area2D" groups=[
-"virus",
-]]
+[node name="DualDiagonalVirus" type="Area2D"]
 script = ExtResource( 2 )
 scoreValue = 150
 shootingCooldownFrom = 8.0
@@ -37,7 +35,7 @@ shootingCooldownTo = 12.0
 HeartDropChance = 75
 isInSlot = true
 projectile = ExtResource( 6 )
-damageSound = ExtResource( 8 )
+damageSounds = [ ExtResource( 8 ) ]
 shootingSound = ExtResource( 7 )
 damageAnimation = ExtResource( 3 )
 deathAnimation = ExtResource( 5 )
@@ -52,5 +50,3 @@ texture = ExtResource( 1 )
 [node name="virusRotate" type="AnimationPlayer" parent="."]
 autoplay = "virusRotate"
 anims/virusRotate = SubResource( 2 )
-
-[connection signal="area_entered" from="." to="." method="_on_virus_area_entered"]

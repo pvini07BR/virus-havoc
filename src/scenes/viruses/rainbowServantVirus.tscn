@@ -12,6 +12,7 @@
 radius = 21.0
 
 [sub_resource type="Shader" id=2]
+resource_local_to_scene = true
 code = "shader_type canvas_item;
 render_mode unshaded;
 
@@ -57,9 +58,7 @@ resource_local_to_scene = true
 shader = SubResource( 2 )
 shader_param/Shift_Hue = 0.0
 
-[node name="rainbowServantVirus" type="Area2D" groups=[
-"virus",
-]]
+[node name="rainbowServantVirus" type="Area2D"]
 script = ExtResource( 2 )
 scoreValue = 100
 maxHealth = 3.0
@@ -67,7 +66,7 @@ shootingCooldownFrom = 2.0
 shootingCooldownTo = 3.0
 HeartDropChance = 50
 projectile = ExtResource( 6 )
-damageSound = ExtResource( 7 )
+damageSounds = [ ExtResource( 7 ) ]
 shootingSound = ExtResource( 8 )
 damageAnimation = ExtResource( 3 )
 deathAnimation = ExtResource( 4 )
@@ -94,7 +93,6 @@ playback/repeat = true
 [node name="tripleShootingTimer" type="Timer" parent="."]
 wait_time = 0.3
 
-[connection signal="area_entered" from="." to="." method="_on_virus_area_entered"]
 [connection signal="tween_all_completed" from="moving" to="." method="_on_moving_tween_all_completed"]
 [connection signal="tween_all_completed" from="fleeing" to="." method="_on_fleeing_tween_all_completed"]
 [connection signal="timeout" from="tripleShootingTimer" to="." method="_on_tripleShootingTimer_timeout"]

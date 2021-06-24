@@ -19,9 +19,7 @@ outline_size = 5
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 6 )
 
-[node name="stage1" type="Node2D" groups=[
-"stage",
-]]
+[node name="stage1" type="Node2D"]
 script = ExtResource( 1 )
 namePTBR = "Nível 1"
 nameEng = "Stage 1"

@@ -111,7 +111,7 @@ func _process(_delta):
 	if hp >= 10:
 			hp = 10
 	if isOverlappingAVirus == true:
-		hit()
+		hit(1)
 			
 func replace_gun():
 	if get_parent().get_node("LevelUI").gunSelected == 1:
@@ -145,7 +145,11 @@ func _input(Event):
 func _on_col_area_entered(area):
 	if isInputWorking == true:
 		if area.is_in_group("virusBullet"):
-			hit()
+			hit(1)
+			
+		if area.is_in_group("explosion"):
+			randomize()
+			hit([1,2][randi() % 2])
 				
 		if area.is_in_group("lootbox"):
 			get_parent().get_node("LootBox").gotLootBox()
@@ -175,18 +179,18 @@ func _on_col_area_exited(area):
 func _on_damageCooldown_timeout():
 	gotHit = false
 	
-func hit():
+func hit(damage : int):
 	if isInputWorking == true:
 		if !gotHit:
 			$Hits.play()
 			
 			$playerEffects.play("playerHit")
-			hp -= 1
-			get_parent().score -= 100
+			hp -= damage
+			get_parent().score -= damage * 100
 			$damageCooldown.start()
 			
 			var damageIndInst = damageIndicator.instance()
-			damageIndInst.amount = 1
+			damageIndInst.amount = damage
 			damageIndInst.type = 2
 			get_tree().get_nodes_in_group("stage")[0].add_child(damageIndInst)
 			damageIndInst.global_position = global_position

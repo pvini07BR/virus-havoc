@@ -12,9 +12,6 @@ func _process(_delta):
 	if itsPaused >= 2:
 		get_tree().paused = false
 		itsPaused = 0
-		
-	if get_parent().get_node("player").hp <= 0:
-		GameManager.goto_scene("res://scenes/runnables/menus/GameOverScreen.tscn")
 
 func _input(Event):
 	if Event.is_action_pressed("ui_cancel"):

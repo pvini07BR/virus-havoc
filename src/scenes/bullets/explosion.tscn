@@ -30,10 +30,7 @@ tracks/0/keys = {
 "values": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ]
 }
 
-[node name="explosion" type="Area2D" groups=[
-"projectile",
-"virusBullet",
-]]
+[node name="explosion" type="Area2D"]
 script = ExtResource( 8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

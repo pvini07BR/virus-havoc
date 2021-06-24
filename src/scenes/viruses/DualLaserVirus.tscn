@@ -27,9 +27,7 @@ tracks/0/keys = {
 "values": [ 0.0, 360.0 ]
 }
 
-[node name="DualLaserVirus" type="Area2D" groups=[
-"virus",
-]]
+[node name="DualLaserVirus" type="Area2D"]
 script = ExtResource( 1 )
 scoreValue = 135
 maxHealth = 4.0
@@ -38,7 +36,7 @@ shootingCooldownTo = 8.0
 HeartDropChance = 75
 isInSlot = true
 projectile = ExtResource( 6 )
-damageSound = ExtResource( 8 )
+damageSounds = [ ExtResource( 8 ) ]
 shootingSound = ExtResource( 7 )
 damageAnimation = ExtResource( 3 )
 deathAnimation = ExtResource( 2 )
@@ -58,5 +56,4 @@ anims/virusRotate = SubResource( 2 )
 wait_time = 0.2
 one_shot = true
 
-[connection signal="area_entered" from="." to="." method="_on_virus_area_entered"]
 [connection signal="timeout" from="doubleLaserTimer" to="." method="_on_doubleLaserTimer_timeout"]

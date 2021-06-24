@@ -45,7 +45,7 @@ func _on_disappearTween_tween_all_completed():
 			get_parent().attackMoves(3)
 			get_parent().repeatAttack -= 1
 		else:
-			get_parent().randomizeAttack(false)
+			get_parent().randomizeAttack()
 	queue_free()
 
 func _on_duration_timeout():

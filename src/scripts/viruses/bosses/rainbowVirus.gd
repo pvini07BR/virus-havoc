@@ -35,7 +35,7 @@ func _ready():
 	z_index = 4
 	z_as_relative = false
 	
-	$movementTween.interpolate_property(self, "position", Vector2(1760, 360), Vector2(1000, 360), 11.9, Tween.TRANS_LINEAR)
+	$movementTween.interpolate_property(self, "position", Vector2(1760, 360), Vector2(1000, 360), 11.48, Tween.TRANS_LINEAR)
 	$movementTween.start()
 	
 func _on_movementTween_tween_all_completed():
@@ -83,13 +83,15 @@ func attackMoves(attack : int):
 				repeatAttack = 0
 	currentAttack = attack
 			
-func randomizeAttack(doesHaveThird : bool):
+func randomizeAttack():
 	if !isDead:
 		randomize()
-		if !doesHaveThird:
+		if currentAttack == 1:
+			attackMoves([2,3][randi() % 2])
+		elif currentAttack == 2:
+			attackMoves([1,3][randi() % 2])
+		elif currentAttack == 3:
 			attackMoves([1,2][randi() % 2])
-		elif doesHaveThird == true:
-			attackMoves([1,2,3][randi() % 3])
 
 func _on_shooting_timeout():
 	if !shooted:
@@ -138,7 +140,7 @@ func _on_rammingTween_tween_all_completed():
 			attackMoves(2)
 			repeatAttack -= 1
 		else:
-			randomizeAttack(true)
+			randomizeAttack()
 		rammingState = 0
 	
 func _on_deathDuration_timeout():
@@ -210,6 +212,8 @@ func takeDamageCooldown():
 				get_tree().get_nodes_in_group("stage")[0].add_child(damageIndInst)
 				damageIndInst.global_position = global_position
 			$damage.play("damage")
+			rng.randomize()
+			$damageS.pitch_scale = rng.randf_range(0.9,1.1)
 			$damageS.play()
 			$damageCooldown.start()
 			canTakeDamage = false
@@ -244,7 +248,7 @@ func _on_shootingCooldown_timeout():
 		attackMoves(1)
 		repeatAttack -= 1
 	else:
-		randomizeAttack(true)
+		randomizeAttack()
 	
 func _on_beamingTimer_timeout():
 	if beamingState == 0:

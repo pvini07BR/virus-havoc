@@ -20,6 +20,9 @@ var isDistanceTween : bool
 var once = false
 var isCanvasAppearing = false
 	
+func _on_stage_started():
+	$virusSpawningTimer.start()
+	
 func _ready():
 	if GameManager.wasInBossBattle == true:
 		$CanvasLayer/CanvasModulate.color = Color(1,1,1,1)
@@ -29,10 +32,7 @@ func _process(delta):
 		$CanvasLayer/Tween.interpolate_property($CanvasLayer/CanvasModulate, "color", Color(1,1,1,0), Color(1,1,1,1), 0.5)
 		$CanvasLayer/Tween.start()
 		isCanvasAppearing = true
-	
-	if !stageBegun:
-		$virusSpawningTimer.start()
-	
+
 	if !stageFinished:
 		children = $virusSpace.get_children()
 		if !$virusSpace.get_child_count() <= 0:
@@ -69,7 +69,7 @@ func _process(delta):
 					virusSpaceWave += 1
 					virusWaveJustSpawned = false
 					$virusSpawningTimer.start()
-					if virusSpaceWave >= 16:
+					if virusSpaceWave >= 11:
 						startBossFight()
 				
 			if virusSpaceMoving == 1:
@@ -97,25 +97,6 @@ func _process(delta):
 								200, 200, "clockwise", 60
 								)
 						4:
-							spawnWave(
-								[viruses[0], 
-								viruses[0], 
-								viruses[0], 
-								viruses[0], 
-								viruses[0]], 
-								200, 200, "clockwise", 65
-								)
-						5:
-							spawnWave(
-								[viruses[0], 
-								viruses[0], 
-								viruses[0], 
-								viruses[0], 
-								viruses[0], 
-								viruses[0]], 
-								200, 200, "clockwise", 70
-								)
-						6:
 							spawnLootBox()
 							spawnWave(
 								[viruses[0], 
@@ -124,107 +105,71 @@ func _process(delta):
 								viruses[1]], 
 								200, 200, "clockwise", 50
 								)
+						5:
+							spawnWave(
+								[viruses[1], 
+								viruses[0], 
+								viruses[1], 
+								viruses[0], 
+								viruses[1]],
+								200, 200, "clockwise", 70)
+						6:
+							spawnWave(
+								[viruses[0], 
+								viruses[1], 
+								viruses[0], 
+								viruses[1],
+								viruses[0],
+								viruses[1]], 
+								200, 200, "clockwise", 50
+								)
 						7:
+							spawnLootBox()
+							$brokenVirusSpawningTimer.start()
 							spawnWave(
 								[viruses[1],
 								viruses[0],
 								viruses[1],
-								viruses[0],
+								viruses[2],
 								viruses[1],
 								viruses[0]],
 								200, 200, "clockwise", 55
 								)
 						8:
 							spawnWave(
-								[viruses[1],
+								[viruses[0],
 								viruses[1],
-								viruses[0],
-								viruses[1],
+								viruses[2],
+								viruses[2],
+								viruses[2],
 								viruses[1],
 								viruses[0]],
 								200, 200, "clockwise", 60
 								)
 						9:
 							spawnWave(
-								[viruses[1],
+								[viruses[0],
+								viruses[2],
 								viruses[1],
+								viruses[2],
 								viruses[1],
-								viruses[0],
-								viruses[1],
-								viruses[1],
+								viruses[2],
 								viruses[1],
 								viruses[0]],
 								200, 200, "clockwise", 65
 								)
 						10:
-							spawnLootBox()
-							$brokenVirusSpawningTimer.start()
-							spawnWave(
-								[viruses[0],
-								viruses[2],
-								viruses[1],
-								viruses[2],
-								viruses[1]],
-								100, 200, "clockwise", 50
-								)
-						11:
 							spawnWave(
 								[viruses[0],
 								viruses[1],
 								viruses[2],
+								viruses[1],
 								viruses[0],
 								viruses[1],
-								viruses[2]],
-								100, 210, "clockwise", 55
-								)
-						12:
-							spawnWave(
-								[viruses[0],
-								viruses[1],
-								viruses[2],
-								viruses[2],
 								viruses[2],
 								viruses[1],
 								viruses[0]],
-								100, 220, "clockwise", 60
-								)
-						13:
-							spawnWave(
-								[viruses[0],
-								viruses[1],
-								viruses[1],
-								viruses[2],
-								viruses[2],
-								viruses[2],
-								viruses[1],
-								viruses[1]],
-								100, 230, "clockwise", 65
-								)
-						14:
-							spawnWave(
-								[viruses[1],
-								viruses[1],
-								viruses[2],
-								viruses[2],
-								viruses[0],
-								viruses[2],
-								viruses[2],
-								viruses[1],
-								viruses[1]],
-								100, 240, "clockwise", 70
-								)
-						15:
-							spawnWave(
-								[viruses[0],
-								viruses[1],
-								viruses[2],
-								viruses[0],
-								viruses[1],
-								viruses[2],
-								viruses[0],
-								viruses[1],
-								viruses[2]],
-								100, 250, "clockwise", 75
+								100, 200, "clockwise", 50
 								)
 					virusWaveJustSpawned = true
 					

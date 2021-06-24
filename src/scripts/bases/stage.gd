@@ -7,6 +7,7 @@ onready var UInst
 onready var barrier = preload("res://scenes/barrier.tscn")
 onready var pause = preload("res://scenes/pause.tscn")
 onready var lootBox = preload("res://scenes/LootBox.tscn")
+onready var gameOver = preload("res://scenes/runnables/menus/GameOverScreen.tscn")
 
 onready var victoryMusic = preload("res://assets/music/victoryTheme.ogg")
 
@@ -22,6 +23,8 @@ export var bossMusic: AudioStreamOGGVorbis
 export var boss : PackedScene
 export var viruses : Array
 export var background : PackedScene
+
+signal stage_started
 
 var virusesKilled = 0
 var score = 0
@@ -46,6 +49,10 @@ func _init():
 		virusesKilled = GameManager.storedKills
 
 func _ready():
+	add_to_group("stage")
+	
+	connect("stage_started", self, "_on_stage_started")
+	
 	if !boss == null:
 		bossInst = boss.instance()
 	
@@ -100,6 +107,9 @@ func _process(_delta):
 		bitcoins = score / 6
 	if bitcoins < 0:
 		bitcoins = 0
+		
+	if playerInst.hp <= 0:
+		GameManager.goto_scene(gameOver)
 	
 func spawnLootBox():
 	if !obtainedLootBoxBefore:
@@ -110,12 +120,27 @@ func spawnLootBox():
 			
 func startBossFight():
 	isBossFight = true
-	GameManager.wasInBossBattle = true
 	GameManager.storedBitcoins = bitcoins
 	GameManager.storedKills = virusesKilled
 	GameManager.storedScore = score
 	isBossFightTriggerOnce = true
+	
+	if !GameManager.wasInBossBattle:
+		var musicFadeOut = Tween.new()
+		musicFadeOut.connect("tween_all_completed", self, "_on_musicFadeOut_finished")
+		musicFadeOut.interpolate_property(get_tree().get_root().get_node("GameManager/musicChannel"), "volume_db", 0, -80, 1)
+		add_child(musicFadeOut)
+		musicFadeOut.start()
+	else:
+		startBossFight2()
+	GameManager.wasInBossBattle = true
+	
+func _on_musicFadeOut_finished():
+	startBossFight2()
+	
+func startBossFight2():
 	get_tree().get_root().get_node("GameManager/musicChannel").set_stream(null)
+	get_tree().get_root().get_node("GameManager/musicChannel").volume_db = 0
 	if !bossMusic == null:
 		get_tree().get_root().get_node("GameManager/musicChannel").set_stream(bossMusic)
 		get_tree().get_root().get_node("GameManager/musicChannel").play()
@@ -139,6 +164,7 @@ func beginStage():
 		if !music == null:
 			get_tree().get_root().get_node("GameManager/musicChannel").set_stream(music)
 			get_tree().get_root().get_node("GameManager/musicChannel").play()
+		emit_signal("stage_started")
 		stageBegun = true
 	
 func _on_VictoryMusic_finished():

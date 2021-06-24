@@ -27,18 +27,15 @@ tracks/0/keys = {
 "values": [ 0.0, 360.0 ]
 }
 
-[node name="CommonVirus" type="Area2D" groups=[
-"virus",
-]]
+[node name="CommonVirus" type="Area2D"]
 script = ExtResource( 2 )
 scoreValue = 100
 maxHealth = 2.0
 shootingCooldownFrom = 2.0
 shootingCooldownTo = 5.0
-HeartDropChance = 75
 isInSlot = true
 projectile = ExtResource( 6 )
-damageSound = ExtResource( 7 )
+damageSounds = [ ExtResource( 7 ) ]
 shootingSound = ExtResource( 8 )
 damageAnimation = ExtResource( 3 )
 deathAnimation = ExtResource( 4 )
@@ -53,5 +50,3 @@ texture = ExtResource( 1 )
 autoplay = "virusRotate"
 method_call_mode = 1
 anims/virusRotate = SubResource( 2 )
-
-[connection signal="area_entered" from="." to="." method="_on_virus_area_entered"]
