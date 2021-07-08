@@ -19,7 +19,7 @@ Atirar: Aperta Espaço ou Enter (pode ser o Enter da esquerda ou o da direita, t
 Trocar de arma: Aperta Q para mudar para o primeiro slot. Tecla E para mudar para o segundo slot.
 
 NÍVEL 1:
-O nível usa um sistema de ondas. O nível no total tem 10 ondas. Cada onda tem uma quantidade fixa de vírus, e a partir da onda número 7, os vírus começam a ficar indo e voltando um pouco do centro.
+O nível usa um sistema de ondas. O nível no total tem 10 ondas. Cada onda tem uma quantidade fixa de vírus, e a partir da onda número 7, os vírus começam a ficar indo e voltando do centro.
 Na onda número 4, irá aparecer uma Loot Box (depois irei falar com mais detalhes o que é), e também irá aparecer na onda número 7 (somente se você não pegou a primeira loot box). Depois de passar das 10 ondas, irá começar a luta com o boss. Você irá vencer o nível se você derrotar o boss. As armas que forem pegas no nível 1 não serão salvas.
 
 OBS: O nível 1 foi feito para jogar somente com as seguintes armas: Arma Laser Comum, Arma Laser de Canhão Duplo e Arma Laser Dupla Diagonal. Usar qualquer arma que não seja dessas, estará fora do balanceamento do nível 1.
@@ -64,7 +64,7 @@ Shoot: Press Space or Enter (can be the left Enter or the right Enter, whatever)
 Switch guns: Press Q for switching to the first slot. Press E to switch to the second slot.
 
 STAGE 1:
-This stage uses a "waves" system. In total, this stage has 10 waves. Each wave has a fixed amount of viruses, and from the wave 7, the viruses starts going back and forth a bit from the center. On the wave number 4, will appear a loot box (i will talk more about the loot boxes later), and it will also appear on the wave number 7 (only if you haven't get the first loot box on wave 5). After passing the 10 waves, the boss fight will begin. You will finish the stage if you defeat the boss. All the weapons that are caught on stage 1 will NOT be saved.
+This stage uses a "waves" system. In total, this stage has 10 waves. Each wave has a fixed amount of viruses, and from the wave 7, the viruses starts going back and forth from the center. On the wave number 4, will appear a loot box (i will talk more about the loot boxes later), and it will also appear on the wave number 7 (only if you haven't get the first loot box on wave 5). After passing the 10 waves, the boss fight will begin. You will finish the stage if you defeat the boss. All the weapons that are caught on stage 1 will NOT be saved.
 
 OBS: The stage 1 was made to be played only with the following guns: Common Laser Gun, Dual-Cannon Laser Gun and Dual-Cannon Diagonal Laser Gun.
 
