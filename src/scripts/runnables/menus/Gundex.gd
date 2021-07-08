@@ -139,6 +139,9 @@ func _input(event):
 			$equippingGunSound.play()
 			GameManager.save_equippedGuns(true)
 			isSubAGun = false
+		if event.is_action_pressed("ui_cancel"):
+			isSubAGunOnce = false
+			isSubAGun = false
 
 func _on_GoBack_pressed():
 	GameManager.get_node("Fade").path = "res://scenes/runnables/menus/DebugMenu.tscn"

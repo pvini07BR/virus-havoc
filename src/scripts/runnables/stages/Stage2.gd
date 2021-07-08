@@ -1,8 +1,9 @@
 extends "res://scripts/bases/stage.gd"
 
 func _on_stage_started():
-	$paperPlaneSpawning.start()
-	$shootingFolderSpawning.start()
+	if !stageFinished:
+		$paperPlaneSpawning.start()
+		$shootingFolderSpawning.start()
 
 func _on_paperPlaneSpawning_timeout():
 	add_child(viruses[0].instance())

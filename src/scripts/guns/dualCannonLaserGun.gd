@@ -9,7 +9,8 @@ func _input(Event):
 					add_child(bull)
 					bull.set_as_toplevel(true)
 					bull.global_position = $pos.global_position
-					shootingPlayer.play()
+					if !shootingSound == null:
+						SoundManager.playSound(shootingSound, -10, 1)
 					$cooldown.start()
 					cooldown = true
 

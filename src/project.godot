@@ -20,6 +20,7 @@ config/windows_native_icon="res://icons/favicon.ico"
 [autoload]
 
 GameManager="*res://scenes/managers/GameManager.tscn"
+SoundManager="*res://scenes/managers/SoundManager.tscn"
 
 [debug]
 

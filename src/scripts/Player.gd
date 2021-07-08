@@ -1,6 +1,7 @@
 extends KinematicBody2D 
 
-onready var hitSound = load("res://assets/sounds/playerDamage.wav")
+onready var hitSound = preload("res://assets/sounds/playerDamage.wav")
+onready var getHeartSound = preload("res://assets/sounds/heartGet.wav")
 onready var damageIndicator = preload("res://scenes/damageIndicator.tscn")
 onready var victorySprite = preload("res://assets/images/jogadorYeah.png")
 
@@ -156,7 +157,7 @@ func _on_col_area_entered(area):
 				
 		if area.is_in_group("heart"):
 			if hp < 10 and !gotHeart:
-				$getHeart.play()
+				SoundManager.playSound(getHeartSound, -5, 1)
 				randomize()
 				var heal = [1,2][randi() % 2]
 				hp += heal
@@ -182,7 +183,7 @@ func _on_damageCooldown_timeout():
 func hit(damage : int):
 	if isInputWorking == true:
 		if !gotHit:
-			$Hits.play()
+			SoundManager.playSound(hitSound, -10, 1)
 			
 			$playerEffects.play("playerHit")
 			hp -= damage

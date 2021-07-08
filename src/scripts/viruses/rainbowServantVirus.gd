@@ -24,22 +24,29 @@ func _ready():
 	rng.randomize()
 	$tripleShootingTimer.wait_time = rng.randf_range(0.3, 0.5)
 	
-	$moving.interpolate_property(self, "position", Vector2(1310, randomY), Vector2(randomX, randomY), rng.randf_range(1,4))
-	$moving.start()
-	
 	$rotating.interpolate_property($Sprite, "rotation_degrees", 0, 360, 1)
 	$rotating.start()
 	
 	$rainbow.interpolate_property($Sprite.get_material(), "shader_param/Shift_Hue", 0, 1, 2, Tween.TRANS_LINEAR)
 	$rainbow.start()
+		
+func _process(delta):
+	if get_parent().get_parent().virusSpaceMoving == 2:
+		match get_parent().get_parent().virusSpaceRotDirection:
+			0: rotation_degrees -= get_parent().get_parent().virusSpaceVelocity * delta
+			1: rotation_degrees += get_parent().get_parent().virusSpaceVelocity * delta
+	else:
+		rotation_degrees = 0
+	
+	if get_parent().get_parent().virusSpaceMoving == 2:
+		vulnerable = true
 	
 	if !shooted:
 		shootingCooldown.start()
 		shooted = true
-		
-func _process(delta):
+	
 	if GameManager.currentScene.bossInst.health <= 0 and !finishedOnce:
-		$fleeing.interpolate_property(self, "position", self.position, Vector2(-30, self.position.y), 1)
+		$fleeing.interpolate_property(self, "global_position", self.global_position, Vector2(-30, self.global_position.y), 1)
 		$fleeing.start()
 		vulnerable = false
 		shootingCooldown.stop()
@@ -54,16 +61,13 @@ func _on_tripleShootingTimer_timeout():
 		if timesShooted <= 2:
 			shoot()
 			bull.isRainbowy = true
-			var dir = (get_parent().get_node("player").global_position - global_position).normalized()
+			var dir = (get_tree().get_nodes_in_group("stage")[0].get_node("player").global_position - global_position).normalized()
 			bull.global_rotation = dir.angle() + PI / 2.0
 			bull.direction = dir
 			timesShooted += 1
 		else:
 			$tripleShootingTimer.stop()
 			timesShooted = 0
-
-func _on_moving_tween_all_completed():
-	vulnerable = true
 
 func _on_fleeing_tween_all_completed():
 	queue_free()

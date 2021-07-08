@@ -33,7 +33,6 @@ scoreValue = 100
 maxHealth = 2.0
 shootingCooldownFrom = 2.0
 shootingCooldownTo = 5.0
-isInSlot = true
 projectile = ExtResource( 6 )
 damageSounds = [ ExtResource( 7 ) ]
 shootingSound = ExtResource( 8 )

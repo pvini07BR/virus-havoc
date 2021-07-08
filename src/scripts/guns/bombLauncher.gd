@@ -29,7 +29,8 @@ func _input(Event):
 					if bombExists == true:
 						damage = [2,3,4][randi() % 3]
 						bom.launch()
-						shootingPlayer.play()
+						if !shootingSound == null:
+							SoundManager.playSound(shootingSound, -10, 1)
 						$cooldown.start()
 						cooldown = true
 

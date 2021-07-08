@@ -1,7 +1,5 @@
 extends Area2D
 
-var damageSoundStream = preload("res://scenes/handlers/damageSoundHandler.tscn")
-
 export var scoreValue: int
 export var maxHealth : float
 export var shootingCooldownFrom : float
@@ -26,9 +24,7 @@ var damageIndicator = preload("res://scenes/damageIndicator.tscn")
 var droppedHeart = false
 var healthBar = TextureProgress.new()
 var virusEffects = AnimationPlayer.new()
-var shootingSoundStream = AudioStreamPlayer.new()
 var shootingCooldown = Timer.new()
-var damageCooldown = Timer.new()
 
 var bull
 var bull2
@@ -41,10 +37,6 @@ func _ready():
 		shootingCooldown.wait_time = rng.randf_range(shootingCooldownFrom, shootingCooldownTo)
 		shootingCooldown.connect("timeout", self, "_on_ShootTimer_timeout")
 		add_child(shootingCooldown)
-	
-	damageCooldown.wait_time = 0.1
-	damageCooldown.connect("timeout", self, "_on_damageCooldown_timeout")
-	add_child(damageCooldown)
 	
 	healthBar.visible = false
 	healthBar.texture_under = load("res://assets/images/viruses/virusBarProgressBg.png")
@@ -63,11 +55,6 @@ func _ready():
 		connect("onDeath", self, "_onDeath_triggered") 
 	add_child(virusEffects)
 	
-	if !shootingSound == null:
-		shootingSoundStream.stream = shootingSound
-		shootingSoundStream.volume_db = -15
-		add_child(shootingSoundStream)
-	
 	rng.randomize()
 	heartDropProbability = rng.randi_range(0, 100)
 	
@@ -76,69 +63,37 @@ func _ready():
 	
 	add_to_group("virus")
 	self.connect("area_entered", self, "_on_virus_area_entered")
-
-func takeDamageWithCooldown():
-	if vulnerable == true:
-		if canTakeDamage == true:
+			
+func takeDamage(cooldown: bool):
+	if canTakeDamage == true:
+		if vulnerable == true:
 			if !damageAnimation == null:
 				virusEffects.play("virusHit")
-				if get_tree().get_nodes_in_group("stage")[0].get_node("player").slotSelected == 0:
-					health -= get_tree().get_nodes_in_group("stage")[0].get_node("player").gunInstance.damage
-					var damageIndInst = damageIndicator.instance()
-					damageIndInst.amount = get_tree().get_nodes_in_group("stage")[0].get_node("player").gunInstance.damage
-					damageIndInst.type = 0
-					get_tree().get_nodes_in_group("stage")[0].add_child(damageIndInst)
-					damageIndInst.global_position = global_position
-				if get_tree().get_nodes_in_group("stage")[0].get_node("player").slotSelected == 1:
-					health -= get_tree().get_nodes_in_group("stage")[0].get_node("player").gun2Instance.damage
-					var damageIndInst2 = damageIndicator.instance()
-					damageIndInst2.amount = get_tree().get_nodes_in_group("stage")[0].get_node("player").gun2Instance.damage
-					damageIndInst2.type = 0
-					get_tree().get_nodes_in_group("stage")[0].add_child(damageIndInst2)
-					damageIndInst2.global_position = global_position
+			if get_tree().get_nodes_in_group("stage")[0].get_node("player").slotSelected == 0:
+				health -= get_tree().get_nodes_in_group("stage")[0].get_node("player").gunInstance.damage
+				var damageIndInst = damageIndicator.instance()
+				damageIndInst.amount = get_tree().get_nodes_in_group("stage")[0].get_node("player").gunInstance.damage
+				damageIndInst.type = 0
+				get_tree().get_nodes_in_group("stage")[0].add_child(damageIndInst)
+				damageIndInst.global_position = global_position
+			if get_tree().get_nodes_in_group("stage")[0].get_node("player").slotSelected == 1:
+				health -= get_tree().get_nodes_in_group("stage")[0].get_node("player").gun2Instance.damage
+				var damageIndInst2 = damageIndicator.instance()
+				damageIndInst2.amount = get_tree().get_nodes_in_group("stage")[0].get_node("player").gun2Instance.damage
+				damageIndInst2.type = 0
+				get_tree().get_nodes_in_group("stage")[0].add_child(damageIndInst2)
+				damageIndInst2.global_position = global_position
 					
 			if !damageSounds.empty():
-				var damageSoundInst = damageSoundStream.instance()
 				randomize()
-				damageSoundInst.stream = damageSounds[[0,damageSounds.size() - 1][randi() % 2]]
-				damageSoundInst.volume_db = -10
 				rng.randomize()
-				damageSoundInst.pitch_scale = rng.randf_range(0.9,1.1)
-				get_tree().get_nodes_in_group("stage")[0].add_child(damageSoundInst)
-				damageSoundInst.play()
+				SoundManager.playSound(damageSounds[[0,damageSounds.size() - 1][randi() % 2]], -10, rng.randf_range(0.9,1.1))
 			healthBar.visible = true
-			damageCooldown.start()
-			canTakeDamage = false
 			
-func takeDamage():
-	if vulnerable == true:
-		if !damageAnimation == null:
-			virusEffects.play("virusHit")
-		if get_tree().get_nodes_in_group("stage")[0].get_node("player").slotSelected == 0:
-			health -= get_tree().get_nodes_in_group("stage")[0].get_node("player").gunInstance.damage
-			var damageIndInst = damageIndicator.instance()
-			damageIndInst.amount = get_tree().get_nodes_in_group("stage")[0].get_node("player").gunInstance.damage
-			damageIndInst.type = 0
-			get_tree().get_nodes_in_group("stage")[0].add_child(damageIndInst)
-			damageIndInst.global_position = global_position
-		if get_tree().get_nodes_in_group("stage")[0].get_node("player").slotSelected == 1:
-			health -= get_tree().get_nodes_in_group("stage")[0].get_node("player").gun2Instance.damage
-			var damageIndInst2 = damageIndicator.instance()
-			damageIndInst2.amount = get_tree().get_nodes_in_group("stage")[0].get_node("player").gun2Instance.damage
-			damageIndInst2.type = 0
-			get_tree().get_nodes_in_group("stage")[0].add_child(damageIndInst2)
-			damageIndInst2.global_position = global_position
-				
-		if !damageSounds.empty():
-			var damageSoundInst = damageSoundStream.instance()
-			randomize()
-			damageSoundInst.stream = damageSounds[[0,damageSounds.size() - 1][randi() % 2]]
-			damageSoundInst.volume_db = -10
-			rng.randomize()
-			damageSoundInst.pitch_scale = rng.randf_range(0.9,1.1)
-			get_tree().get_nodes_in_group("stage")[0].add_child(damageSoundInst)
-			damageSoundInst.play()
-		healthBar.visible = true
+		if cooldown == true:
+			canTakeDamage = false
+			yield(get_tree().create_timer(0.1), "timeout")
+			canTakeDamage = true
 		
 func takeDamageFixedAmount(damage : int):
 	if vulnerable == true:
@@ -152,14 +107,9 @@ func takeDamageFixedAmount(damage : int):
 		damageIndInst.global_position = global_position
 				
 		if !damageSounds.empty():
-			var damageSoundInst = damageSoundStream.instance()
 			randomize()
-			damageSoundInst.stream = damageSounds[[0,damageSounds.size() - 1][randi() % 2]]
-			damageSoundInst.volume_db = -10
 			rng.randomize()
-			damageSoundInst.pitch_scale = rng.randf_range(0.9,1.1)
-			get_tree().get_nodes_in_group("stage")[0].add_child(damageSoundInst)
-			damageSoundInst.play()
+			SoundManager.playSound(damageSounds[[0,damageSounds.size() - 1][randi() % 2]], -10, rng.randf_range(0.9,1.1))
 		healthBar.visible = true
 
 func shoot():
@@ -167,7 +117,8 @@ func shoot():
 		bull = projectile.instance()
 		get_tree().get_nodes_in_group("stage")[0].add_child(bull)
 		bull.global_position = global_position
-		shootingSoundStream.play()
+		if !shootingSound == null:
+			SoundManager.playSound(shootingSound, -15, 1)
 	
 func shoot2():
 	if vulnerable == true:
@@ -179,15 +130,16 @@ func shoot2():
 		get_tree().get_nodes_in_group("stage")[0].add_child(bull2)
 		bull2.global_position = global_position
 		
-		shootingSoundStream.play()
+		if !shootingSound == null:
+			SoundManager.playSound(shootingSound, -15, 1)
 		
 func _on_virus_area_entered(area):
 	if area.is_in_group("projectile"):
 		if vulnerable == true:
-			takeDamage()
+			takeDamage(false)
 	if area.is_in_group("multiProjectile"):
 		if vulnerable == true:
-			takeDamageWithCooldown()
+			takeDamage(true)
 	if area.is_in_group("explosion"):
 		if vulnerable == true:
 			randomize()
@@ -221,6 +173,3 @@ func _onDeath_triggered():
 	get_tree().get_nodes_in_group("stage")[0].virusesKilled += 1
 	get_tree().get_nodes_in_group("stage")[0].score += scoreValue
 	queue_free()
-		
-func _on_damageCooldown_timeout():
-	canTakeDamage = true

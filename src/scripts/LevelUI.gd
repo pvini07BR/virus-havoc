@@ -32,6 +32,8 @@ func _process(_delta):
 		$pauseMenu/pauseText.text = "PAUSADO"
 		$pauseMenu/resumeGameButton.text = "Reniciar Nível"
 		$pauseMenu/goBackButton.text = "Voltar para o menu"
+		$levelFinished/score.text = ("Pontuação: %d" % scoreTemp)
+		$levelFinished/bitcoins.text = ("Bitcoins Ganhos: %d" % bitcoinsTemp)
 		
 		if get_parent().get_node("player").slotSelected == 0 and get_parent().get_node("player").doesHaveAFirstGun == true:
 			$gunEquipped.text = get_parent().get_node("player").gunInstance.namePTBR
@@ -59,6 +61,9 @@ func _process(_delta):
 		$levelFinished/goBack.text = "Go back to menu"
 		$levelFinished/restartStage.text = "Play Again"
 		$levelFinished/goToNextLevel.text = "Play the next stage"
+		
+		$levelFinished/score.text = ("Score: %d" % scoreTemp)
+		$levelFinished/bitcoins.text = ("Bitcoins Earned: %d" % bitcoinsTemp)
 		
 		if get_parent().get_node("player").slotSelected == 0 and get_parent().get_node("player").doesHaveAFirstGun == true:
 			$gunEquipped.text = get_parent().get_node("player").gunInstance.nameEng
@@ -169,22 +174,6 @@ func _process(_delta):
 		$playerHealth.modulate = Color(255, 255, 255)
 		
 func _input(Event):
-	if Event.is_action_pressed("ui_cancel"):
-		if isStageFinished == true:
-			levelFinishedMenuState = 2
-			$levelFinished/score.visible = true
-			if GameManager.language == 0:
-				$levelFinished/score.text = ("Pontuação: %d" % get_parent().score)
-			if GameManager.language == 1:
-				$levelFinished/score.text = ("Score: %d" % get_parent().score)
-				
-			$levelFinished/bitcoins.visible = true
-			if GameManager.language == 0:
-				$levelFinished/bitcoins.text = ("Bitcoins Ganhos: %d" % get_parent().bitcoins)
-			if GameManager.language == 1:
-				$levelFinished/bitcoins.text = ("Bitcoins Earned: %d" % get_parent().bitcoins)
-			isStageFinished = false
-	
 	if Event.is_action_pressed("ui_selectWeapon0") and isSubAGun == true:
 		gunSelected -= 1
 	if Event.is_action_pressed("ui_selectWeapon1") and isSubAGun == true:
@@ -280,64 +269,40 @@ func _on_goToNextLevel_pressed():
 	GameManager.storedKills = 0
 	GameManager.storedScore = 0
 	GameManager.wasInBossBattle = false
-	GameManager.get_node("Fade").path = GameManager.stages.values()[GameManager.lastStagePlayed + 1]
+	GameManager.lastStagePlayed = GameManager.lastStagePlayed + 1
+	GameManager.get_node("Fade").path = GameManager.stages.values()[GameManager.lastStagePlayed]
 	GameManager.get_node("Fade/layer/anim").play("fadeOut")
 
 func _on_titleMoving_tween_all_completed():
-	$levelFinished/Timer.start()
-	$levelFinished/score.visible = true
 	isStageFinished = true
+	countUp()
 
-func _on_Timer_timeout():
-	if levelFinishedMenuState == 0:
-		if scoreTemp < get_parent().score:
-			scoreTemp += int(get_parent().score / 100)
-			if GameManager.language == 0:
-				$levelFinished/score.text = ("Pontuação: %d" % scoreTemp)
-			if GameManager.language == 1:
-				$levelFinished/score.text = ("Score: %d" % scoreTemp)
-		if scoreTemp > get_parent().score:
-			scoreTemp -= -int(get_parent().score / 100)
-			if GameManager.language == 0:
-				$levelFinished/score.text = ("Pontuação: %d" % scoreTemp)
-			if GameManager.language == 1:
-				$levelFinished/score.text = ("Score: %d" % scoreTemp)
-		if scoreTemp == get_parent().score:
-			if GameManager.language == 0:
-				$levelFinished/score.text = ("Pontuação: %d" % get_parent().score)
-			if GameManager.language == 1:
-				$levelFinished/score.text = ("Score: %d" % get_parent().score)
-			levelFinishedMenuState = 1
-		$levelFinished/Timer.start()
-	if levelFinishedMenuState == 1:
-		$levelFinished/bitcoins.visible = true
-		if bitcoinsTemp < get_parent().bitcoins:
-			bitcoinsTemp += int(get_parent().bitcoins / 6)
-			if GameManager.language == 0:
-				$levelFinished/bitcoins.text = ("Bitcoins Ganhos: %d" % bitcoinsTemp)
-			if GameManager.language == 1:
-				$levelFinished/bitcoins.text = ("Bitcoins Earned: %d" % bitcoinsTemp)
-		if bitcoinsTemp > get_parent().bitcoins:
-			bitcoinsTemp -= -int(get_parent().bitcoins / 6)
-			if GameManager.language == 0:
-				$levelFinished/bitcoins.text = ("Bitcoins Ganhos: %d" % bitcoinsTemp)
-			if GameManager.language == 1:
-				$levelFinished/bitcoins.text = ("Bitcoins Earned: %d" % bitcoinsTemp)
-		if bitcoinsTemp == get_parent().bitcoins:
-			if GameManager.language == 0:
-				$levelFinished/bitcoins.text = ("Bitcoins Ganhos: %d" % get_parent().bitcoins)
-			if GameManager.language == 1:
-				$levelFinished/bitcoins.text = ("Bitcoins Earned: %d" % get_parent().bitcoins)
-			levelFinishedMenuState = 2
-		$levelFinished/Timer.start()
-	if levelFinishedMenuState == 2:
-		$levelFinished/goBack.visible = true
-		$levelFinished/restartStage.visible = true
-		$levelFinished/goToNextLevel.visible = true
-		
-		$levelFinished/goBack.disabled = false
-		$levelFinished/restartStage.disabled = false
-		if GameManager.lastStagePlayed < GameManager.stages.values().size() - 1:
-			$levelFinished/goToNextLevel.disabled = false
-		elif GameManager.lastStagePlayed == GameManager.stages.values().size() - 1:
-			$levelFinished/goToNextLevel.disabled = true
+func countUp():
+	$levelFinished/score.visible = true
+	if !scoreTemp == get_parent().score:
+		var scoreCounter = Tween.new()
+		scoreCounter.interpolate_property(self, "scoreTemp", scoreTemp, get_parent().score, 1)
+		add_child(scoreCounter)
+		scoreCounter.start()
+		yield(scoreCounter, "tween_all_completed")
+	else:
+		scoreTemp = get_parent().score
+	$levelFinished/bitcoins.visible = true
+	if !bitcoinsTemp == get_parent().bitcoins:
+		var bitcoinCounter = Tween.new()
+		bitcoinCounter.interpolate_property(self, "bitcoinsTemp", bitcoinsTemp, get_parent().bitcoins, 1)
+		add_child(bitcoinCounter)
+		bitcoinCounter.start()
+		yield(bitcoinCounter,"tween_all_completed")
+	else:
+		bitcoinsTemp = get_parent().bitcoins
+	$levelFinished/goBack.visible = true
+	$levelFinished/restartStage.visible = true
+	$levelFinished/goToNextLevel.visible = true
+
+	$levelFinished/goBack.disabled = false
+	$levelFinished/restartStage.disabled = false
+	if GameManager.lastStagePlayed < GameManager.stages.values().size() - 1:
+		$levelFinished/goToNextLevel.disabled = false
+	elif GameManager.lastStagePlayed == GameManager.stages.values().size() - 1:
+		$levelFinished/goToNextLevel.disabled = true

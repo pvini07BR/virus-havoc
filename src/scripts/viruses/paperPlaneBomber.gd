@@ -40,5 +40,6 @@ func _on_playerDetector_area_entered(area):
 	if area.is_in_group("player"):
 		if !hasLaunched:
 			bomb.launch()
-			shootingSoundStream.play()
+			if !shootingSound == null:
+				SoundManager.playSound(shootingSound, -15, 1)
 			hasLaunched = true

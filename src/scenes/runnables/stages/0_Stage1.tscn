@@ -41,10 +41,6 @@ one_shot = true
 [node name="brokenVirusSpawningTimer" type="Timer" parent="."]
 wait_time = 20.0
 
-[node name="rainbowServantSpawningTimer" type="Timer" parent="."]
-wait_time = 20.0
-one_shot = true
-
 [node name="virusSpace" type="Node2D" parent="."]
 position = Vector2( 1980, 360 )
 
@@ -69,11 +65,9 @@ color = Color( 1, 1, 1, 0 )
 [node name="Tween" type="Tween" parent="CanvasLayer"]
 
 [node name="distancingTween" type="Tween" parent="."]
-repeat = true
-playback/repeat = true
 
-[node name="changingPosTween" type="Tween" parent="."]
+[node name="virusSpaceMoving" type="Tween" parent="."]
 
 [connection signal="timeout" from="virusSpawningTimer" to="." method="_on_virusSpawningTimer_timeout"]
 [connection signal="timeout" from="brokenVirusSpawningTimer" to="." method="_on_brokenVirusSpawningTimer_timeout"]
-[connection signal="timeout" from="rainbowServantSpawningTimer" to="." method="_on_rainbowServantSpawningTimer_timeout"]
+[connection signal="tween_all_completed" from="distancingTween" to="." method="_on_distancingTween_tween_all_completed"]

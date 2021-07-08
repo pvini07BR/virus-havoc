@@ -62,8 +62,8 @@ shader_param/Shift_Hue = 0.0
 script = ExtResource( 2 )
 scoreValue = 100
 maxHealth = 3.0
-shootingCooldownFrom = 2.0
-shootingCooldownTo = 3.0
+shootingCooldownFrom = 4.0
+shootingCooldownTo = 6.0
 HeartDropChance = 50
 projectile = ExtResource( 6 )
 damageSounds = [ ExtResource( 7 ) ]
@@ -86,13 +86,10 @@ playback/repeat = true
 repeat = true
 playback/repeat = true
 
-[node name="moving" type="Tween" parent="."]
-
 [node name="fleeing" type="Tween" parent="."]
 
 [node name="tripleShootingTimer" type="Timer" parent="."]
 wait_time = 0.3
 
-[connection signal="tween_all_completed" from="moving" to="." method="_on_moving_tween_all_completed"]
 [connection signal="tween_all_completed" from="fleeing" to="." method="_on_fleeing_tween_all_completed"]
 [connection signal="timeout" from="tripleShootingTimer" to="." method="_on_tripleShootingTimer_timeout"]

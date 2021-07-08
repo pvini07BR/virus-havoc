@@ -449,10 +449,6 @@ __meta__ = {
 
 [node name="titleMoving" type="Tween" parent="levelFinished"]
 
-[node name="Timer" type="Timer" parent="levelFinished"]
-wait_time = 0.01
-one_shot = true
-
 [node name="appearingTween" type="Tween" parent="."]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
@@ -467,4 +463,3 @@ color = Color( 1, 1, 1, 0 )
 [connection signal="pressed" from="levelFinished/restartStage" to="." method="_on_resumeGameButton_pressed"]
 [connection signal="pressed" from="levelFinished/goToNextLevel" to="." method="_on_goToNextLevel_pressed"]
 [connection signal="tween_all_completed" from="levelFinished/titleMoving" to="." method="_on_titleMoving_tween_all_completed"]
-[connection signal="timeout" from="levelFinished/Timer" to="." method="_on_Timer_timeout"]

@@ -23,7 +23,8 @@ func _input(Event):
 					bull2.set_collision_layer_bit(2, 4)
 					bull2.set_collision_mask_bit(2, 4)
 					
-					shootingPlayer.play()
+					if !shootingSound == null:
+						SoundManager.playSound(shootingSound, -10, 1)
 					
 					$cooldown.start()
 					cooldown = true

@@ -9,7 +9,8 @@ func _input(Event):
 					get_tree().get_nodes_in_group("stage")[0].add_child(bull)
 					bull.global_position = $pos.global_position
 					cooldown = true
-					shootingPlayer.play()
+					if !shootingSound == null:
+						SoundManager.playSound(shootingSound, -10, 1)
 					$cooldown.start()
 				
 func _on_cooldown_timeout():

@@ -1,10 +1,8 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://assets/images/viruses/bossVirus_Rainbow.png" type="Texture" id=1]
 [ext_resource path="res://scripts/viruses/bosses/rainbowVirus.gd" type="Script" id=2]
-[ext_resource path="res://assets/sounds/laser.wav" type="AudioStream" id=3]
 [ext_resource path="res://assets/sounds/rainbowVirusAmbient.wav" type="AudioStream" id=4]
-[ext_resource path="res://assets/sounds/rainbowVirusDamage.wav" type="AudioStream" id=5]
 [ext_resource path="res://assets/images/viruses/bossVirus_RainbowGlow.png" type="Texture" id=6]
 [ext_resource path="res://scenes/viruses/bosses/rainbowVirusShader.tres" type="Material" id=7]
 [ext_resource path="res://assets/sounds/beamRiser.wav" type="AudioStream" id=8]
@@ -134,13 +132,6 @@ anims/damage = SubResource( 6 )
 stream = ExtResource( 4 )
 volume_db = -15.0
 autoplay = true
-
-[node name="damageS" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 5 )
-
-[node name="shootingS" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 3 )
-volume_db = -15.0
 
 [node name="beamingRiser" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )

@@ -23,6 +23,7 @@ func _on_virusZipBomb_area_entered(area):
 		expl.add_to_group("explosion")
 		expl.global_position = global_position
 		get_tree().get_nodes_in_group("stage")[0].add_child(expl)
+		
 		queue_free()
 
 func _on_positioning_tween_all_completed():

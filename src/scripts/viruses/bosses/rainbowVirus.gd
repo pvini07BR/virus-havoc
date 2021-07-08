@@ -6,6 +6,7 @@ onready var brokenSprite = preload("res://assets/images/viruses/bossVirus_Rainbo
 onready var damageIndicator = preload("res://scenes/damageIndicator.tscn")
 onready var projectile = preload("res://scenes/bullets/virus/rainbowVirusBullet.tscn")
 onready var laserBeam = preload("res://scenes/bullets/virus/rainbowVirusDeadlyLaser.tscn")
+onready var damageSound = preload("res://assets/sounds/rainbowVirusDamage.wav")
 var health = 100
 var vulnerable = false
 var canTakeDamage = true
@@ -39,7 +40,7 @@ func _ready():
 	$movementTween.start()
 	
 func _on_movementTween_tween_all_completed():
-	get_parent().get_node("rainbowServantSpawningTimer").start()
+	get_parent().get_node("virusSpawningTimer").start()
 	vulnerable = true
 	
 	attackMoves(1)
@@ -110,9 +111,9 @@ func _on_shooting_timeout():
 	
 func _on_Area2D_area_entered(area):
 	if area.is_in_group("multiProjectile"):
-		takeDamageCooldown()
+		takeDamage(true)
 	if area.is_in_group("projectile"):
-		takeDamage()
+		takeDamage(false)
 	
 func _process(delta):
 	if health <= 0:
@@ -175,28 +176,9 @@ func _on_deathDuration_timeout():
 		$deathSound.play()
 		$deathDuration.stop()
 		
-func takeDamage():
-	if vulnerable == true:
-		if get_parent().get_node("player").slotSelected == 0:
-			health -= get_parent().get_node("player").gunInstance.damage
-			var damageIndInst = damageIndicator.instance()
-			damageIndInst.amount = get_parent().get_node("player").gunInstance.damage
-			damageIndInst.type = 0
-			get_tree().get_nodes_in_group("stage")[0].add_child(damageIndInst)
-			damageIndInst.global_position = global_position
-		if get_parent().get_node("player").slotSelected == 1:
-			health -= get_parent().get_node("player").gun2Instance.damage
-			var damageIndInst = damageIndicator.instance()
-			damageIndInst.amount = get_parent().get_node("player").gun2Instance.damage
-			damageIndInst.type = 0
-			get_tree().get_nodes_in_group("stage")[0].add_child(damageIndInst)
-			damageIndInst.global_position = global_position
-		$damage.play("damage")
-		$damageS.play()
-		
-func takeDamageCooldown():
-	if vulnerable == true:
-		if canTakeDamage == true:
+func takeDamage(cooldown : bool):
+	if canTakeDamage == true:
+		if vulnerable == true:
 			if get_parent().get_node("player").slotSelected == 0:
 				health -= get_parent().get_node("player").gunInstance.damage
 				var damageIndInst = damageIndicator.instance()
@@ -212,11 +194,12 @@ func takeDamageCooldown():
 				get_tree().get_nodes_in_group("stage")[0].add_child(damageIndInst)
 				damageIndInst.global_position = global_position
 			$damage.play("damage")
-			rng.randomize()
-			$damageS.pitch_scale = rng.randf_range(0.9,1.1)
-			$damageS.play()
-			$damageCooldown.start()
+			SoundManager.playSound(damageSound, 0, 1)
+			
+		if cooldown == true:
 			canTakeDamage = false
+			yield(get_tree().create_timer(0.1), "timeout")
+			canTakeDamage = true
 			
 func die():
 	if !isDead:
@@ -274,51 +257,3 @@ func _on_intensifyBeamingSound_tween_all_completed():
 		
 func _on_deathTween_tween_all_completed():
 	get_parent().endStage()
-	
-#func _physics_process(_delta):
-#	if timesShooted >= 5:
-#		isRamming = true
-#
-#	if rammingState == 2:
-#		isRamming = false
-#		vulnerable = true
-#		timesShooted = 0
-#		if !shootedNrammed == 5:
-#			shootedNrammed += 1
-#		elif shootedNrammed == 5 and !isBeaming:
-#			$beamingTimer.start()
-#			$glowIntense.interpolate_property($Area2D/glow, "modulate", Color(1,1,1,0), Color(1,1,1,1),$beamingTimer.wait_time)
-#			$intensifySpeed.interpolate_property($moving, "playback_speed", 1, 2, $beamingTimer.wait_time)
-#			$intensifySpeed2.interpolate_property($effects, "playback_speed", 1, 2, $beamingTimer.wait_time)
-#			$intensifySound.interpolate_property($ambient, "pitch_scale", 1, 2, $beamingTimer.wait_time)
-#			$intensifySound2.interpolate_property($ambient, "volume_db", -15, -10, $beamingTimer.wait_time)
-#			$glowIntense.start()
-#			$intensifySpeed.start()
-#			$intensifySpeed2.start()
-#			$intensifySound.start()
-#			$intensifySound2.start()
-#			$beamingRiser.play()
-#			$intensifyBeamingSound.interpolate_property($beamingRiser, "pitch_scale", 1, 2, 5)
-#			$intensifyBeamingSound2.interpolate_property($beamingRiser, "volume_db", -20, -10, 5)
-#			$intensifyBeamingSound.start()
-#			$intensifyBeamingSound2.start()
-#			beamingState = 0
-#			isBeaming = true
-#		rammingState = 0
-#
-#	if isRamming == true and !shooted and vulnerable == true and !isBeaming:
-#		$rammingTween.interpolate_property(self, "position", Vector2(1000, 360), Vector2(-240, 360), 2, Tween.TRANS_LINEAR)
-#		$rammingTween.start()
-#		#direction = Vector2.LEFT
-#		#velocity = 500
-#		vulnerable = false
-#
-#	if bulletsSpawned >= 11:
-#		for i in get_tree().get_nodes_in_group("rainbowVirusBullet").size():
-#			get_tree().get_nodes_in_group("rainbowVirusBullet")[i].moving = true
-#		$shootingCooldown.start()
-#		$releasingBullets.play()
-#		shooted = true
-#		bulletsSpawned = 0
-#		if !isRamming:
-#			timesShooted += 1
