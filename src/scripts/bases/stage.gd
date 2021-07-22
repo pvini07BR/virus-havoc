@@ -22,6 +22,7 @@ export var music: AudioStreamOGGVorbis
 export var bossMusic: AudioStreamOGGVorbis
 export var boss : PackedScene
 export var viruses : Array
+export var GunsInLootBox : Array
 export var background : PackedScene
 
 signal stage_started

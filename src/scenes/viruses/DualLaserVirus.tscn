@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://scripts/viruses/DualLaserVirus.gd" type="Script" id=1]
-[ext_resource path="res://animations/viruses/commonVirusDeath.tres" type="Animation" id=2]
-[ext_resource path="res://animations/viruses/commonVirusHit.tres" type="Animation" id=3]
+[ext_resource path="res://scenes/viruses/DualLaserVirus.gd" type="Script" id=1]
+[ext_resource path="res://resources/animations/viruses/death/commonVirusDeath.tres" type="Animation" id=2]
+[ext_resource path="res://resources/animations/viruses/hit/commonVirusHit.tres" type="Animation" id=3]
 [ext_resource path="res://assets/images/viruses/virus_doubleLaser.png" type="Texture" id=5]
 [ext_resource path="res://scenes/bullets/virus/VirusBullet.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/sounds/laser.wav" type="AudioStream" id=7]

@@ -1,17 +1,19 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
-[ext_resource path="res://scripts/runnables/stages/Stage1.gd" type="Script" id=1]
+[ext_resource path="res://scenes/runnables/stages/Stage1.gd" type="Script" id=1]
 [ext_resource path="res://assets/music/boss1Music.ogg" type="AudioStream" id=2]
 [ext_resource path="res://assets/music/level1_music.ogg" type="AudioStream" id=3]
 [ext_resource path="res://scenes/backgrounds/level1_background.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/images/GUI/levelSelectionArts/art_level1.png" type="Texture" id=5]
-[ext_resource path="res://fonts/nokiafc22.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://resources/fonts/nokiafc22.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://scenes/viruses/bosses/rainbowVirus.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/viruses/CommonVirus.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/viruses/DualLaserVirus.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/viruses/BrokenVirus.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scenes/viruses/DualDiagonalVirus.tscn" type="PackedScene" id=11]
 [ext_resource path="res://scenes/viruses/rainbowServantVirus.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/guns/1_dualCannonLaserGun.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scenes/guns/2_dualDiagonalLaserGun.tscn" type="PackedScene" id=14]
 
 [sub_resource type="DynamicFont" id=1]
 size = 40
@@ -32,6 +34,7 @@ music = ExtResource( 3 )
 bossMusic = ExtResource( 2 )
 boss = ExtResource( 7 )
 viruses = [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 11 ), ExtResource( 10 ), ExtResource( 12 ) ]
+GunsInLootBox = [ ExtResource( 13 ), ExtResource( 14 ) ]
 background = ExtResource( 4 )
 
 [node name="virusSpawningTimer" type="Timer" parent="."]

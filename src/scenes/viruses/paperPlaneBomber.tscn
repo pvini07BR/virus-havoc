@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/images/viruses/virus_paperPlaneBomber.png" type="Texture" id=1]
-[ext_resource path="res://scripts/viruses/paperPlaneBomber.gd" type="Script" id=2]
+[ext_resource path="res://scenes/viruses/paperPlaneBomber.gd" type="Script" id=2]
 [ext_resource path="res://scenes/bullets/virus/virusZipBomb.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/sounds/paperVirusDamage.wav" type="AudioStream" id=4]
 [ext_resource path="res://assets/sounds/paperVirusDamage2.wav" type="AudioStream" id=5]

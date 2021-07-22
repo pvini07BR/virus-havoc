@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/images/laserBullet.png" type="Texture" id=1]
-[ext_resource path="res://scripts/bullets/rainbowBullet.gd" type="Script" id=2]
+[ext_resource path="res://scenes/bullets/rainbowBullet.gd" type="Script" id=2]
 [ext_resource path="res://assets/sounds/rainbowBulletAppear.wav" type="AudioStream" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]

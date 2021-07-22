@@ -1,9 +1,9 @@
 [gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/images/viruses/virus_Common.png" type="Texture" id=1]
-[ext_resource path="res://scripts/viruses/rainbowServantVirus.gd" type="Script" id=2]
-[ext_resource path="res://animations/viruses/commonVirusHit.tres" type="Animation" id=3]
-[ext_resource path="res://animations/viruses/commonVirusDeath.tres" type="Animation" id=4]
+[ext_resource path="res://scenes/viruses/rainbowServantVirus.gd" type="Script" id=2]
+[ext_resource path="res://resources/animations/viruses/hit/commonVirusHit.tres" type="Animation" id=3]
+[ext_resource path="res://resources/animations/viruses/death/commonVirusDeath.tres" type="Animation" id=4]
 [ext_resource path="res://scenes/bullets/virus/VirusBullet.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/sounds/virusDamage.wav" type="AudioStream" id=7]
 [ext_resource path="res://assets/sounds/laser.wav" type="AudioStream" id=8]

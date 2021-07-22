@@ -25,7 +25,7 @@ Na onda número 4, irá aparecer uma Loot Box (depois irei falar com mais detalh
 OBS: O nível 1 foi feito para jogar somente com as seguintes armas: Arma Laser Comum, Arma Laser de Canhão Duplo e Arma Laser Dupla Diagonal. Usar qualquer arma que não seja dessas, estará fora do balanceamento do nível 1.
 
 NÍVEL 2:
-Tem dois inimigos: o avião de papel bombardeador, e a pasta atiradora. Ambos tem 6 de vida. O avião atira uma .zip bomb, que pode dar entre 1-2 de dano no jogador e nos inimigos. Já a pasta atiradora, ela atira arquivos em sua direção. Dá apenas 1 de dano.
+Tem três inimigos: o avião de papel bombardeador, a pasta atiradora e a lixeira spammadora. Os dois primeiros tem 6 de vida. O avião atira uma .zip bomb, que pode dar entre 1-2 de dano no jogador e nos inimigos. Já a pasta atiradora, ela atira arquivos em sua direção. Dá apenas 1 de dano. A lixeira mira em você por um tempo e então atira um raio de papéis representando um spam, e depois some, e é imortal.
 
 LOOT BOXES:
 São caixas que contém uma arma aleatória, dependendo do nível que você for jogar. Tem 75% de chance de aparecer em uma fase, dependendo de em qual momento exatamente a loot box aparece. Se você já tiver pego a loot box antes em uma fase, ela não aparecerá novamente até que você renicie a fase.
@@ -69,7 +69,7 @@ This stage uses a "waves" system. In total, this stage has 10 waves. Each wave h
 OBS: The stage 1 was made to be played only with the following guns: Common Laser Gun, Dual-Cannon Laser Gun and Dual-Cannon Diagonal Laser Gun.
 
 STAGE 2:
-There are two enemies: the paper plane bomber, and the shooting folder, both has 6 of health. The plane shoots a .zip bomb, that can deal between 1-2 of damage on the player and the enemies. And the shooting folder, shoots files on your direction. Deals only 1 of damage.
+There are three enemies: the paper plane bomber, the shooting folder and the spamming trash bin. The first two has 6 of health. The plane shoots a .zip bomb, that can deal between 1-2 of damage on the player and the enemies. And the shooting folder, shoots files on your direction. Deals only 1 of damage. The spamming trash bin points on you for some time, and then shoots a beam of papers, representing a spam. And then it goes away, and it's immortal.
 
 LOOT BOXES:
 They are boxes that contains a random gun, depending on the stage that you are playing. It has 75% of chance of appearing on a stage, depending on what moment exactly it was made to it appear. If you already got the loot box before, it will not appear again until you restart the stage.

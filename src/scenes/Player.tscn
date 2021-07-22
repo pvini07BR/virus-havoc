@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/images/jogador.png" type="Texture" id=1]
-[ext_resource path="res://scripts/Player.gd" type="Script" id=2]
+[ext_resource path="res://scenes/Player.gd" type="Script" id=2]
 [ext_resource path="res://assets/images/playerShipWaves.png" type="Texture" id=3]
 [ext_resource path="res://assets/sounds/gunEquip.wav" type="AudioStream" id=5]
 

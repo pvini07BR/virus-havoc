@@ -1,9 +1,9 @@
 [gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/MenuBackground.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scripts/runnables/menus/DebugMenu.gd" type="Script" id=2]
+[ext_resource path="res://scenes/runnables/menus/DebugMenu.gd" type="Script" id=2]
 [ext_resource path="res://assets/images/newFreakingLogo.png" type="Texture" id=3]
-[ext_resource path="res://fonts/nokiafc22.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://resources/fonts/nokiafc22.ttf" type="DynamicFontData" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 30
@@ -15,7 +15,7 @@ font_data = ExtResource( 5 )
 
 [sub_resource type="DynamicFont" id=3]
 resource_local_to_scene = true
-size = 40
+size = 30
 font_data = ExtResource( 5 )
 
 [sub_resource type="DynamicFont" id=4]
@@ -86,7 +86,7 @@ __meta__ = {
 [node name="LevelList" type="ItemList" parent="."]
 margin_left = 10.0
 margin_top = 61.0
-margin_right = 211.0
+margin_right = 401.0
 margin_bottom = 449.0
 focus_mode = 0
 custom_fonts/font = SubResource( 3 )
@@ -117,5 +117,22 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ModsButton" type="Button" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1125.0
+margin_top = 641.0
+margin_right = 1262.0
+margin_bottom = 707.0
+custom_fonts/font = SubResource( 5 )
+disabled = true
+text = "Mods"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="item_selected" from="LevelList" to="." method="_on_LevelList_item_selected"]
 [connection signal="pressed" from="GunDexButton" to="." method="_on_GunDexButton_pressed"]
+[connection signal="pressed" from="ModsButton" to="." method="_on_ModsButton_pressed"]

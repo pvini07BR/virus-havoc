@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/images/defaultBomb.png" type="Texture" id=1]
-[ext_resource path="res://scripts/bullets/commonBomb.gd" type="Script" id=2]
+[ext_resource path="res://scenes/bullets/commonBomb.gd" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 9.30682
@@ -48,7 +48,6 @@ shape = SubResource( 1 )
 
 [node name="bombSprite" type="AnimatedSprite" parent="col"]
 frames = SubResource( 4 )
-frame = 1
 speed_scale = 5.0
 playing = true
 offset = Vector2( -0.5, -1.5 )

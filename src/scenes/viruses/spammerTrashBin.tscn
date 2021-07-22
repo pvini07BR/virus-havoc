@@ -1,0 +1,62 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/images/viruses/spammerTrashBin_cover.png" type="Texture" id=1]
+[ext_resource path="res://assets/images/viruses/spammerTrashBin_body.png" type="Texture" id=2]
+[ext_resource path="res://scenes/viruses/spammerTrashBin.gd" type="Script" id=3]
+[ext_resource path="res://scenes/bullets/virus/virusSpammingRay.tscn" type="PackedScene" id=4]
+[ext_resource path="res://resources/animations/viruses/death/trashBinDeath.tres" type="Animation" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 19, 16 )
+
+[sub_resource type="Animation" id=3]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("body/cover:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 100.0 ]
+}
+
+[node name="spammerTrashBin" type="Area2D"]
+script = ExtResource( 3 )
+scoreValue = 200
+projectile = ExtResource( 4 )
+deathAnimation = ExtResource( 5 )
+
+[node name="Line2D" type="Line2D" parent="."]
+visible = false
+points = PoolVector2Array( -1331, 0, 0, 0 )
+width = 2.0
+default_color = Color( 1, 0, 0, 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="body" type="Sprite" parent="."]
+z_index = 1
+texture = ExtResource( 2 )
+
+[node name="cover" type="Sprite" parent="body"]
+position = Vector2( -18, -15 )
+texture = ExtResource( 1 )
+offset = Vector2( -4.5, 15 )
+
+[node name="anim" type="AnimationPlayer" parent="."]
+anims/opening = SubResource( 3 )
+anims/trashBinDeath = ExtResource( 5 )
+
+[node name="movemente" type="Tween" parent="."]
+
+[node name="shootingDaBeam" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="animation_finished" from="anim" to="." method="_on_anim_animation_finished"]
+[connection signal="timeout" from="shootingDaBeam" to="." method="_on_shootingDaBeam_timeout"]

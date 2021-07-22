@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/images/rainbowVirusDeadlyLaser.png" type="Texture" id=1]
-[ext_resource path="res://scripts/bullets/rainbowVirusDeadlyLaser.gd" type="Script" id=2]
-[ext_resource path="res://scenes/viruses/bosses/rainbowVirusShader.tres" type="Material" id=3]
+[ext_resource path="res://scenes/bullets/virus/rainbowVirusDeadlyLaser.gd" type="Script" id=2]
+[ext_resource path="res://resources/shaders/rainbow.tres" type="Material" id=3]
 [ext_resource path="res://assets/sounds/beamingLoop.ogg" type="AudioStream" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
