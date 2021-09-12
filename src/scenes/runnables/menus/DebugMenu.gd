@@ -31,9 +31,10 @@ func _ready():
 		get_tree().get_root().get_node("GameManager/musicChannel").play()
 	
 	for i in GameManager.stages.size():
-		instanciatedStages.push_back(GameManager.stages[i].instance())
-		$LevelList.add_item("stage placeholder")
-		$LevelList.set_item_metadata(i, GameManager.stages[i])
+		if !GameManager.stages.empty():
+			instanciatedStages.push_back(GameManager.stages[i].instance())
+			$LevelList.add_item("stage placeholder")
+			$LevelList.set_item_metadata(i, GameManager.stages[i])
 		
 func _process(_delta):
 	if GameManager.language == 0:
@@ -42,18 +43,20 @@ func _process(_delta):
 		$bossEnableCheckBox.text = "Começar boss fight logo ao iniciar um nível"
 		$LevelListText.text = "Níveis disponíveis:"
 	
-		for i in GameManager.stages.size():
-			$LevelList.set_item_text(i, instanciatedStages[i].namePTBR)
-			$LevelList.set_item_tooltip(i, instanciatedStages[i].descPTBR)
+		if !GameManager.stages.empty():
+			for i in GameManager.stages.size():
+				$LevelList.set_item_text(i, instanciatedStages[i].namePTBR)
+				$LevelList.set_item_tooltip(i, instanciatedStages[i].descPTBR)
 	if GameManager.language == 1:
 		$logo/logoText.text = "Early Access Version!"
 		$languageCheckBox.text = "Enable English Language / Habilitar Idioma Inglês"
 		$bossEnableCheckBox.text = "Start boss fight when starting a stage"
 		$LevelListText.text = "Available Stages:"
 		
-		for i in GameManager.stages.size():
-			$LevelList.set_item_text(i, instanciatedStages[i].nameEng)
-			$LevelList.set_item_tooltip(i, instanciatedStages[i].descEng)
+		if !GameManager.stages.empty():
+			for i in GameManager.stages.size():
+					$LevelList.set_item_text(i, instanciatedStages[i].nameEng)
+					$LevelList.set_item_tooltip(i, instanciatedStages[i].descEng)
 		
 	if $languageCheckBox.pressed:
 		GameManager.language = 1

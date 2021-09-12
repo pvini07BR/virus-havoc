@@ -11,5 +11,5 @@ dest_files=[ "res://.import/pviniGamesIntro.ogg-7b3ca7632a6dae928836ca238a7482e4
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

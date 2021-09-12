@@ -1,5 +1,6 @@
 extends Node2D
 
 func _process(delta):
-	var texture = $Viewport.get_texture()
-	$BG.texture = texture
+	$BG.texture = $Viewport.get_texture()
+	
+	$binaryEffectRender.texture = $binaryEffect.get_texture()

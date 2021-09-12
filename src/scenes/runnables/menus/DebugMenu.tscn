@@ -127,7 +127,6 @@ margin_top = 641.0
 margin_right = 1262.0
 margin_bottom = 707.0
 custom_fonts/font = SubResource( 5 )
-disabled = true
 text = "Mods"
 __meta__ = {
 "_edit_use_anchors_": false

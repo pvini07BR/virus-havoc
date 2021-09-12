@@ -15,6 +15,19 @@ var itsAlreadyPaused = false
 
 func _init():
 	#pasta de armas
+	loadGuns()
+		
+	#######
+	#ARMAS EQUIPADAS (ISSO É BEM SAGRADO)
+	equippedGuns = [null, null]
+	#NÃO TIRAR DE JEITO NENHUM OU O JOGO MORRE
+	#######
+	
+	loadStages()
+	
+	load_equippedGuns()
+	
+func loadGuns():
 	var gunsDir := Directory.new()
 	var error = gunsDir.change_dir("res://scenes/guns/")
 	if (error != OK):
@@ -31,13 +44,8 @@ func _init():
 			guns.push_back(load("res://scenes/guns/" + next_file))
 		
 		next_file = gunsDir.get_next()
-		
-	#######
-	#ARMAS EQUIPADAS (ISSO É BEM SAGRADO)
-	equippedGuns = [null, null]
-	#NÃO TIRAR DE JEITO NENHUM OU O JOGO MORRE
-	#######
 	
+func loadStages():
 	var stagesDir := Directory.new()
 	var errorStage = stagesDir.change_dir("res://scenes/runnables/stages")
 	if (errorStage != OK):
@@ -54,8 +62,6 @@ func _init():
 			stages.push_back(load("res://scenes/runnables/stages/" + next_stageFile))
 			
 		next_stageFile = stagesDir.get_next()
-	
-	load_equippedGuns()
 	
 func _process(_delta):
 	if !equippedGuns[0] == null and !equippedGuns[1] == null:

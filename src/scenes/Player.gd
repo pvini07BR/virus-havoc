@@ -35,6 +35,26 @@ func _ready():
 	z_as_relative = false
 
 func _physics_process(delta):
+	_movement(delta)
+
+func _process(_delta):
+	_gun_managing()
+			
+	if hp >= 10:
+			hp = 10
+	if isOverlappingAVirus == true:
+		hit(1)
+		
+func _input(Event):
+	if isInputWorking == true:
+		if Event.is_action_pressed("ui_selectWeapon0") and doesHaveAFirstGun == true:
+			cameFromInput = true
+			slotSelected = 0
+		elif Event.is_action_pressed("ui_selectWeapon1") and doesHaveASecondGun == true:
+			cameFromInput = true
+			slotSelected = 1
+		
+func _movement(delta):
 	var rotate = move.x * 0.7 * delta
 	$col.rotation_degrees = lerp($col.rotation_degrees, rotate, 10 * delta)
 		
@@ -55,8 +75,8 @@ func _physics_process(delta):
 		$col/waves/waveController.playback_speed = lerp(1, move.x / 50, 10 * delta)
 	if move.x < -0:
 		$col/waves/waveController.playback_speed = lerp(1, -move.x / -20, 10 * delta)
-
-func _process(_delta):
+		
+func _gun_managing():
 	if get_parent().stageFinished == true and !isInputWorking:
 		$col/spr.texture = victorySprite
 	
@@ -109,11 +129,6 @@ func _process(_delta):
 		slot2Equipped = true
 		slot1Equipped = false
 			
-	if hp >= 10:
-			hp = 10
-	if isOverlappingAVirus == true:
-		hit(1)
-			
 func replace_gun():
 	if get_parent().get_node("LevelUI").gunSelected == 1:
 		$gunSwitching.play()
@@ -134,15 +149,6 @@ func changeToExistingGun():
 			slotSelected = 0
 	elif GameManager.equippedGuns[1] == get_parent().get_node("LootBox").decidedGun:
 		if slotSelected == 0:
-			slotSelected = 1
-		
-func _input(Event):
-	if isInputWorking == true:
-		if Event.is_action_pressed("ui_selectWeapon0") and doesHaveAFirstGun == true:
-			cameFromInput = true
-			slotSelected = 0
-		elif Event.is_action_pressed("ui_selectWeapon1") and doesHaveASecondGun == true:
-			cameFromInput = true
 			slotSelected = 1
 
 func _on_col_area_entered(area):

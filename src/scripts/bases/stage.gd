@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name Stage
+
 onready var player = preload("res://scenes/Player.tscn")
 onready var playerInst
 onready var UI = preload("res://scenes/LevelUI.tscn")
@@ -157,6 +159,7 @@ func endStage():
 		victoryMusicPlayer.connect("finished", self, "_on_VictoryMusic_finished")
 		add_child(victoryMusicPlayer)
 		victoryMusicPlayer.play()
+		GameManager.save_equippedGuns(true)
 		stageFinished = true
 		
 func beginStage():

@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name Gun
+
 export var projectile: PackedScene
 export var previewSprite: Texture
 export var namePTBR: String

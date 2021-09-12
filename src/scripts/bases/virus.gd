@@ -1,5 +1,7 @@
 extends Area2D
 
+class_name Virus
+
 export var scoreValue: int
 export var maxHealth : float
 export var shootingCooldownFrom : float

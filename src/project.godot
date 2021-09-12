@@ -8,10 +8,32 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Node2D",
+"class": "Gun",
+"language": "GDScript",
+"path": "res://scripts/bases/gun.gd"
+}, {
+"base": "Node2D",
+"class": "Stage",
+"language": "GDScript",
+"path": "res://scripts/bases/stage.gd"
+}, {
+"base": "Area2D",
+"class": "Virus",
+"language": "GDScript",
+"path": "res://scripts/bases/virus.gd"
+} ]
+_global_script_class_icons={
+"Gun": "",
+"Stage": "",
+"Virus": ""
+}
+
 [application]
 
 config/name="VIRUS HAVOC!"
-run/main_scene="res://scenes/runnables/menus/DebugMenu.tscn"
+run/main_scene="res://scenes/runnables/menus/intro.tscn"
 boot_splash/image="res://assets/images/splash.png"
 boot_splash/use_filter=false
 config/icon="res://assets/icons/icon-hd.png"

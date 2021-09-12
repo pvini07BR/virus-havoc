@@ -5,8 +5,10 @@ var randomY
 var paper
 var paperExists = false
 var dir
-var distanceX
-var distanceY
+var alcanceY
+var alcanceX
+var playerYDiffer
+var playerXDiffer
 
 func _init():
 	rng.randomize()
@@ -18,17 +20,33 @@ func _ready():
 	$movemente.start()
 	
 func _process(delta):
-	dir = (get_parent().get_node("player").global_position - global_position).normalized()
-	distanceX = dir.x - position.x / PI
-	distanceY = dir.y - position.y / PI
+	var velocity = 100
+	
+	playerXDiffer = get_parent().get_node("player").global_position.x - global_position.x
+	playerYDiffer = get_parent().get_node("player").global_position.y - global_position.y
+	
+	var playerYDifference = abs(playerYDiffer)
+	var timeOfTravelY = sqrt(2 * playerYDifference / gravity)
+	alcanceY = velocity * timeOfTravelY
+	
+	var playerXDifference = abs(playerXDiffer)
+	var timeOfTravelX = sqrt(2 * playerXDifference / gravity)
+	alcanceX = velocity * timeOfTravelX
 	
 func _on_movemente_tween_all_completed():
 	shoot()
 
 func _on_shootingTimer_timeout():
 	if !paper == null and paperExists == true:
-		paper.velocity.x = distanceX
-		paper.velocity.y = distanceY
+		if playerXDiffer > 0:
+			paper.velocity.x = alcanceX
+		elif playerXDiffer < 0:
+			paper.velocity.x = -alcanceX
+			
+		if playerYDiffer > 0:
+			paper.velocity.y = 0
+		elif playerYDiffer < 0:
+			paper.velocity.y = -alcanceY
 		paper.shoot()
 		$attackAnim.play("attack")
 		paper = null

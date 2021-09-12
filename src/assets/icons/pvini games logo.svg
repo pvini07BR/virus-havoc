@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="36mm"
+   height="16mm"
+   viewBox="0 0 36 16"
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.1 (c68e22c387, 2021-05-23)"
+   sodipodi:docname="pvini games logo.svg"
+   inkscape:export-filename="D:\projetos\projetos godot\virus-havoc\src\assets\images\pviniGamesLogo.png"
+   inkscape:export-xdpi="592.66669"
+   inkscape:export-ydpi="592.66669"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <defs
+     id="defs2">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient1772">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop1768" />
+      <stop
+         style="stop-color:#ff0000;stop-opacity:1"
+         offset="1"
+         id="stop1770" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient930"
+       inkscape:swatch="gradient">
+      <stop
+         style="stop-color:#ff0000;stop-opacity:1;"
+         offset="0"
+         id="stop926" />
+      <stop
+         style="stop-color:#ff0000;stop-opacity:0;"
+         offset="1"
+         id="stop928" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient1772"
+       id="linearGradient2442"
+       x1="21.642433"
+       y1="305.41821"
+       x2="21.634256"
+       y2="290.95618"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-0.1403165,0.0935443)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient1772"
+       id="linearGradient2450"
+       x1="14.409962"
+       y1="294.2038"
+       x2="35.152634"
+       y2="294.2038"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="5.6568543"
+     inkscape:cx="55.06594"
+     inkscape:cy="34.825009"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     showguides="false"
+     inkscape:pagecheckerboard="true"
+     inkscape:window-width="1800"
+     inkscape:window-height="950"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Camada 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-281)">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.58333302px;line-height:1.25;font-family:'Archivo Black';-inkscape-font-specification:'Archivo Black, ';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="-49.58625"
+       y="152.54665"
+       id="text12"><tspan
+         sodipodi:role="line"
+         id="tspan10"
+         x="-49.58625"
+         y="162.03545"
+         style="stroke-width:0.26458332" /></text>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot864"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:1.25;font-family:'Archivo Black';-inkscape-font-specification:'Archivo Black, ';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       transform="scale(0.26458333)"><flowRegion
+         id="flowRegion866"><rect
+           id="rect868"
+           width="32.324883"
+           height="143.94673"
+           x="297.48993"
+           y="140.65141" /></flowRegion><flowPara
+         id="flowPara870" /></flowRoot>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.58333302px;line-height:1.25;font-family:'Archivo Black';-inkscape-font-specification:'Archivo Black, ';letter-spacing:0px;word-spacing:0px;fill:#0008ff;fill-opacity:0;stroke:none;stroke-width:0.26458332"
+       x="50.488476"
+       y="60.859543"
+       id="text898"><tspan
+         sodipodi:role="line"
+         id="tspan896"
+         x="50.488476"
+         y="70.348335"
+         style="fill:#0008ff;fill-opacity:0;stroke-width:0.26458332" /></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.58333302px;line-height:1.25;font-family:'Archivo Black';-inkscape-font-specification:'Archivo Black, ';letter-spacing:0px;word-spacing:0px;fill:#0008a6;fill-opacity:1;stroke:#0008a6;stroke-width:2.06500006;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill"
+       x="0.97297281"
+       y="290.51297"
+       id="text902"><tspan
+         sodipodi:role="line"
+         id="tspan900"
+         x="0.97297281"
+         y="290.51297"
+         style="fill:#0008a6;fill-opacity:1;stroke:#0008a6;stroke-width:2.06500006;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill">PVINI</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.58333302px;line-height:1.25;font-family:'Archivo Black';-inkscape-font-specification:'Archivo Black, ';letter-spacing:0px;word-spacing:0px;fill:#ffc60a;fill-opacity:1;stroke:#0008ff;stroke-width:2.06500006;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill"
+       x="0.27925131"
+       y="289.84085"
+       id="text902-0"
+       inkscape:export-filename="D:\projetos\projetos godot\virus-havoc\src\assets\images\text902-0.png"
+       inkscape:export-xdpi="592.66669"
+       inkscape:export-ydpi="592.66669"><tspan
+         sodipodi:role="line"
+         id="tspan900-9"
+         x="0.27925131"
+         y="289.84085"
+         style="fill:#ffc60a;fill-opacity:1;stroke:#0008ff;stroke-width:2.06500006;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill">PVINI</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:900;font-stretch:normal;font-size:7.05556px;line-height:1.25;font-family:Orbitron;-inkscape-font-specification:'Orbitron Heavy';letter-spacing:0px;word-spacing:0px;opacity:1;fill:url(#linearGradient2442);fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="15.053235"
+       y="295.22778"
+       id="text924-8-3"><tspan
+         sodipodi:role="line"
+         id="tspan922-6-8"
+         x="15.053235"
+         y="295.22778"
+         style="font-style:normal;font-variant:normal;font-weight:900;font-stretch:normal;font-size:5.29167px;font-family:Orbitron;-inkscape-font-specification:'Orbitron Heavy';fill:url(#linearGradient2442);fill-opacity:1;stroke:none;stroke-width:0.264583">games</tspan></text>
+  </g>
+</svg>
