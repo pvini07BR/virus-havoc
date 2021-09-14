@@ -38,9 +38,7 @@ tracks/0/keys = {
 "values": [ 0.0, -360.0 ]
 }
 
-[node name="commonBomb" type="Area2D" groups=[
-"subprojectile",
-]]
+[node name="commonBomb" type="Area2D"]
 script = ExtResource( 2 )
 
 [node name="col" type="CollisionShape2D" parent="."]
@@ -48,6 +46,7 @@ shape = SubResource( 1 )
 
 [node name="bombSprite" type="AnimatedSprite" parent="col"]
 frames = SubResource( 4 )
+frame = 1
 speed_scale = 5.0
 playing = true
 offset = Vector2( -0.5, -1.5 )

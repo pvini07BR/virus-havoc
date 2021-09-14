@@ -1,4 +1,4 @@
-extends "res://scripts/bases/virusBullet.gd"
+extends VirusBullet
 
 var direction : Vector2 = Vector2.LEFT
 var speed : float = 0
@@ -36,7 +36,7 @@ func _on_VirusBullet_area_entered(area):
 		
 func _physics_process(_delta):
 	if !moving:
-		var dir = (get_parent().get_node("player").global_position - global_position).normalized()
+		var dir = (GameManager.currentScene.playerInst.global_position - global_position).normalized()
 		global_rotation = dir.angle() + PI / 2.0
 		direction = dir
 	

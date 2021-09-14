@@ -2,16 +2,16 @@ extends Area2D
 
 class_name Virus
 
-export var scoreValue: int
-export var maxHealth : float
-export var shootingCooldownFrom : float
-export var shootingCooldownTo : float
-export var HeartDropChance : int
-export var projectile: PackedScene
-export var damageSounds : Array
-export var shootingSound : AudioStreamSample
-export var damageAnimation : Animation
-export var deathAnimation : Animation
+export(int) var scoreValue
+export(float) var maxHealth
+export(float) var shootingCooldownFrom
+export(float) var shootingCooldownTo
+export(int) var HeartDropChance
+export(PackedScene) var projectile
+export(Array, AudioStreamSample) var damageSounds
+export(AudioStreamSample) var shootingSound
+export(Animation) var damageAnimation
+export(Animation) var deathAnimation
 
 signal onDeath
 
@@ -27,9 +27,6 @@ var droppedHeart = false
 var healthBar = TextureProgress.new()
 var virusEffects = AnimationPlayer.new()
 var shootingCooldown = Timer.new()
-
-var bull
-var bull2
 
 func _ready():
 	health = maxHealth
@@ -65,26 +62,18 @@ func _ready():
 	
 	add_to_group("virus")
 	self.connect("area_entered", self, "_on_virus_area_entered")
-			
-func takeDamage(cooldown: bool):
+		
+func hit(damage : int, cooldown : bool):
 	if canTakeDamage == true:
 		if vulnerable == true:
 			if !damageAnimation == null:
 				virusEffects.play("virusHit")
-			if get_tree().get_nodes_in_group("stage")[0].get_node("player").slotSelected == 0:
-				health -= get_tree().get_nodes_in_group("stage")[0].get_node("player").gunInstance.damage
-				var damageIndInst = damageIndicator.instance()
-				damageIndInst.amount = get_tree().get_nodes_in_group("stage")[0].get_node("player").gunInstance.damage
-				damageIndInst.type = 0
-				get_tree().get_nodes_in_group("stage")[0].add_child(damageIndInst)
-				damageIndInst.global_position = global_position
-			if get_tree().get_nodes_in_group("stage")[0].get_node("player").slotSelected == 1:
-				health -= get_tree().get_nodes_in_group("stage")[0].get_node("player").gun2Instance.damage
-				var damageIndInst2 = damageIndicator.instance()
-				damageIndInst2.amount = get_tree().get_nodes_in_group("stage")[0].get_node("player").gun2Instance.damage
-				damageIndInst2.type = 0
-				get_tree().get_nodes_in_group("stage")[0].add_child(damageIndInst2)
-				damageIndInst2.global_position = global_position
+			health -= damage
+			var damageIndInst = damageIndicator.instance()
+			damageIndInst.amount = damage
+			damageIndInst.type = 0
+			GameManager.currentScene.add_child(damageIndInst)
+			damageIndInst.global_position = global_position
 					
 			if !damageSounds.empty():
 				randomize()
@@ -97,55 +86,14 @@ func takeDamage(cooldown: bool):
 			yield(get_tree().create_timer(0.1), "timeout")
 			canTakeDamage = true
 		
-func takeDamageFixedAmount(damage : int):
-	if vulnerable == true:
-		if !damageAnimation == null:
-			virusEffects.play("virusHit")
-		health -= damage
-		var damageIndInst = damageIndicator.instance()
-		damageIndInst.amount = damage
-		damageIndInst.type = 0
-		get_tree().get_nodes_in_group("stage")[0].add_child(damageIndInst)
-		damageIndInst.global_position = global_position
-				
-		if !damageSounds.empty():
-			randomize()
-			rng.randomize()
-			SoundManager.playSound(damageSounds[[0,damageSounds.size() - 1][randi() % 2]], -10, rng.randf_range(0.9,1.1))
-		healthBar.visible = true
-
-func shoot():
-	if vulnerable == true:
-		bull = projectile.instance()
-		get_tree().get_nodes_in_group("stage")[0].add_child(bull)
-		bull.global_position = global_position
-		if !shootingSound == null:
-			SoundManager.playSound(shootingSound, -15, 1)
-	
-func shoot2():
-	if vulnerable == true:
-		bull = projectile.instance()
-		get_tree().get_nodes_in_group("stage")[0].add_child(bull)
-		bull.global_position = global_position
-		
-		bull2 = projectile.instance()
-		get_tree().get_nodes_in_group("stage")[0].add_child(bull2)
-		bull2.global_position = global_position
-		
-		if !shootingSound == null:
-			SoundManager.playSound(shootingSound, -15, 1)
-		
 func _on_virus_area_entered(area):
+	print("virus collided with something")
 	if area.is_in_group("projectile"):
 		if vulnerable == true:
-			takeDamage(false)
+			hit(area.damage, false)
 	if area.is_in_group("multiProjectile"):
 		if vulnerable == true:
-			takeDamage(true)
-	if area.is_in_group("explosion"):
-		if vulnerable == true:
-			randomize()
-			takeDamageFixedAmount([1,2][randi() % 2])
+			hit(area.damage, true)
 		
 func _process(_delta):
 	healthBar.value = health

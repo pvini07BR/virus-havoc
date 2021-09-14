@@ -1,4 +1,4 @@
-extends "res://scripts/bases/virus.gd"
+extends Virus
 
 var timesShooted = 0
 var finishedOnce = false
@@ -59,7 +59,10 @@ func _on_ShootTimer_timeout():
 func _on_tripleShootingTimer_timeout():
 	if vulnerable == true:
 		if timesShooted <= 2:
-			shoot()
+			var bull = projectile.instance()
+			bull.damage = 1
+			GameManager.currentScene.add_child(bull)
+			bull.global_position = global_position
 			bull.isRainbowy = true
 			var dir = (get_tree().get_nodes_in_group("stage")[0].get_node("player").global_position - global_position).normalized()
 			bull.global_rotation = dir.angle() + PI / 2.0

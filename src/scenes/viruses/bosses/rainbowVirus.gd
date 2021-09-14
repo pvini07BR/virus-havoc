@@ -111,9 +111,9 @@ func _on_shooting_timeout():
 	
 func _on_Area2D_area_entered(area):
 	if area.is_in_group("multiProjectile"):
-		takeDamage(true)
+		hit(area.damage, true)
 	if area.is_in_group("projectile"):
-		takeDamage(false)
+		hit(area.damage, false)
 	
 func _process(delta):
 	if health <= 0:
@@ -122,6 +122,7 @@ func _process(delta):
 func shoot():
 	if vulnerable == true:
 		var bull = projectile.instance()
+		bull.damage = 1
 		get_tree().get_nodes_in_group("stage")[0].add_child(bull)
 		bull.global_position.x = global_position.x - 300
 		bull.global_position.y = global_position.y + 300 - bulletsSpawned * 55
@@ -176,25 +177,18 @@ func _on_deathDuration_timeout():
 		$deathSound.play()
 		$deathDuration.stop()
 		
-func takeDamage(cooldown : bool):
+func hit(damage : int, cooldown : bool):
 	if canTakeDamage == true:
 		if vulnerable == true:
-			if get_parent().get_node("player").slotSelected == 0:
-				health -= get_parent().get_node("player").gunInstance.damage
-				var damageIndInst = damageIndicator.instance()
-				damageIndInst.amount = get_parent().get_node("player").gunInstance.damage
-				damageIndInst.type = 0
-				get_tree().get_nodes_in_group("stage")[0].add_child(damageIndInst)
-				damageIndInst.global_position = global_position
-			if get_parent().get_node("player").slotSelected == 1:
-				health -= get_parent().get_node("player").gun2Instance.damage
-				var damageIndInst = damageIndicator.instance()
-				damageIndInst.amount = get_parent().get_node("player").gun2Instance.damage
-				damageIndInst.type = 0
-				get_tree().get_nodes_in_group("stage")[0].add_child(damageIndInst)
-				damageIndInst.global_position = global_position
 			$damage.play("damage")
-			SoundManager.playSound(damageSound, 0, 1)
+			health -= damage
+			var damageIndInst = damageIndicator.instance()
+			damageIndInst.amount = damage
+			damageIndInst.type = 0
+			GameManager.currentScene.add_child(damageIndInst)
+			damageIndInst.global_position = global_position
+			rng.randomize()
+			SoundManager.playSound(damageSound, -10, rng.randf_range(0.9,1.1))
 			
 		if cooldown == true:
 			canTakeDamage = false
@@ -202,6 +196,7 @@ func takeDamage(cooldown : bool):
 			canTakeDamage = true
 			
 func die():
+	#*dies from cringe*
 	if !isDead:
 		vulnerable = false
 		health = 0

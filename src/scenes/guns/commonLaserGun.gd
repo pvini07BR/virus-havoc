@@ -1,17 +1,17 @@
-extends "res://scripts/bases/gun.gd"
+extends Gun
 
 func _input(Event):
-	if get_parent().isInputWorking == true:
+	if GameManager.currentScene.playerInst.isInputWorking == true:
 		if active == true:
 			if Event.is_action_pressed("ui_accept"):
 				if !cooldown:
 					var bull = projectile.instance()
-					get_tree().get_nodes_in_group("stage")[0].add_child(bull)
+					bull.damage = damage
+					GameManager.currentScene.add_child(bull)
 					bull.global_position = $pos.global_position
-					cooldown = true
 					if !shootingSound == null:
 						SoundManager.playSound(shootingSound, -10, 1)
 					$cooldown.start()
-				
-func _on_cooldown_timeout():
-	cooldown = false
+					cooldown = true
+					yield($cooldown,"timeout")
+					cooldown = false

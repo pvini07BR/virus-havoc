@@ -1,4 +1,4 @@
-extends Area2D
+extends Bullet
 
 func _ready():
 	$CollisionShape2D/explosion2.play("explosion")

@@ -1,4 +1,4 @@
-extends "res://scripts/bases/gun.gd"
+extends Gun
 
 var shooted = false
 var shootingState = 0
@@ -38,6 +38,7 @@ func shoot():
 		pressed = true
 	if !shooted:
 		var bull = projectile.instance()
+		bull.damage = damage
 		add_child(bull)
 		bull.set_as_toplevel(true)
 		bull.global_position.y = 640 - bulletsSpawned * 63
@@ -45,7 +46,7 @@ func shoot():
 		bulletsSpawned += 1
 
 func _input(event):
-	if get_parent().isInputWorking == true:
+	if GameManager.currentScene.playerInst.isInputWorking == true:
 		if active == true:
 			if event.is_action_pressed("ui_accept"):
 				if !pressed:

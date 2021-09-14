@@ -1,4 +1,4 @@
-extends "res://scripts/bases/stage.gd"
+extends Stage
 
 var virusSpaceVelocity = 0
 var virusSpaceRotDirection = 0

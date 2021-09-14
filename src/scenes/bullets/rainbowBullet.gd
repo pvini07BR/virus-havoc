@@ -1,4 +1,4 @@
-extends Area2D
+extends Bullet
 
 var direction : Vector2 = Vector2.LEFT
 var speed : float = 0

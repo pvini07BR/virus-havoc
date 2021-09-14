@@ -1,4 +1,4 @@
-extends "res://scripts/bases/stage.gd"
+extends Stage
 
 func _on_stage_started():
 	if !stageFinished:

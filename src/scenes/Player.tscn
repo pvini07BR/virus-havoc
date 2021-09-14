@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/images/jogador.png" type="Texture" id=1]
 [ext_resource path="res://scenes/Player.gd" type="Script" id=2]
 [ext_resource path="res://assets/images/playerShipWaves.png" type="Texture" id=3]
-[ext_resource path="res://assets/sounds/gunEquip.wav" type="AudioStream" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 20.5015
@@ -190,8 +189,9 @@ tracks/1/keys = {
 ]]
 scale = Vector2( 1.2, 1.2 )
 script = ExtResource( 2 )
+gunsHandler = NodePath("guns")
 
-[node name="gunPos" type="Position2D" parent="."]
+[node name="guns" type="Node2D" parent="."]
 position = Vector2( 16, 22 )
 
 [node name="box" type="CollisionShape2D" parent="."]
@@ -243,11 +243,7 @@ anims/playerHit = SubResource( 4 )
 
 [node name="damageCooldown" type="Timer" parent="."]
 wait_time = 0.5
-
-[node name="gunSwitching" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 5 )
-volume_db = -5.0
+one_shot = true
 
 [connection signal="area_entered" from="col" to="." method="_on_col_area_entered"]
 [connection signal="area_exited" from="col" to="." method="_on_col_area_exited"]
-[connection signal="timeout" from="damageCooldown" to="." method="_on_damageCooldown_timeout"]

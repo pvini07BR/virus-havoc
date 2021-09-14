@@ -13,21 +13,24 @@ onready var gameOver = preload("res://scenes/runnables/menus/GameOverScreen.tscn
 
 onready var victoryMusic = preload("res://assets/music/victoryTheme.ogg")
 
-export var namePTBR : String
-export var nameEng : String
-export var titlePTBR : String
-export var titleEng : String
-export var descPTBR : String
-export var descEng : String
-export var previewSprite : Texture
-export var music: AudioStreamOGGVorbis
-export var bossMusic: AudioStreamOGGVorbis
-export var boss : PackedScene
-export var viruses : Array
-export var GunsInLootBox : Array
-export var background : PackedScene
+export(String) var namePTBR
+export(String) var nameEng
+export(String) var titlePTBR
+export(String) var titleEng
+export(String) var descPTBR
+export(String) var descEng
+export(Texture) var previewSprite
+export(AudioStreamOGGVorbis) var music
+export(AudioStreamOGGVorbis) var bossMusic
+export(PackedScene) var boss 
+export(Array) var viruses = viruses as Virus
+export(Array) var GunsInLootBox = GunsInLootBox as Gun
+export(PackedScene) var background
 
 signal stage_started
+
+var gunSwitchingSound = preload("res://assets/sounds/gunEquip.wav")
+var gunSwitchingStreamPlayer := AudioStreamPlayer.new()
 
 var virusesKilled = 0
 var score = 0
@@ -40,10 +43,14 @@ var lootBoxSpawningChance = 0
 var stageBegun = false
 var stageFinished = false
 
+var guns : Array
+var gunIndex := 0
+
 var bossInst
 var camera
 
 func _init():
+	gunSwitchingStreamPlayer.stream = gunSwitchingSound
 	if !GameManager.wasInBossBattle:
 		GameManager.load_equippedGuns()
 	if GameManager.wasInBossBattle == true:
@@ -52,19 +59,16 @@ func _init():
 		virusesKilled = GameManager.storedKills
 
 func _ready():
+	add_child(gunSwitchingStreamPlayer)
+	for i in GameManager.equippedGuns.size():
+		if !GameManager.equippedGuns[i] == null:
+			guns.resize(i + 1)
+			guns[i] = GameManager.equippedGuns[i].instance()
+	guns[gunIndex].active = true
+	
 	add_to_group("stage")
 	
 	connect("stage_started", self, "_on_stage_started")
-	
-	if !boss == null:
-		bossInst = boss.instance()
-	
-	get_tree().paused = false
-	
-	get_tree().get_root().get_node("GameManager/musicChannel").set_stream(null)
-	
-	if !background == null:
-		add_child(background.instance())
 	
 	playerInst = player.instance()
 	if GameManager.wasInBossBattle == true:
@@ -74,6 +78,18 @@ func _ready():
 		playerInst.position.x = -70
 		playerInst.position.y = 360
 	add_child(playerInst)
+	for i in guns:
+		if !i == null:
+			playerInst.gunsHandler.add_child(i)
+	if !boss == null:
+		bossInst = boss.instance()
+	
+	get_tree().paused = false
+	
+	get_tree().get_root().get_node("GameManager/musicChannel").set_stream(null)
+	
+	if !background == null:
+		add_child(background.instance())
 	
 	if !GameManager.wasInBossBattle:
 		var playerEntrance = Tween.new()
@@ -104,6 +120,24 @@ func _ready():
 	
 	if GameManager.wasInBossBattle == true:
 		startBossFight()
+	
+func _input(event):
+	if Input.is_action_just_pressed("ui_selectWeapon0"):
+		if gunIndex > 0:
+			var prevIndex = gunIndex
+			guns[prevIndex].active = false
+			gunIndex -= 1
+			gunIndex = clamp(gunIndex, 0, guns.size() - 1)
+			guns[gunIndex].active = true
+			gunSwitchingStreamPlayer.play()
+	if Input.is_action_just_pressed("ui_selectWeapon1"):
+		if gunIndex < guns.size() - 1:
+			var prevIndex = gunIndex
+			guns[prevIndex].active = false
+			gunIndex += 1
+			gunIndex = clamp(gunIndex, 0, guns.size() - 1)
+			guns[gunIndex].active = true
+			gunSwitchingStreamPlayer.play()
 	
 func _process(_delta):
 	if score >= 0:

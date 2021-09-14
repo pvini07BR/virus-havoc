@@ -10,24 +10,36 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node2D",
+"class": "Bullet",
+"language": "GDScript",
+"path": "res://scripts/classes/bullet.gd"
+}, {
+"base": "Node2D",
 "class": "Gun",
 "language": "GDScript",
-"path": "res://scripts/bases/gun.gd"
+"path": "res://scripts/classes/gun.gd"
 }, {
 "base": "Node2D",
 "class": "Stage",
 "language": "GDScript",
-"path": "res://scripts/bases/stage.gd"
+"path": "res://scripts/classes/stage.gd"
 }, {
 "base": "Area2D",
 "class": "Virus",
 "language": "GDScript",
-"path": "res://scripts/bases/virus.gd"
+"path": "res://scripts/classes/virus.gd"
+}, {
+"base": "Area2D",
+"class": "VirusBullet",
+"language": "GDScript",
+"path": "res://scripts/classes/virusBullet.gd"
 } ]
 _global_script_class_icons={
+"Bullet": "",
 "Gun": "",
 "Stage": "",
-"Virus": ""
+"Virus": "",
+"VirusBullet": ""
 }
 
 [application]

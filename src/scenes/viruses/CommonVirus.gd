@@ -1,4 +1,4 @@
-extends "res://scripts/bases/virus.gd"
+extends Virus
 
 func _physics_process(delta):
 	if get_parent().get_parent().virusSpaceMoving == 2:
@@ -17,7 +17,12 @@ func _physics_process(delta):
 
 func _on_ShootTimer_timeout():
 	if vulnerable == true:
-		shoot()
-		var dir = (get_parent().get_parent().get_node("player").global_position - global_position).normalized()
+		var bull = projectile.instance()
+		bull.damage = 1
+		GameManager.currentScene.add_child(bull)
+		bull.global_position = global_position
+		if !shootingSound == null:
+			SoundManager.playSound(shootingSound, -15, 1)
+		var dir = (GameManager.currentScene.playerInst.global_position - global_position).normalized()
 		bull.global_rotation = dir.angle() + PI / 2.0
 		bull.direction = dir

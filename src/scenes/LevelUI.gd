@@ -23,155 +23,155 @@ func _ready():
 	if GameManager.wasInBossBattle == true:
 		$CanvasModulate.color = Color(1,1,1,1)
 
-func _process(_delta):
-	if GameManager.language == 0:
-		$playerHealth.text = ("Vida: %d" % get_parent().get_node("player").hp)
-		$virusesKilled.text = ("Matou: %d" % get_parent().virusesKilled)
-		$score.text = ("Pontos: %d" % get_parent().score)
-		$score/bitcoins.text = ("Bitcoins ganhos: %d" % get_parent().bitcoins)
-		$pauseMenu/pauseText.text = "PAUSADO"
-		$pauseMenu/resumeGameButton.text = "Reniciar Nível"
-		$pauseMenu/goBackButton.text = "Voltar para o menu"
-		$levelFinished/score.text = ("Pontuação: %d" % scoreTemp)
-		$levelFinished/bitcoins.text = ("Bitcoins Ganhos: %d" % bitcoinsTemp)
-		
-		if get_parent().get_node("player").slotSelected == 0 and get_parent().get_node("player").doesHaveAFirstGun == true:
-			$gunEquipped.text = get_parent().get_node("player").gunInstance.namePTBR
-		if get_parent().get_node("player").slotSelected == 1 and get_parent().get_node("player").doesHaveASecondGun == true:
-			$gunEquipped.text = get_parent().get_node("player").gun2Instance.namePTBR
-		$selectingGuntoSub/whichOne.text = "Qual Substituir?"
-		$discard.text = "Descartar"
-		$pauseMenu/resume.text = "Retomar Jogo"
-		
-		$levelFinished/title.text = "NÍVEL COMPLETO!"
-		$levelFinished/goBack.text = "Voltar para o menu"
-		$levelFinished/restartStage.text = "Jogar Novamente"
-		$levelFinished/goToNextLevel.text = "Jogar o próximo nivel"
-	if GameManager.language == 1:
-		$playerHealth.text = ("Health: %d" % get_parent().get_node("player").hp)
-		$virusesKilled.text = ("Killed: %d" % get_parent().virusesKilled)
-		$score.text = ("Score: %d" % get_parent().score)
-		$score/bitcoins.text = ("Bitcoins Earned: %d" % get_parent().bitcoins)
-		$pauseMenu/pauseText.text = "PAUSED"
-		$pauseMenu/resumeGameButton.text = "Restart Stage"
-		$pauseMenu/goBackButton.text = "Go back to menu"
-		$pauseMenu/resume.text = "Resume Game"
-		
-		$levelFinished/title.text = "STAGE CLEAR!"
-		$levelFinished/goBack.text = "Go back to menu"
-		$levelFinished/restartStage.text = "Play Again"
-		$levelFinished/goToNextLevel.text = "Play the next stage"
-		
-		$levelFinished/score.text = ("Score: %d" % scoreTemp)
-		$levelFinished/bitcoins.text = ("Bitcoins Earned: %d" % bitcoinsTemp)
-		
-		if get_parent().get_node("player").slotSelected == 0 and get_parent().get_node("player").doesHaveAFirstGun == true:
-			$gunEquipped.text = get_parent().get_node("player").gunInstance.nameEng
-		if get_parent().get_node("player").slotSelected == 1 and get_parent().get_node("player").doesHaveASecondGun == true:
-			$gunEquipped.text = get_parent().get_node("player").gun2Instance.nameEng
-		$selectingGuntoSub/whichOne.text = "Which one to replace?"
-		$discard.text = "Discard"
-			
-	if get_parent().get_node("player").slotSelected == 0 and get_parent().get_node("player").doesHaveAFirstGun == true:
-		if !get_parent().get_node("player").gunInstance.previewSprite == null:
-			$gunEquipped/gunPreview.texture = get_parent().get_node("player").gunInstance.previewSprite
-		else:
-			$gunEquipped/gunPreview.texture = get_parent().get_node("player").gunInstance.gunNotFoundSprite
-				
-		$selecting.rect_position.x = 471
-		$selecting.rect_position.y = 18
-	if get_parent().get_node("player").slotSelected == 1 and get_parent().get_node("player").doesHaveASecondGun == true:
-		if !get_parent().get_node("player").gun2Instance.previewSprite == null:
-			$gunEquipped/gunPreview.texture = get_parent().get_node("player").gun2Instance.previewSprite
-		else:
-			$gunEquipped/gunPreview.texture = get_parent().get_node("player").gun2Instance.gunNotFoundSprite
-		$selecting.rect_position.x = 614
-		$selecting.rect_position.y = 18
-		
-	if get_parent().get_node("player").doesHaveAFirstGun == true:
-		if !get_parent().get_node("player").gunInstance.previewSprite == null:
-			$gunsEquippedSlot1.texture = get_parent().get_node("player").gunInstance.previewSprite
-		else:
-			$gunEquipped/gunPreview.texture = get_parent().get_node("player").gunInstance.gunNotFoundSprite
-		
-	if get_parent().get_node("player").doesHaveASecondGun == true:
-		if !get_parent().get_node("player").gun2Instance.previewSprite == null:
-			$gunsEquippedSlot2.texture = get_parent().get_node("player").gun2Instance.previewSprite
-		else:
-			$gunEquipped/gunPreview.texture = get_parent().get_node("player").gun2Instance.gunNotFoundSprite
-		
-		$gunsEquippedSlot2.visible = true
-	
-	if get_parent().isBossFight == true:
-		if !GameManager.currentScene.bossInst == null or !GameManager.currentScene.boss == null:
-			$bossHealth.visible = true
-			$bossHealth.text = ("Boss: %d" % GameManager.currentScene.bossInst.health)
-		
-	if isSubAGun == true:
-		if !pauseOnce:
-			get_parent().get_node("pause").itsPaused += 1
-			pauseOnce = true
-		if gunSelected <= -1:
-			gunSelected = 0
-		if gunSelected == 0:
-			$selectingGuntoSub.rect_position.x = 345
-			$selectingGuntoSub.rect_position.y = 73
-			
-			$selectingGuntoSub.visible = true
-			$selectingGuntoSub/whichOne.visible = false
-			$discard.visible = true
-		if gunSelected == 1:
-			$selectingGuntoSub.rect_position.x = 471
-			$selectingGuntoSub.rect_position.y = 18
-			
-			$selectingGuntoSub.visible = true
-			$selectingGuntoSub/whichOne.visible = true
-			$discard.visible = true
-		if gunSelected == 2:
-			$selectingGuntoSub.rect_position.x = 614
-			$selectingGuntoSub.rect_position.y = 18
-			
-			$selectingGuntoSub.visible = true
-			$selectingGuntoSub/whichOne.visible = true
-			$discard.visible = true
-		if gunSelected >= 3:
-			gunSelected = 2
-	else:
-		$selectingGuntoSub.visible = false
-		$selectingGuntoSub/whichOne.visible = false
-		$discard.visible = false
-		
-	if get_parent().stageBegun == true and !isAppearing and !GameManager.wasInBossBattle:
-		$appearingTween.interpolate_property($CanvasModulate, "color", Color(1,1,1,0), Color(1,1,1,1), 0.5)
-		$appearingTween.start()
-		isAppearing = true
-	if get_parent().stageFinished == true and !isDesappearing:
-		$appearingTween.interpolate_property($CanvasModulate, "color", Color(1,1,1,1), Color(1,1,1,0), 0.5)
-		$appearingTween.start()
-		isDesappearing = true
-		
-	if get_parent().get_node("pause").itsPaused == 1:
-		if !get_parent().get_node("LevelUI").isSubAGun:
-			$pauseMenu.offset = Vector2(0,0)
-			if !musicPlaying:
-				$pauseMenu/pauseMusic_FadeIn.interpolate_property($pauseMenu/pauseMusic, "volume_db", -80, 0, 4)
-				$pauseMenu/pauseMusic_FadeIn.start()
-				musicPlaying = true
-	else:
-		$pauseMenu.offset = Vector2(-1280, -720)
-		if musicPlaying == true:
-			$pauseMenu/pauseMusic_FadeIn.stop_all()
-			$pauseMenu/pauseMusic.stop()
-			$pauseMenu/pauseMusic.volume_db = -80
-			$pauseMenu/pauseMusic.stream = pauseMusic
-			easterEggCounter = 0
-			musicPlaying = false
-		
-	if get_parent().get_node("player").hp <= 3:
-		$critic.play("healthCritic")
-	else:
-		$critic.stop()
-		$playerHealth.modulate = Color(255, 255, 255)
+#func _process(_delta):
+#	if GameManager.language == 0:
+#		$playerHealth.text = ("Vida: %d" % get_parent().get_node("player").hp)
+#		$virusesKilled.text = ("Matou: %d" % get_parent().virusesKilled)
+#		$score.text = ("Pontos: %d" % get_parent().score)
+#		$score/bitcoins.text = ("Bitcoins ganhos: %d" % get_parent().bitcoins)
+#		$pauseMenu/pauseText.text = "PAUSADO"
+#		$pauseMenu/resumeGameButton.text = "Reniciar Nível"
+#		$pauseMenu/goBackButton.text = "Voltar para o menu"
+#		$levelFinished/score.text = ("Pontuação: %d" % scoreTemp)
+#		$levelFinished/bitcoins.text = ("Bitcoins Ganhos: %d" % bitcoinsTemp)
+#
+#		if get_parent().get_node("player").slotSelected == 0 and get_parent().get_node("player").doesHaveAFirstGun == true:
+#			$gunEquipped.text = get_parent().get_node("player").gunInstance.namePTBR
+#		if get_parent().get_node("player").slotSelected == 1 and get_parent().get_node("player").doesHaveASecondGun == true:
+#			$gunEquipped.text = get_parent().get_node("player").gun2Instance.namePTBR
+#		$selectingGuntoSub/whichOne.text = "Qual Substituir?"
+#		$discard.text = "Descartar"
+#		$pauseMenu/resume.text = "Retomar Jogo"
+#
+#		$levelFinished/title.text = "NÍVEL COMPLETO!"
+#		$levelFinished/goBack.text = "Voltar para o menu"
+#		$levelFinished/restartStage.text = "Jogar Novamente"
+#		$levelFinished/goToNextLevel.text = "Jogar o próximo nivel"
+#	if GameManager.language == 1:
+#		$playerHealth.text = ("Health: %d" % get_parent().get_node("player").hp)
+#		$virusesKilled.text = ("Killed: %d" % get_parent().virusesKilled)
+#		$score.text = ("Score: %d" % get_parent().score)
+#		$score/bitcoins.text = ("Bitcoins Earned: %d" % get_parent().bitcoins)
+#		$pauseMenu/pauseText.text = "PAUSED"
+#		$pauseMenu/resumeGameButton.text = "Restart Stage"
+#		$pauseMenu/goBackButton.text = "Go back to menu"
+#		$pauseMenu/resume.text = "Resume Game"
+#
+#		$levelFinished/title.text = "STAGE CLEAR!"
+#		$levelFinished/goBack.text = "Go back to menu"
+#		$levelFinished/restartStage.text = "Play Again"
+#		$levelFinished/goToNextLevel.text = "Play the next stage"
+#
+#		$levelFinished/score.text = ("Score: %d" % scoreTemp)
+#		$levelFinished/bitcoins.text = ("Bitcoins Earned: %d" % bitcoinsTemp)
+#
+#		if get_parent().get_node("player").slotSelected == 0 and get_parent().get_node("player").doesHaveAFirstGun == true:
+#			$gunEquipped.text = get_parent().get_node("player").gunInstance.nameEng
+#		if get_parent().get_node("player").slotSelected == 1 and get_parent().get_node("player").doesHaveASecondGun == true:
+#			$gunEquipped.text = get_parent().get_node("player").gun2Instance.nameEng
+#		$selectingGuntoSub/whichOne.text = "Which one to replace?"
+#		$discard.text = "Discard"
+#
+#	if get_parent().get_node("player").slotSelected == 0 and get_parent().get_node("player").doesHaveAFirstGun == true:
+#		if !get_parent().get_node("player").gunInstance.previewSprite == null:
+#			$gunEquipped/gunPreview.texture = get_parent().get_node("player").gunInstance.previewSprite
+#		else:
+#			$gunEquipped/gunPreview.texture = get_parent().get_node("player").gunInstance.gunNotFoundSprite
+#
+#		$selecting.rect_position.x = 471
+#		$selecting.rect_position.y = 18
+#	if get_parent().get_node("player").slotSelected == 1 and get_parent().get_node("player").doesHaveASecondGun == true:
+#		if !get_parent().get_node("player").gun2Instance.previewSprite == null:
+#			$gunEquipped/gunPreview.texture = get_parent().get_node("player").gun2Instance.previewSprite
+#		else:
+#			$gunEquipped/gunPreview.texture = get_parent().get_node("player").gun2Instance.gunNotFoundSprite
+#		$selecting.rect_position.x = 614
+#		$selecting.rect_position.y = 18
+#
+#	if get_parent().get_node("player").doesHaveAFirstGun == true:
+#		if !get_parent().get_node("player").gunInstance.previewSprite == null:
+#			$gunsEquippedSlot1.texture = get_parent().get_node("player").gunInstance.previewSprite
+#		else:
+#			$gunEquipped/gunPreview.texture = get_parent().get_node("player").gunInstance.gunNotFoundSprite
+#
+#	if get_parent().get_node("player").doesHaveASecondGun == true:
+#		if !get_parent().get_node("player").gun2Instance.previewSprite == null:
+#			$gunsEquippedSlot2.texture = get_parent().get_node("player").gun2Instance.previewSprite
+#		else:
+#			$gunEquipped/gunPreview.texture = get_parent().get_node("player").gun2Instance.gunNotFoundSprite
+#
+#		$gunsEquippedSlot2.visible = true
+#
+#	if get_parent().isBossFight == true:
+#		if !GameManager.currentScene.bossInst == null or !GameManager.currentScene.boss == null:
+#			$bossHealth.visible = true
+#			$bossHealth.text = ("Boss: %d" % GameManager.currentScene.bossInst.health)
+#
+#	if isSubAGun == true:
+#		if !pauseOnce:
+#			get_parent().get_node("pause").itsPaused += 1
+#			pauseOnce = true
+#		if gunSelected <= -1:
+#			gunSelected = 0
+#		if gunSelected == 0:
+#			$selectingGuntoSub.rect_position.x = 345
+#			$selectingGuntoSub.rect_position.y = 73
+#
+#			$selectingGuntoSub.visible = true
+#			$selectingGuntoSub/whichOne.visible = false
+#			$discard.visible = true
+#		if gunSelected == 1:
+#			$selectingGuntoSub.rect_position.x = 471
+#			$selectingGuntoSub.rect_position.y = 18
+#
+#			$selectingGuntoSub.visible = true
+#			$selectingGuntoSub/whichOne.visible = true
+#			$discard.visible = true
+#		if gunSelected == 2:
+#			$selectingGuntoSub.rect_position.x = 614
+#			$selectingGuntoSub.rect_position.y = 18
+#
+#			$selectingGuntoSub.visible = true
+#			$selectingGuntoSub/whichOne.visible = true
+#			$discard.visible = true
+#		if gunSelected >= 3:
+#			gunSelected = 2
+#	else:
+#		$selectingGuntoSub.visible = false
+#		$selectingGuntoSub/whichOne.visible = false
+#		$discard.visible = false
+#
+#	if get_parent().stageBegun == true and !isAppearing and !GameManager.wasInBossBattle:
+#		$appearingTween.interpolate_property($CanvasModulate, "color", Color(1,1,1,0), Color(1,1,1,1), 0.5)
+#		$appearingTween.start()
+#		isAppearing = true
+#	if get_parent().stageFinished == true and !isDesappearing:
+#		$appearingTween.interpolate_property($CanvasModulate, "color", Color(1,1,1,1), Color(1,1,1,0), 0.5)
+#		$appearingTween.start()
+#		isDesappearing = true
+#
+#	if get_parent().get_node("pause").itsPaused == 1:
+#		if !get_parent().get_node("LevelUI").isSubAGun:
+#			$pauseMenu.offset = Vector2(0,0)
+#			if !musicPlaying:
+#				$pauseMenu/pauseMusic_FadeIn.interpolate_property($pauseMenu/pauseMusic, "volume_db", -80, 0, 4)
+#				$pauseMenu/pauseMusic_FadeIn.start()
+#				musicPlaying = true
+#	else:
+#		$pauseMenu.offset = Vector2(-1280, -720)
+#		if musicPlaying == true:
+#			$pauseMenu/pauseMusic_FadeIn.stop_all()
+#			$pauseMenu/pauseMusic.stop()
+#			$pauseMenu/pauseMusic.volume_db = -80
+#			$pauseMenu/pauseMusic.stream = pauseMusic
+#			easterEggCounter = 0
+#			musicPlaying = false
+#
+#	if get_parent().get_node("player").hp <= 3:
+#		$critic.play("healthCritic")
+#	else:
+#		$critic.stop()
+#		$playerHealth.modulate = Color(255, 255, 255)
 		
 func _input(Event):
 	if Event.is_action_pressed("ui_selectWeapon0") and isSubAGun == true:

@@ -1,4 +1,4 @@
-extends "res://scripts/bases/virusBullet.gd"
+extends VirusBullet
 
 var direction : Vector2 = Vector2.LEFT
 var speed : float = 500

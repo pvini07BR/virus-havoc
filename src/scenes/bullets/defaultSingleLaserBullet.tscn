@@ -7,9 +7,7 @@
 radius = 4.13134
 height = 30.0026
 
-[node name="defaultSingleLaserBullet" type="Area2D" groups=[
-"projectile",
-]]
+[node name="defaultSingleLaserBullet" type="Area2D"]
 scale = Vector2( 0.8, 0.8 )
 script = ExtResource( 2 )
 
@@ -29,4 +27,4 @@ position = Vector2( 0.188774, -0.110485 )
 scale = Vector2( 0.64, 0.64 )
 texture = ExtResource( 1 )
 
-[connection signal="area_entered" from="." to="." method="_on_Tiro_area_entered"]
+[connection signal="area_entered" from="." to="." method="_on_defaultSingleLaserBullet_area_entered"]

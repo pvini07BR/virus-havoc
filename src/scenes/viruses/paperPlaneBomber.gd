@@ -1,4 +1,4 @@
-extends "res://scripts/bases/virus.gd"
+extends Virus
 
 var bomb
 var randomY
@@ -39,6 +39,8 @@ func _on_movement_tween_all_completed():
 func _on_playerDetector_area_entered(area):
 	if area.is_in_group("player"):
 		if !hasLaunched:
+			randomize()
+			bomb.damage = [1,2][randi() % 2]
 			bomb.launch()
 			if !shootingSound == null:
 				SoundManager.playSound(shootingSound, -15, 1)

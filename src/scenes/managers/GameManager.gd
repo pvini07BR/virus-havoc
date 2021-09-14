@@ -1,31 +1,31 @@
 extends Node
 
-export var equippedGuns = []
-var loadedMods = []
-var language = 0
-var lastStagePlayed = 0
-var guns = []
-var stages = []
-var currentScene = null
-var wasInBossBattle = false
-var storedKills = 0
-var storedScore = 0
-var storedBitcoins = 0
-var itsAlreadyPaused = false
+export(Array, PackedScene) var equippedGuns = [null, null]
+var loadedMods := []
+var language := 0
+var lastStagePlayed := 0
+var guns := []
+var stages := []
+var wasInBossBattle := false
+var storedKills := 0
+var storedScore := 0
+var storedBitcoins := 0
+var itsAlreadyPaused := false
+
+onready var root = get_tree().get_root()
+onready var currentScene = root.get_child(root.get_child_count() - 1)
 
 func _init():
-	#pasta de armas
 	loadGuns()
-		
-	#######
-	#ARMAS EQUIPADAS (ISSO É BEM SAGRADO)
-	equippedGuns = [null, null]
-	#NÃO TIRAR DE JEITO NENHUM OU O JOGO MORRE
-	#######
 	
 	loadStages()
 	
 	load_equippedGuns()
+	
+func _process(_delta):
+	if !equippedGuns[0] == null and !equippedGuns[1] == null:
+		if equippedGuns[0] == equippedGuns[1]:
+			equippedGuns[1] = null
 	
 func loadGuns():
 	var gunsDir := Directory.new()
@@ -62,15 +62,6 @@ func loadStages():
 			stages.push_back(load("res://scenes/runnables/stages/" + next_stageFile))
 			
 		next_stageFile = stagesDir.get_next()
-	
-func _process(_delta):
-	if !equippedGuns[0] == null and !equippedGuns[1] == null:
-		if equippedGuns[0] == equippedGuns[1]:
-			equippedGuns[1] = null
-	
-func _ready():
-	var root = get_tree().get_root()
-	currentScene = root.get_child(root.get_child_count() - 1)
 	
 func load_equippedGuns():
 	var file = File.new()

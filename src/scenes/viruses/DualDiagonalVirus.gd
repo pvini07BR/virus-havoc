@@ -1,4 +1,4 @@
-extends "res://scripts/bases/virus.gd"
+extends Virus
 
 func _init():
 	randomize()
@@ -21,12 +21,19 @@ func _physics_process(delta):
 		
 func _on_ShootTimer_timeout():
 	if vulnerable == true:
-		shoot2()
+		var bull = projectile.instance()
+		bull.damage = 1
+		GameManager.currentScene.add_child(bull)
+		bull.global_position = global_position
 		bull.velocity.x = -1
 		bull.velocity.y = -0.8
 		bull.set_collision_layer_bit(2, 4)
 		bull.set_collision_mask_bit(2, 4)
 		
+		var bull2 = projectile.instance()
+		bull.damage = 1
+		GameManager.currentScene.add_child(bull)
+		bull.global_position = global_position
 		bull2.velocity.x = -1
 		bull2.velocity.y = 0.8
 		bull2.set_collision_layer_bit(3, 8)

@@ -1,4 +1,4 @@
-extends "res://scripts/bases/gun.gd"
+extends Gun
 
 var bombExists = false
 var bom
@@ -22,12 +22,13 @@ func _process(_delta):
 		
 	
 func _input(Event):
-	if get_parent().isInputWorking == true:
+	if GameManager.currentScene.playerInst.isInputWorking == true:
 		if active == true:
 			if Event.is_action_pressed("ui_accept"):
 				if !cooldown:
 					if bombExists == true:
 						damage = [2,3,4][randi() % 3]
+						bom.damage = damage
 						bom.launch()
 						if !shootingSound == null:
 							SoundManager.playSound(shootingSound, -10, 1)

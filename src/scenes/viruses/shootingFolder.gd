@@ -1,4 +1,4 @@
-extends "res://scripts/bases/virus.gd"
+extends Virus
 
 var randomX
 var randomY

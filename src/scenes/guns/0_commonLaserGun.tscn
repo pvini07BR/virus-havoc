@@ -28,5 +28,3 @@ position = Vector2( 36, 18 )
 
 [node name="cooldown" type="Timer" parent="."]
 wait_time = 0.3
-
-[connection signal="timeout" from="cooldown" to="." method="_on_cooldown_timeout"]

@@ -26,7 +26,8 @@ centered = false
 [node name="pos" type="Position2D" parent="."]
 position = Vector2( 37, 7 )
 
+[node name="pos2" type="Position2D" parent="."]
+position = Vector2( 37, 18 )
+
 [node name="cooldown" type="Timer" parent="."]
 wait_time = 0.8
-
-[connection signal="timeout" from="cooldown" to="." method="_on_cooldown_timeout"]

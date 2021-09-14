@@ -1,7 +1,8 @@
-extends "res://scripts/bases/virusBullet.gd"
+extends Area2D
 
 var explosion = preload("res://scenes/bullets/explosion.tscn")
 var released = false
+var damage := 0
 
 func _init():
 	z_index = 3
@@ -20,7 +21,11 @@ func _on_virusZipBomb_area_entered(area):
 	if area.is_in_group("player"):
 		get_parent().hasLaunched = true
 		var expl = explosion.instance()
-		expl.add_to_group("explosion")
+		expl.damage = damage
+		expl.add_to_group("projectile")
+		expl.add_to_group("virusBullet")
+		randomize()
+		expl.damage = [1,2][randi() % 2]
 		expl.global_position = global_position
 		get_tree().get_nodes_in_group("stage")[0].add_child(expl)
 		
