@@ -87,7 +87,6 @@ func hit(damage : int, cooldown : bool):
 			canTakeDamage = true
 		
 func _on_virus_area_entered(area):
-	print("virus collided with something")
 	if area.is_in_group("projectile"):
 		if vulnerable == true:
 			hit(area.damage, false)

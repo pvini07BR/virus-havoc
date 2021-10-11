@@ -12,10 +12,8 @@
 script = ExtResource( 1 )
 projectile = ExtResource( 3 )
 previewSprite = ExtResource( 4 )
-namePTBR = "Arma Laser Comum"
-nameEng = "Common Laser Gun"
-descPTBR = "Uma arma simples que veio junto com a sua nave."
-descEng = "A simple gun that came bundled with your spaceship."
+gunName = "GUNNAME_COMMON_LASER_GUN"
+gunDesc = "GUNDESC_COMMON_LASER_GUN"
 damage = 1.0
 shootingSound = ExtResource( 5 )
 

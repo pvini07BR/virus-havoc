@@ -16,14 +16,10 @@ var howManyGuns = 0
 
 func _ready():	
 	$hasJustSpawnedTimer.start()
-	if get_parent().GunsInLootBox.empty() == true:
-		decidedGun = null
-	elif get_parent().GunsInLootBox.size() == 1:
-		decidedGun = get_parent().GunsInLootBox[0]
-	else:
+	if !GameManager.currentScene.GunsInLootBox.empty():
 		randomize()
-		decidedGun = get_parent().GunsInLootBox[[0, get_parent().GunsInLootBox.size() - 1][randi() % 2]]
-	
+		decidedGun = GameManager.currentScene.GunsInLootBox[[0, GameManager.currentScene.GunsInLootBox.size() - 1][randi() % 2]]
+		
 	randomize()
 	position.x = [-15,1300][randi() % 2]
 	position.y = [-15,750][randi() % 2]
@@ -56,51 +52,56 @@ func _process(_delta):
 		
 func gotLootBox():
 	if !boxOpen:
-		if get_tree().get_nodes_in_group("stage")[0].get_node("player").doesHaveASecondGun == true and get_tree().get_nodes_in_group("stage")[0].get_node("player").doesHaveAFirstGun == true:
-			if GameManager.equippedGuns[0] == decidedGun:
-				get_tree().get_nodes_in_group("stage")[0].get_node("player").slotSelected = 0
-				get_tree().get_nodes_in_group("stage")[0].get_node("player").get_node("gunSwitching").play()
-			if GameManager.equippedGuns[1] == decidedGun:
-				get_tree().get_nodes_in_group("stage")[0].get_node("player").slotSelected = 1
-				get_tree().get_nodes_in_group("stage")[0].get_node("player").get_node("gunSwitching").play()
-			if !GameManager.equippedGuns[0] == decidedGun and !GameManager.equippedGuns[1] == decidedGun:
-				get_parent().get_node("LevelUI").isSubAGun = true
-				
-		if get_tree().get_nodes_in_group("stage")[0].get_node("player").doesHaveAFirstGun == true and get_tree().get_nodes_in_group("stage")[0].get_node("player").doesHaveASecondGun == false:
-			if GameManager.equippedGuns[0] == decidedGun:
-				get_tree().get_nodes_in_group("stage")[0].get_node("player").slotSelected = 0
-				get_tree().get_nodes_in_group("stage")[0].get_node("player").get_node("gunSwitching").play()
-			else:
-				GameManager.equippedGuns[1] = decidedGun
-				get_tree().get_nodes_in_group("stage")[0].get_node("player").slotSelected = 1
-				get_tree().get_nodes_in_group("stage")[0].get_node("player").get_node("gunSwitching").play()
-				
-		if get_tree().get_nodes_in_group("stage")[0].get_node("player").doesHaveAFirstGun == false and get_tree().get_nodes_in_group("stage")[0].get_node("player").doesHaveASecondGun == true:
-			if GameManager.equippedGuns[1] == decidedGun:
-				get_tree().get_nodes_in_group("stage")[0].get_node("player").slotSelected = 1
-				get_tree().get_nodes_in_group("stage")[0].get_node("player").get_node("gunSwitching").play()
-			else:
-				GameManager.equippedGuns[0] = decidedGun
-				get_tree().get_nodes_in_group("stage")[0].get_node("player").slotSelected = 0
-				get_tree().get_nodes_in_group("stage")[0].get_node("player").get_node("gunSwitching").play()
-					
-		if get_tree().get_nodes_in_group("stage")[0].get_node("player").doesHaveAFirstGun == false and get_tree().get_nodes_in_group("stage")[0].get_node("player").doesHaveASecondGun == false:
-			GameManager.equippedGuns[0] = decidedGun
-			get_tree().get_nodes_in_group("stage")[0].get_node("player").slotSelected = 0
-			get_tree().get_nodes_in_group("stage")[0].get_node("player").get_node("gunSwitching").play()
-				
+		GameManager.currentScene.gotLootBox(self)
+#		if get_tree().get_nodes_in_group("stage")[0].get_node("player").doesHaveASecondGun == true and get_tree().get_nodes_in_group("stage")[0].get_node("player").doesHaveAFirstGun == true:
+#			if GameManager.equippedGuns[0] == decidedGun:
+#				get_tree().get_nodes_in_group("stage")[0].get_node("player").slotSelected = 0
+#				get_tree().get_nodes_in_group("stage")[0].get_node("player").get_node("gunSwitching").play()
+#			if GameManager.equippedGuns[1] == decidedGun:
+#				get_tree().get_nodes_in_group("stage")[0].get_node("player").slotSelected = 1
+#				get_tree().get_nodes_in_group("stage")[0].get_node("player").get_node("gunSwitching").play()
+#			if !GameManager.equippedGuns[0] == decidedGun and !GameManager.equippedGuns[1] == decidedGun:
+#				get_parent().get_node("LevelUI").isSubAGun = true
+#
+#		if get_tree().get_nodes_in_group("stage")[0].get_node("player").doesHaveAFirstGun == true and get_tree().get_nodes_in_group("stage")[0].get_node("player").doesHaveASecondGun == false:
+#			if GameManager.equippedGuns[0] == decidedGun:
+#				get_tree().get_nodes_in_group("stage")[0].get_node("player").slotSelected = 0
+#				get_tree().get_nodes_in_group("stage")[0].get_node("player").get_node("gunSwitching").play()
+#			else:
+#				GameManager.equippedGuns[1] = decidedGun
+#				get_tree().get_nodes_in_group("stage")[0].get_node("player").slotSelected = 1
+#				get_tree().get_nodes_in_group("stage")[0].get_node("player").get_node("gunSwitching").play()
+#
+#		if get_tree().get_nodes_in_group("stage")[0].get_node("player").doesHaveAFirstGun == false and get_tree().get_nodes_in_group("stage")[0].get_node("player").doesHaveASecondGun == true:
+#			if GameManager.equippedGuns[1] == decidedGun:
+#				get_tree().get_nodes_in_group("stage")[0].get_node("player").slotSelected = 1
+#				get_tree().get_nodes_in_group("stage")[0].get_node("player").get_node("gunSwitching").play()
+#			else:
+#				GameManager.equippedGuns[0] = decidedGun
+#				get_tree().get_nodes_in_group("stage")[0].get_node("player").slotSelected = 0
+#				get_tree().get_nodes_in_group("stage")[0].get_node("player").get_node("gunSwitching").play()
+#
+#		if get_tree().get_nodes_in_group("stage")[0].get_node("player").doesHaveAFirstGun == false and get_tree().get_nodes_in_group("stage")[0].get_node("player").doesHaveASecondGun == false:
+#			GameManager.equippedGuns[0] = decidedGun
+#			get_tree().get_nodes_in_group("stage")[0].get_node("player").slotSelected = 0
+#			get_tree().get_nodes_in_group("stage")[0].get_node("player").get_node("gunSwitching").play()
+#
 		stopMoving = true
 		$col/AnimationPlayer.stop()
 		$col.rotation_degrees = 0
-		$col/AnimationPlayer.play("lootBox_open")
-		get_parent().obtainedLootBoxBefore = true
+		GameManager.currentScene.obtainedLootBoxBefore = true
 		boxOpen = true
+		$col/AnimationPlayer.play("lootBox_open")
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "lootBox_open":
 		$col/AnimationPlayer.play("lootBox_vanish")
-	if anim_name == "lootBox_vanish":
+		yield($col/AnimationPlayer,"animation_finished")
 		queue_free()
 
 func _on_hasJustSpawnedTimer_timeout():
 	hasJustSpawned = false
+
+func _on_LootBox_area_entered(area):
+	if area.is_in_group("player"):
+		gotLootBox()

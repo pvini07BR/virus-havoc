@@ -12,10 +12,8 @@
 script = ExtResource( 2 )
 projectile = ExtResource( 3 )
 previewSprite = ExtResource( 4 )
-namePTBR = "Arma Laser de Canhão Duplo"
-nameEng = "Dual-Cannon Laser Gun"
-descPTBR = "Atira duas balas laser ao mesmo tempo. Uau! "
-descEng = "Shoots two bullets at the same time. Wow! "
+gunName = "GUNNAME_DUAL_CANNON_LASER_GUN"
+gunDesc = "GUNDESC_DUAL_CANNON_LASER_GUN"
 damage = 1.0
 shootingSound = ExtResource( 5 )
 

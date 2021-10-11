@@ -12,7 +12,7 @@ func _ready():
 	$rainbowEffect.start()
 
 func _process(_delta):
-	if shootingState == 2 and !shooted or !active and !shooted and pressed == true or !get_parent().isInputWorking and !shooted and pressed == true:
+	if shootingState == 2 and !shooted or !active and !shooted and pressed == true or !GameManager.currentScene.inputWorking and !shooted and pressed == true:
 		for i in get_tree().get_nodes_in_group("rainbowBullet").size():
 			get_tree().get_nodes_in_group("rainbowBullet")[i].moving = true
 		shootingState = 0
@@ -46,7 +46,7 @@ func shoot():
 		bulletsSpawned += 1
 
 func _input(event):
-	if GameManager.currentScene.playerInst.isInputWorking == true:
+	if GameManager.currentScene.inputWorking == true:
 		if active == true:
 			if event.is_action_pressed("ui_accept"):
 				if !pressed:

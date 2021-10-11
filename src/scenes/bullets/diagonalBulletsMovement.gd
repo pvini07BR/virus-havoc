@@ -22,3 +22,7 @@ func _physics_process(delta):
 				howManyTimesBounced += 1
 		if howManyTimesBounced >= 3:
 			queue_free()
+
+func _on_area_area_entered(area):
+	if area.is_in_group("virus"):
+		queue_free()

@@ -1,0 +1,42 @@
+keys,pt,en
+INTRO_MEETING,Apresenta,Presents
+DEBUG_MENU_TOGGLEENGLISHLANG,Habilitar Idioma Inglês / Enable English Language,Enable English Language / Habilitar Idioma Inglês
+DEBUG_MENU_TOGGLEBOSSFIGHT,Começar boss fight logo ao iniciar um nível,Start boss fight when starting a stage
+DEBUG_MENU_TOGGLE_MOBILE_MODE,Habilitar Modo para Dispositivos Touchscreen,Toggle Touchscreen Mode
+DEBUG_MENU_GUNDEX,Gún-Dex,Gún-Dex
+DEBUG_MENU_MODS,Mods,Mods
+DEBUG_MENU_SETTINGS,Configurações,Settings
+DEBUG_MENU_BOUNCINGTEXT,Versão de Acesso Antecipado!,Early Access Version!
+DEBUG_MENU_STAGELISTTEXT,Níveis disponíveis:,Available Stages:
+SETTINGS_TOUCHSCREEN_UI_OPACITY,Opacidade,Opacity
+GUNDEX_GO_BACK,Voltar,Go Back
+GUNDEX_EQUIPGUN_BUTTON_REMOVE,(Remover),(Remove)
+GUNDEX_EQUIPGUN_BUTTON_EQUIP,Equipar,Equip
+GUNDEX_EQUIPGUN_BUTTON_EQUIPPED,(Equipado),(Equipped)
+GUNDEX_NAME_NOT_FOUND,(Não há nome),(No name provided)
+GUNDEX_DESC_NOT_FOUND,(Não há descrição),(No description provided)
+GUNNAME_COMMON_LASER_GUN,Arma Laser Comum,Common Laser Gun
+GUNDESC_COMMON_LASER_GUN,Uma arma simples que veio junto com a sua nave.,A simple gun that came bundled with your spaceship.
+GUNNAME_DUAL_CANNON_LASER_GUN,Arma Laser de Canhão Duplo,Dual-Cannon Laser Gun
+GUNDESC_DUAL_CANNON_LASER_GUN,Atira duas balas laser ao mesmo tempo. Uau!,Shoots two bullets at the same time. Wow!
+GUNNAME_DUAL_DIAGONAL_LASER_GUN,Arma Laser Dupla Diagonal,Dual-Cannon Diagonal Laser Gun
+GUNDESC_DUAL_DIAGONAL_LASER_GUN,"Você é fã de ping-pong? Se sim, você certamente vai amar esta arma.","Are you a ping-pong fan? If yes, then you will definitively love this gun."
+GUNNAME_BOMB_LAUNCHER,Arma Lançadora de Bombas,Bomb Launcher Gun
+GUNDESC_BOMB_LAUNCHER,Lança uma bomba que explode e afeta vários inimigos ao redor. Só tome cuidado para não se aproximar muito da explosão!,Launches a bomb that explodes and affects various enemies around it. But be careful to not get too close to the explosion!
+GUNNAME_CANNONLESS_RAINBOW_GUN,Arma Laser Arco-Íris sem canhão,Cannonless Rainbow Laser Gun
+GUNDESC_CANNONLESS_RAINBOW_GUN,Definitivamente a arma mais GAMER que você já viu.,Definitely the most GAMER gun you have ever seen.
+STAGE_UI_HEALTH,Vida,Health
+STAGE_UI_VIRUSES_KILLED,Matou,Killed
+STAGE_UI_SCORE,Pontos,Score
+STAGE_UI_BITCOINS,Bitcoins Ganhos,Bitcoins Earned
+STAGE_UI_BOSS_HEALTH,Boss,Boss
+STAGE_UI_1_WAVES,Onda,Wave
+STAGE_PAUSE_UI_PAUSED,Pausado,Paused
+STAGE_PAUSE_UI_RESUME_GAME,Retomar Jogo,Resume Game
+STAGE_PAUSE_UI_RESTART_STAGE,Reniciar Nível,Restart Stage
+STAGE_PAUSE_UI_GO_BACK,Voltar para o menu,Go Back to Menu
+STAGE_FINISHED_UI_TITLE,Nível Completo!,Stage Clear!
+STAGE_FINISHED_UI_PLAY_AGAIN,Jogar Novamente,Play Again
+STAGE_FINISHED_UI_GO_TO_NEXT,Jogar o próximo nível,Play the next stage
+STAGE_REPLACE_GUN_UI_WARNING,"Seu armamento está cheio.\nFavor substitua alguma arma existente pela nova, ou descarte-a.","Your gun slots are full.\nPlease replace an existing gun by the new one, or discard it."
+STAGE_REPLACE_GUN_UI_DISCARD_BUTTON,Descartar,Discard

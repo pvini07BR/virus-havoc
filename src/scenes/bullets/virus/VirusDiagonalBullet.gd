@@ -3,8 +3,11 @@ extends KinematicBody2D
 var speed = 400
 var velocity = Vector2.ZERO
 var howManyTimesBounced = 0
+var damage
 
 func _ready():
+	$Area2D.damage = damage
+	
 	velocity.x = 0
 	velocity.y = 0
 	#colocar 1 e -0.8 para ir pra cima direita

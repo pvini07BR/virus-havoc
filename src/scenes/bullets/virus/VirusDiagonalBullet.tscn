@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/bullets/virus/VirusDiagonalBullet.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/diagonalLaserBullet.png" type="Texture" id=2]
+[ext_resource path="res://scenes/bullets/virus/Area2D.gd" type="Script" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 5.0
@@ -24,10 +25,9 @@ script = ExtResource( 1 )
 scale = Vector2( 1.03, 1.03 )
 shape = SubResource( 1 )
 
-[node name="Area2D" type="Area2D" parent="." groups=[
-"virusBullet",
-]]
+[node name="Area2D" type="Area2D" parent="."]
 scale = Vector2( 1.03, 1.03 )
+script = ExtResource( 3 )
 
 [node name="col" type="CollisionShape2D" parent="Area2D" groups=[
 "virusBullet",

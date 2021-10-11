@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 var instanciatedGuns = []
 var isSubAGun = false
@@ -7,124 +7,96 @@ var isSubAGunSelected = 0
 
 var removeGun = false
 
+onready var gunList = $BigAssWrapper/gunSelectionArea/GunList
+onready var goBackButton = $BigAssWrapper/gunSelectionArea/centralizer/buttons/GoBack
+onready var equipGunButton = $BigAssWrapper/gunSelectionArea/centralizer/buttons/EquipGun
+onready var previewSlot1 = $BigAssWrapper/gunSelectionArea/centralizer/buttons/EquippedGunsPreview/slot1
+onready var previewSlot2 = $BigAssWrapper/gunSelectionArea/centralizer/buttons/EquippedGunsPreview/slot2
+
+onready var gunID = $BigAssWrapper/gunInfoArea/GunID
+onready var gunPreviewSprite = $BigAssWrapper/gunInfoArea/previewSprite
+onready var gunNameLabel = $BigAssWrapper/gunInfoArea/GunName
+onready var gunDescLabel = $BigAssWrapper/gunInfoArea/ScrollContainer/GunDesc
+
 func _ready():
 	for i in GameManager.guns.size():
 		instanciatedGuns.push_back(GameManager.guns[i].instance())
 		
-		$GunList.add_item("")
+		gunList.add_item("")
 		if !instanciatedGuns[i].previewSprite == null:
-			$GunList.set_item_icon(i, instanciatedGuns[i].previewSprite)
+			gunList.set_item_icon(i, instanciatedGuns[i].previewSprite)
 		else:
-			$GunList.set_item_icon(i, instanciatedGuns[i].gunNotFoundSprite)
-		$GunList.set_item_text(i, "")
-		
-	if GameManager.language == 0:
-		$GoBack.text = "Voltar"
-	if GameManager.language == 1:
-		$GoBack.text = "Go back"
+			gunList.set_item_icon(i, instanciatedGuns[i].gunNotFoundSprite)
+		gunList.set_item_text(i, "")
 
 func _process(delta):
 	if isSubAGun == true and !isSubAGunOnce:
-		$EquipGun.disabled = true
-		$GoBack.disabled = true
+		equipGunButton.disabled = true
+		goBackButton.disabled = true
 		for i in GameManager.guns.size():
-			$GunList.set_item_disabled(i, true)
-		$EquippedGunsPreview/subCursor.visible = true
+			gunList.set_item_disabled(i, true)
 		isSubAGunOnce = true
-	if !isSubAGun:
-		$EquipGun.disabled = false
-		$GoBack.disabled = false
-		for i in GameManager.guns.size():
-			$GunList.set_item_disabled(i, false)
-		$EquippedGunsPreview/subCursor.visible = false
 		
-	if isSubAGunSelected == 0:
-		$EquippedGunsPreview/subCursor.position.x = $EquippedGunsPreview/slot1.rect_position.x
-	if isSubAGunSelected == 1:
-		$EquippedGunsPreview/subCursor.position.x = $EquippedGunsPreview/slot2.rect_position.x
+	if !isSubAGun:
+		equipGunButton.disabled = false
+		goBackButton.disabled = false
+		for i in GameManager.guns.size():
+			gunList.set_item_disabled(i, false)
+		
+	if isSubAGunSelected == 0 and isSubAGun == true:
+		previewSlot1.get_node("subCursor").visible = true
+		previewSlot2.get_node("subCursor").visible = false
+	if isSubAGunSelected == 1 and isSubAGun == true:
+		previewSlot1.get_node("subCursor").visible = false
+		previewSlot2.get_node("subCursor").visible = true
+	elif isSubAGun == false:
+		previewSlot1.get_node("subCursor").visible = false
+		previewSlot2.get_node("subCursor").visible = false
 	
 	for i in GameManager.guns.size():
 		if !GameManager.equippedGuns[0] == null:
 			if GameManager.equippedGuns[0] == GameManager.guns[i]:
-				if !instanciatedGuns[i].previewSprite == null:
-					$EquippedGunsPreview/slot1/sprite.texture = instanciatedGuns[i].previewSprite
-				else:
-					$EquippedGunsPreview/slot1/sprite.texture = instanciatedGuns[i].gunNotFoundSprite
+				previewSlot1.get_node("sprite").texture = instanciatedGuns[i].previewSprite
 		else:
-			$EquippedGunsPreview/slot1/sprite.texture = null
+			previewSlot1.get_node("sprite").texture = null
 				
 		if !GameManager.equippedGuns[1] == null:
 			if GameManager.equippedGuns[1] == GameManager.guns[i]:
-				if !instanciatedGuns[i].previewSprite == null:
-					$EquippedGunsPreview/slot2/sprite.texture = instanciatedGuns[i].previewSprite
-				else:
-					$EquippedGunsPreview/slot2/sprite.texture = instanciatedGuns[i].gunNotFoundSprite
+				previewSlot2.get_node("sprite").texture = instanciatedGuns[i].previewSprite
 		else:
-			$EquippedGunsPreview/slot2/sprite.texture = null
+			previewSlot2.get_node("sprite").texture = null
 					
-	if !$GunList.get_selected_items().empty():
+	if !gunList.get_selected_items().empty():
 		if !isSubAGun:
-			if GameManager.equippedGuns[0] == GameManager.guns[$GunList.get_selected_items()[0]] or GameManager.equippedGuns[1] == GameManager.guns[$GunList.get_selected_items()[0]]:
-				$EquipGun.visible = true
-				$EquipGun.disabled = false
-				$EquipGun.rect_position = Vector2(591, 646)
-				if GameManager.language == 0:
-					$EquipGun.text = "(Remover)"
-				if GameManager.language == 1:
-					$EquipGun.text = "(Remove)"
+			if GameManager.equippedGuns[0] == GameManager.guns[gunList.get_selected_items()[0]] or GameManager.equippedGuns[1] == GameManager.guns[gunList.get_selected_items()[0]]:
+				equipGunButton.visible = true
+				equipGunButton.disabled = false
+				equipGunButton.text = "GUNDEX_EQUIPGUN_BUTTON_REMOVE"
 				removeGun = true
 			else:
-				$EquipGun.visible = true
-				$EquipGun.disabled = false
-				$EquipGun.rect_position = Vector2(591, 646)
-				if GameManager.language == 0:
-					$EquipGun.text = "Equipar"
-				if GameManager.language == 1:
-					$EquipGun.text = "Equip"
+				equipGunButton.visible = true
+				equipGunButton.disabled = false
+				equipGunButton.text = "GUNDEX_EQUIPGUN_BUTTON_EQUIP"
 				removeGun = false
-			if GameManager.equippedGuns[0] == GameManager.guns[$GunList.get_selected_items()[0]] and GameManager.equippedGuns[1] == null or GameManager.equippedGuns[1] == GameManager.guns[$GunList.get_selected_items()[0]] and GameManager.equippedGuns[0] == null:
-				$EquipGun.visible = true
-				$EquipGun.disabled = true
-				$EquipGun.rect_position = Vector2(591, 646)
-				if GameManager.language == 0:
-					$EquipGun.text = "(Equipado)"
-				if GameManager.language == 1:
-					$EquipGun.text = "(Equipped)"
-				
-	$GunDesc.rect_position.y = $GunName.rect_position.y + $GunName.rect_size.y
-	$GunDesc.rect_size.y = 720 - $GunDesc.rect_position.y
-	$GunName.rect_size.y = 0
+			if GameManager.equippedGuns[0] == GameManager.guns[gunList.get_selected_items()[0]] and GameManager.equippedGuns[1] == null or GameManager.equippedGuns[1] == GameManager.guns[gunList.get_selected_items()[0]] and GameManager.equippedGuns[0] == null:
+				equipGunButton.visible = true
+				equipGunButton.disabled = true
+				equipGunButton.text = "GUNDEX_EQUIPGUN_BUTTON_EQUIPPED"
 	
 func _on_GunList_item_selected(index):
 	if !isSubAGun:
-		if !instanciatedGuns[index].previewSprite == null:
-			$previewSprite.texture = instanciatedGuns[index].previewSprite
-		if !instanciatedGuns[index].namePTBR == null or !instanciatedGuns[index].nameEng == null:
-			if GameManager.language == 0:
-				$GunName.text = instanciatedGuns[index].namePTBR
-			if GameManager.language == 1:
-				$GunName.text = instanciatedGuns[index].nameEng
-		else:
-			if GameManager.language == 0:
-				$GunName.text = instanciatedGuns[index].nameNotFoundPTBR
-			if GameManager.language == 1:
-				$GunName.text = instanciatedGuns[index].nameNotFoundEng
-		if !instanciatedGuns[index].descPTBR == null or !instanciatedGuns[index].descEng == null:
-			if GameManager.language == 0:
-				$GunDesc.text = instanciatedGuns[index].descPTBR
-			if GameManager.language == 1:
-				$GunDesc.text = instanciatedGuns[index].descEng
-		else:
-			if GameManager.language == 0:
-				$GunDesc.text = instanciatedGuns[index].descNotFoundPTBR
-			if GameManager.language == 1:
-				$GunDesc.text = instanciatedGuns[index].descNotFoundEng
+		gunPreviewSprite.texture = instanciatedGuns[index].previewSprite
+		gunNameLabel.text = instanciatedGuns[index].gunName
+		gunDescLabel.text = instanciatedGuns[index].gunDesc
 		if index <= 9:
-			$GunID.text = ("#00%d" % index)
+			gunID.text = ("#00%d" % index)
 		elif index >= 10:
-			$GunID.text = ("#0%d" % index)
+			gunID.text = ("#0%d" % index)
 		elif index >= 100:
-			$GunID.text = ("#%d" % index)
+			gunID.text = ("#%d" % index)
+			
+	previewSlot1.get_node("subCursor").get_node("gunToSub").texture = instanciatedGuns[gunList.get_selected_items()[0]].previewSprite
+	previewSlot2.get_node("subCursor").get_node("gunToSub").texture = instanciatedGuns[gunList.get_selected_items()[0]].previewSprite
 			
 func _input(event):
 	if isSubAGun == true:
@@ -133,8 +105,8 @@ func _input(event):
 		if event.is_action_pressed("ui_selectWeapon1"):
 			isSubAGunSelected = 1
 		if event.is_action_pressed("ui_accept"):
-			if !$GunList.get_selected_items().empty():
-				GameManager.equippedGuns[isSubAGunSelected] = GameManager.guns[$GunList.get_selected_items()[0]]
+			if !gunList.get_selected_items().empty():
+				GameManager.equippedGuns[isSubAGunSelected] = GameManager.guns[gunList.get_selected_items()[0]]
 			isSubAGunOnce = false
 			$equippingGunSound.play()
 			GameManager.save_equippedGuns(true)
@@ -148,34 +120,26 @@ func _on_GoBack_pressed():
 	GameManager.get_node("Fade/layer/anim").play("fadeOut")
 
 func _on_EquipGun_pressed():
-	if !$GunList.get_selected_items().empty():
+	if !gunList.get_selected_items().empty():
 		if removeGun == true:
-			if GameManager.equippedGuns[0] == GameManager.guns[$GunList.get_selected_items()[0]]:
+			if GameManager.equippedGuns[0] == GameManager.guns[gunList.get_selected_items()[0]]:
 				GameManager.equippedGuns[0] = null
 				GameManager.save_equippedGuns(true)
-			if GameManager.equippedGuns[1] == GameManager.guns[$GunList.get_selected_items()[0]]:
+			if GameManager.equippedGuns[1] == GameManager.guns[gunList.get_selected_items()[0]]:
 				GameManager.equippedGuns[1] = null
 				GameManager.save_equippedGuns(true)
 		else:
 			if !GameManager.equippedGuns[0] == null and !GameManager.equippedGuns[1] == null:
 				isSubAGun = true
-				$EquippedGunsPreview/subCursor/sprite.texture = instanciatedGuns[$GunList.get_selected_items()[0]].previewSprite
 			if !GameManager.equippedGuns[0] == null and GameManager.equippedGuns[1] == null:
-				GameManager.equippedGuns[1] = GameManager.guns[$GunList.get_selected_items()[0]]
+				GameManager.equippedGuns[1] = GameManager.guns[gunList.get_selected_items()[0]]
 				$equippingGunSound.play()
 				GameManager.save_equippedGuns(true)
 			if !GameManager.equippedGuns[1] == null and GameManager.equippedGuns[0] == null:
-				GameManager.equippedGuns[0] = GameManager.guns[$GunList.get_selected_items()[0]]
+				GameManager.equippedGuns[0] = GameManager.guns[gunList.get_selected_items()[0]]
 				$equippingGunSound.play()
 				GameManager.save_equippedGuns(true)
 			if GameManager.equippedGuns[1] == null and GameManager.equippedGuns[0] == null:
-				GameManager.equippedGuns[0] = GameManager.guns[$GunList.get_selected_items()[0]]
+				GameManager.equippedGuns[0] = GameManager.guns[gunList.get_selected_items()[0]]
 				$equippingGunSound.play()
 				GameManager.save_equippedGuns(true)
-				
-func _notification(what):
-	match what:
-		MainLoop.NOTIFICATION_WM_FOCUS_OUT:
-			get_tree().paused = true
-		MainLoop.NOTIFICATION_WM_FOCUS_IN:
-			get_tree().paused = false

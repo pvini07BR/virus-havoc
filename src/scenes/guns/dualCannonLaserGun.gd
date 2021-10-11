@@ -1,7 +1,7 @@
 extends Gun
 
 func _input(Event):
-	if GameManager.currentScene.playerInst.isInputWorking == true:
+	if GameManager.currentScene.inputWorking == true:
 		if active == true:
 			if Event.is_action_pressed("ui_accept"):
 				if !cooldown:

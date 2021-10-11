@@ -1,6 +1,13 @@
 extends Node
 
+enum PLATFORMS {
+	PC,
+	MOBILE
+}
+
 export(Array, PackedScene) var equippedGuns = [null, null]
+var languageTemp := "pt"
+var platform = PLATFORMS.PC
 var loadedMods := []
 var language := 0
 var lastStagePlayed := 0
@@ -14,8 +21,14 @@ var itsAlreadyPaused := false
 
 onready var root = get_tree().get_root()
 onready var currentScene = root.get_child(root.get_child_count() - 1)
+onready var musicStream = $musicChannel
 
 func _init():
+	if OS.get_model_name().to_lower() == "android" or OS.get_model_name().to_lower() == "ios":
+		platform = PLATFORMS.MOBILE
+	
+	TranslationServer.set_locale("pt")
+	
 	loadGuns()
 	
 	loadStages()
@@ -137,3 +150,11 @@ func _deferred_goto_packedScene(path):
 	get_tree().get_root().add_child(currentScene)
 	get_tree().set_current_scene(currentScene)
 	get_node("Fade/layer/anim").play("fadeIn")
+	
+func _notification(what):
+	match what:
+		MainLoop.NOTIFICATION_WM_FOCUS_OUT:
+			get_tree().paused = true
+		MainLoop.NOTIFICATION_WM_FOCUS_IN:
+			if !itsAlreadyPaused:
+				get_tree().paused = false

@@ -21,8 +21,13 @@ var distancingOnce = false
 func _on_stage_started():
 	if !stageFinished:
 		$virusSpawningTimer.start()
+		
+func _on_stage_ended():
+	$CanvasLayer/Tween.interpolate_property($CanvasLayer/CanvasModulate, "color", Color(1,1,1,1), Color(1,1,1,0), 0.5)
+	$CanvasLayer/Tween.start()
 	
 func _ready():
+	$CanvasLayer/CanvasModulate.color = Color(1,1,1,0)
 	if GameManager.wasInBossBattle == true:
 		$CanvasLayer/CanvasModulate.color = Color(1,1,1,1)
 		virusSpaceWave = 11
@@ -48,10 +53,7 @@ func _process(delta):
 			$virusSpace.rotation_degrees = 0
 		
 		if !isBossFight:
-			if GameManager.language == 0:
-				$CanvasLayer/Label.text = ("%da Onda" % virusSpaceWave)
-			if GameManager.language == 1:
-				$CanvasLayer/Label.text = ("Wave %d" % virusSpaceWave)
+			$CanvasLayer/Label.text = TranslationServer.translate("STAGE_UI_1_WAVES") + ": " + str(virusSpaceWave)
 		else:
 			$CanvasLayer/Label.visible = false
 			
@@ -104,7 +106,7 @@ func _process(delta):
 								200, 200, 60
 								)
 						4:
-							spawnLootBox()
+							spawnLootBox(false)
 							spawnWave(
 								[viruses[0], 
 								viruses[1], 
@@ -131,7 +133,7 @@ func _process(delta):
 								200, 200, 50
 								)
 						7:
-							spawnLootBox()
+							spawnLootBox(false)
 							$brokenVirusSpawningTimer.start()
 							spawnWave(
 								[viruses[1],

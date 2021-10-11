@@ -1,22 +1,23 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=10 format=2]
 
+[ext_resource path="res://assets/images/guns/preview/gunPreview_commonLaserGun.png" type="Texture" id=1]
 [ext_resource path="res://scenes/LevelUI.gd" type="Script" id=2]
-[ext_resource path="res://assets/music/pause.ogg" type="AudioStream" id=3]
+[ext_resource path="res://assets/images/gunSelector.png" type="Texture" id=3]
 [ext_resource path="res://resources/fonts/nokiafc22.ttf" type="DynamicFontData" id=4]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=6]
 size = 40
 outline_size = 5
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 4 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=7]
 size = 40
 outline_size = 5
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 4 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=8]
 size = 40
 outline_size = 5
 outline_color = Color( 0, 0, 0, 1 )
@@ -31,7 +32,7 @@ font_data = ExtResource( 4 )
 [sub_resource type="Animation" id=5]
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("playerHealth:modulate")
+tracks/0/path = NodePath("topLeft/playerHealth:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -43,124 +44,139 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 0.447059, 0.447059, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="DynamicFont" id=6]
-size = 40
-outline_size = 5
-outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 4 )
-
-[sub_resource type="DynamicFont" id=7]
-size = 80
-outline_size = 5
-outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 4 )
-
-[sub_resource type="DynamicFont" id=8]
-resource_local_to_scene = true
-size = 40
-font_data = ExtResource( 4 )
-
-[sub_resource type="DynamicFont" id=9]
-size = 40
-font_data = ExtResource( 4 )
-
-[sub_resource type="DynamicFont" id=10]
-resource_local_to_scene = true
-size = 80
-outline_size = 5
-outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 4 )
-
-[sub_resource type="DynamicFont" id=11]
-resource_local_to_scene = true
-size = 30
-outline_size = 5
-outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 4 )
-
-[sub_resource type="DynamicFont" id=12]
-resource_local_to_scene = true
-size = 40
-font_data = ExtResource( 4 )
-
 [node name="LevelUI" type="CanvasLayer"]
 pause_mode = 2
 script = ExtResource( 2 )
 
-[node name="score" type="Label" parent="."]
-anchor_left = 0.797
+[node name="topRight" type="VBoxContainer" parent="."]
+anchor_left = 1.0
 anchor_right = 1.0
-anchor_bottom = 0.069
-margin_left = -423.16
-margin_right = -3.0
-margin_bottom = 0.319996
-rect_pivot_offset = Vector2( 257, 0 )
-custom_fonts/font = SubResource( 1 )
+margin_left = -400.0
+margin_top = 5.0
+margin_right = -5.0
+margin_bottom = 105.0
+grow_horizontal = 0
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="score" type="Label" parent="topRight"]
+margin_right = 395.0
+margin_bottom = 50.0
+grow_horizontal = 0
+custom_fonts/font = SubResource( 6 )
 text = "Score:"
 align = 2
 valign = 1
+max_lines_visible = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="bitcoins" type="Label" parent="score"]
-anchor_left = 0.14
-anchor_top = 0.88
-anchor_right = 1.0
-anchor_bottom = 1.58
-margin_left = -214.2
-margin_top = -3.8147e-06
-margin_right = 36.0
-margin_bottom = 15.0
-rect_scale = Vector2( 0.7, 0.7 )
-rect_pivot_offset = Vector2( 714, 0 )
-custom_fonts/font = SubResource( 2 )
+[node name="bitcoins" type="Label" parent="topRight"]
+margin_top = 50.0
+margin_right = 395.0
+margin_bottom = 100.0
+grow_horizontal = 0
+custom_fonts/font = SubResource( 7 )
 text = "Bitcoins Earned:"
 align = 2
 valign = 1
-autowrap = true
+max_lines_visible = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="gunEquipped" type="Label" parent="."]
-anchor_left = 1.0
+[node name="topLeft" type="VBoxContainer" parent="."]
+margin_left = 15.0
+margin_top = 10.0
+margin_right = 185.0
+margin_bottom = 114.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="playerHealth" type="Label" parent="topLeft"]
+margin_right = 170.0
+margin_bottom = 50.0
+custom_fonts/font = SubResource( 8 )
+text = "Health:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="virusesKilled" type="Label" parent="topLeft"]
+margin_top = 54.0
+margin_right = 170.0
+margin_bottom = 104.0
+custom_fonts/font = SubResource( 8 )
+text = "Killed:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bottomRight" type="VBoxContainer" parent="."]
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -1288.0
-margin_top = -55.0
-margin_right = -5.0
-margin_bottom = -5.0
-custom_fonts/font = SubResource( 3 )
-align = 2
-valign = 2
-autowrap = true
+margin_top = -144.0
+alignment = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="gunPreview" type="TextureRect" parent="gunEquipped"]
-margin_left = 1131.0
-margin_top = -90.0
-margin_right = 1283.0
-margin_bottom = 7.62939e-06
-rect_pivot_offset = Vector2( 152, 90 )
-expand = true
+[node name="HBoxContainer" type="HBoxContainer" parent="bottomRight"]
+margin_right = 1280.0
+margin_bottom = 90.0
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="gunPreview" type="TextureRect" parent="bottomRight/HBoxContainer"]
+margin_left = 1128.0
+margin_right = 1280.0
+margin_bottom = 90.0
+grow_horizontal = 0
+grow_vertical = 0
+rect_min_size = Vector2( 152, 90 )
+rect_pivot_offset = Vector2( 152, 0 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource( 1 )
 stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="gunEquipped" type="Label" parent="bottomRight"]
+margin_top = 94.0
+margin_right = 1280.0
+margin_bottom = 144.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 4 )
+text = "Testing 1 2 3!"
+align = 2
+valign = 1
+autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="bossHealth" type="Label" parent="."]
 visible = false
-margin_left = 7.3918
-margin_top = 640.291
-margin_right = 384.392
-margin_bottom = 718.291
-custom_fonts/font = SubResource( 4 )
-text = "Boss:"
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 7.0
+margin_top = -52.0
+margin_right = 132.0
+margin_bottom = -2.0
+custom_fonts/font = SubResource( 8 )
+text = "STAGE_UI_BOSS_HEALTH:"
 valign = 2
+max_lines_visible = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -169,297 +185,84 @@ __meta__ = {
 playback_speed = 3.0
 anims/healthCritic = SubResource( 5 )
 
-[node name="virusesKilled" type="Label" parent="."]
-margin_left = 6.1099
-margin_top = 53.7093
-margin_right = 398.11
-margin_bottom = 152.709
-rect_scale = Vector2( 0.7, 0.7 )
-custom_fonts/font = SubResource( 4 )
-text = "Health:"
+[node name="guns" type="HBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -203.5
+margin_top = 6.0
+margin_right = 203.5
+margin_bottom = 51.0
+rect_min_size = Vector2( 0, 45 )
+custom_constants/separation = 50
+alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="playerHealth" type="Label" parent="."]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 385.0
-margin_bottom = 86.0
-custom_fonts/font = SubResource( 4 )
-text = "Health:"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="gunsEquippedSlot1BG" type="ColorRect" parent="."]
-margin_left = 499.0
-margin_top = -0.44545
-margin_right = 575.0
-margin_bottom = 44.5546
+[node name="slot1" type="ColorRect" parent="guns"]
+margin_left = 102.0
+margin_right = 178.0
+margin_bottom = 45.0
+rect_min_size = Vector2( 76, 45 )
 color = Color( 0.517647, 0.517647, 0.517647, 0.478431 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="gunsEquippedSlot2BG" type="ColorRect" parent="."]
-margin_left = 633.0
-margin_right = 709.0
-margin_bottom = 45.0
-color = Color( 0.517647, 0.517647, 0.517647, 0.478431 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="gunsEquippedSlot1" type="TextureRect" parent="."]
-margin_left = 499.0
-margin_right = 575.0
-margin_bottom = 45.0
+[node name="sprite" type="TextureRect" parent="guns/slot1"]
+margin_top = 0.44545
+margin_right = 76.0
+margin_bottom = 45.4454
 expand = true
 stretch_mode = 6
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="gunsEquippedSlot2" type="TextureRect" parent="."]
-margin_left = 633.0
-margin_right = 709.0
+[node name="selector" type="TextureRect" parent="guns/slot1"]
+visible = false
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 77.0
+margin_bottom = 46.0
+rect_min_size = Vector2( 76, 45 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="slot2" type="ColorRect" parent="guns"]
+margin_left = 228.0
+margin_right = 304.0
 margin_bottom = 45.0
+rect_min_size = Vector2( 76, 45 )
+color = Color( 0.517647, 0.517647, 0.517647, 0.478431 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="sprite" type="TextureRect" parent="guns/slot2"]
+margin_top = 0.44545
+margin_right = 76.0
+margin_bottom = 45.4454
 expand = true
 stretch_mode = 6
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="selecting" type="Label" parent="."]
-margin_left = -20.7656
-margin_top = -31.4289
-margin_right = 19.2344
-margin_bottom = 18.5711
-rect_scale = Vector2( 0.5, 0.5 )
-custom_fonts/font = SubResource( 6 )
-text = ">"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="selectingGuntoSub" type="Label" parent="."]
+[node name="selector" type="TextureRect" parent="guns/slot2"]
 visible = false
-margin_right = 40.0
-margin_bottom = 50.0
-rect_scale = Vector2( 0.5, 0.5 )
-custom_fonts/font = SubResource( 6 )
-custom_colors/font_color = Color( 0, 1, 0.0901961, 1 )
-text = ">"
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 77.0
+margin_bottom = 46.0
+rect_min_size = Vector2( 76, 45 )
+texture = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="whichOne" type="Label" parent="selectingGuntoSub"]
-visible = false
-margin_left = -534.0
-margin_top = 10.0
-margin_right = 520.0
-margin_bottom = 60.0
-rect_scale = Vector2( 0.5, 0.5 )
-custom_fonts/font = SubResource( 6 )
-custom_colors/font_color = Color( 0.0392157, 1, 0, 1 )
-align = 2
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="discard" type="Label" parent="."]
-visible = false
-margin_left = 360.0
-margin_top = 73.0
-margin_right = 600.0
-margin_bottom = 123.0
-rect_scale = Vector2( 0.5, 0.5 )
-custom_fonts/font = SubResource( 6 )
-custom_colors/font_color = Color( 1, 0, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="pauseMenu" type="CanvasLayer" parent="."]
-offset = Vector2( -1280, -720 )
-transform = Transform2D( 1, 0, 0, 1, -1280, -720 )
-
-[node name="bg" type="ColorRect" parent="pauseMenu"]
-margin_right = 1280.0
-margin_bottom = 720.0
-color = Color( 0, 0, 0, 0.501961 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="pauseText" type="Label" parent="pauseMenu"]
-anchor_left = 0.797
-anchor_right = 1.0
-anchor_bottom = 0.069
-margin_left = -1020.16
-margin_top = 202.939
-margin_bottom = 253.259
-rect_pivot_offset = Vector2( 257, 0 )
-custom_fonts/font = SubResource( 7 )
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="resume" type="Button" parent="pauseMenu"]
-margin_left = 400.0
-margin_top = 318.0
-margin_right = 892.0
-margin_bottom = 374.0
-focus_mode = 0
-custom_fonts/font = SubResource( 8 )
-enabled_focus_mode = 0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="resumeGameButton" type="Button" parent="pauseMenu"]
-margin_left = 397.567
-margin_top = 394.727
-margin_right = 889.567
-margin_bottom = 450.727
-focus_mode = 0
-custom_fonts/font = SubResource( 9 )
-enabled_focus_mode = 0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="goBackButton" type="Button" parent="pauseMenu"]
-margin_left = 397.567
-margin_top = 473.727
-margin_right = 889.567
-margin_bottom = 529.727
-focus_mode = 0
-custom_fonts/font = SubResource( 9 )
-enabled_focus_mode = 0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="pauseMusic" type="AudioStreamPlayer" parent="pauseMenu"]
-stream = ExtResource( 3 )
-
-[node name="pauseMusic_FadeIn" type="Tween" parent="pauseMenu"]
-
-[node name="levelFinished" type="CanvasLayer" parent="."]
-offset = Vector2( 1280, -720 )
-transform = Transform2D( 1, 0, 0, 1, 1280, -720 )
-
-[node name="bg" type="ColorRect" parent="levelFinished"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-color = Color( 0, 0, 0, 0.501961 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="title" type="Label" parent="levelFinished"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -1280.0
-margin_top = 124.0
-margin_right = -1280.0
-margin_bottom = -496.0
-custom_fonts/font = SubResource( 10 )
-align = 1
-valign = 1
-autowrap = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="score" type="Label" parent="levelFinished"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 264.0
-margin_bottom = -418.0
-rect_pivot_offset = Vector2( -449.162, 269.37 )
-custom_fonts/font = SubResource( 11 )
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="bitcoins" type="Label" parent="levelFinished"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 306.0
-margin_bottom = -376.0
-rect_pivot_offset = Vector2( -449.162, 269.37 )
-custom_fonts/font = SubResource( 11 )
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="goBack" type="Button" parent="levelFinished"]
-visible = false
-margin_left = 344.0
-margin_top = 527.743
-margin_right = 911.0
-margin_bottom = 583.743
-focus_mode = 0
-custom_fonts/font = SubResource( 12 )
-disabled = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="restartStage" type="Button" parent="levelFinished"]
-visible = false
-margin_left = 344.0
-margin_top = 463.727
-margin_right = 911.0
-margin_bottom = 519.727
-focus_mode = 0
-custom_fonts/font = SubResource( 9 )
-disabled = true
-enabled_focus_mode = 0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="goToNextLevel" type="Button" parent="levelFinished"]
-visible = false
-margin_left = 344.0
-margin_top = 400.0
-margin_right = 911.0
-margin_bottom = 456.0
-focus_mode = 0
-custom_fonts/font = SubResource( 9 )
-disabled = true
-enabled_focus_mode = 0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="titleMoving" type="Tween" parent="levelFinished"]
 
 [node name="appearingTween" type="Tween" parent="."]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color( 1, 1, 1, 0 )
-
-[connection signal="pressed" from="pauseMenu/resume" to="." method="_on_resume_pressed"]
-[connection signal="pressed" from="pauseMenu/resumeGameButton" to="." method="_on_resumeGameButton_pressed"]
-[connection signal="pressed" from="pauseMenu/goBackButton" to="." method="_on_goBackButton_pressed"]
-[connection signal="finished" from="pauseMenu/pauseMusic" to="." method="_on_pauseMusic_finished"]
-[connection signal="tween_started" from="pauseMenu/pauseMusic_FadeIn" to="." method="_on_pauseMusic_FadeIn_tween_started"]
-[connection signal="pressed" from="levelFinished/goBack" to="." method="_on_goBackButton_pressed"]
-[connection signal="pressed" from="levelFinished/restartStage" to="." method="_on_resumeGameButton_pressed"]
-[connection signal="pressed" from="levelFinished/goToNextLevel" to="." method="_on_goToNextLevel_pressed"]
-[connection signal="tween_all_completed" from="levelFinished/titleMoving" to="." method="_on_titleMoving_tween_all_completed"]

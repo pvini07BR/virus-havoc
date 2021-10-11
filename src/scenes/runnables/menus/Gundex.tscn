@@ -4,169 +4,123 @@
 [ext_resource path="res://scenes/runnables/menus/Gundex.gd" type="Script" id=2]
 [ext_resource path="res://resources/fonts/nokiafc22.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://assets/sounds/gunEquip.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/images/gunSelector.png" type="Texture" id=5]
 
 [sub_resource type="DynamicFont" id=1]
+resource_local_to_scene = true
+size = 40
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+resource_local_to_scene = true
+size = 40
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=3]
 resource_local_to_scene = true
 size = 30
 outline_size = 5
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=4]
+resource_local_to_scene = true
 size = 25
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=3]
-resource_local_to_scene = true
-size = 40
-font_data = ExtResource( 3 )
-
-[sub_resource type="DynamicFont" id=4]
-resource_local_to_scene = true
-size = 40
-font_data = ExtResource( 3 )
-
-[sub_resource type="DynamicFont" id=5]
-resource_local_to_scene = true
-size = 15
-font_data = ExtResource( 3 )
-
-[node name="Gundex" type="Node2D"]
+[node name="Gundex" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="equippingGunSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
 
 [node name="MenuBackground" parent="." instance=ExtResource( 1 )]
 
-[node name="GunList" type="ItemList" parent="."]
-margin_right = 884.0
-margin_bottom = 625.0
+[node name="BigAssWrapper" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = -5.0
+margin_bottom = -5.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="gunSelectionArea" type="VBoxContainer" parent="BigAssWrapper"]
+margin_right = 870.0
+margin_bottom = 710.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GunList" type="ItemList" parent="BigAssWrapper/gunSelectionArea"]
+margin_right = 870.0
+margin_bottom = 650.0
 focus_mode = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 max_columns = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GunID" type="Label" parent="."]
-margin_left = 884.0
-margin_right = 1280.0
-margin_bottom = 32.0
-custom_fonts/font = SubResource( 1 )
-clip_text = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="centralizer" type="VBoxContainer" parent="BigAssWrapper/gunSelectionArea"]
+margin_top = 654.0
+margin_right = 870.0
+margin_bottom = 710.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+alignment = 1
 
-[node name="previewSprite" type="TextureRect" parent="."]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = 884.0
-margin_top = 32.0
-margin_right = 1278.0
-margin_bottom = 275.0
-expand = true
-stretch_mode = 6
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="buttons" type="HBoxContainer" parent="BigAssWrapper/gunSelectionArea/centralizer"]
+margin_right = 870.0
+margin_bottom = 56.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 75
+alignment = 1
 
-[node name="GunName" type="Label" parent="."]
-margin_left = 884.0
-margin_top = 274.0
-margin_right = 1280.0
-margin_bottom = 312.0
-custom_fonts/font = SubResource( 1 )
-autowrap = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="GunDesc" type="RichTextLabel" parent="."]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 884.0
-margin_top = 313.0
-margin_right = 1280.0
-margin_bottom = 313.0
-grow_vertical = 0
-custom_fonts/normal_font = SubResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="GoBack" type="Button" parent="."]
-margin_left = 18.0
-margin_top = 646.0
-margin_right = 185.0
-margin_bottom = 702.0
+[node name="GoBack" type="Button" parent="BigAssWrapper/gunSelectionArea/centralizer/buttons"]
+margin_left = 93.0
+margin_right = 545.0
+margin_bottom = 56.0
 focus_mode = 0
-custom_fonts/font = SubResource( 3 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+size_flags_stretch_ratio = 0.0
+custom_fonts/font = SubResource( 1 )
+text = "GUNDEX_GO_BACK"
 align = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="EquipGun" type="Button" parent="."]
-visible = false
-margin_left = -666.0
-margin_top = -666.0
-margin_right = -374.0
-margin_bottom = -610.0
-custom_fonts/font = SubResource( 4 )
-disabled = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="EquippedGunsPreview" type="HBoxContainer" parent="BigAssWrapper/gunSelectionArea/centralizer/buttons"]
+margin_left = 620.0
+margin_right = 776.0
+margin_bottom = 56.0
+alignment = 1
 
-[node name="EquippedGunsPreview" type="Control" parent="."]
-margin_left = 339.0
-margin_top = 675.0
-margin_right = 567.0
-margin_bottom = 720.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="subCursor" type="Node2D" parent="EquippedGunsPreview"]
-visible = false
-position = Vector2( 0, -45 )
-
-[node name="cursor" type="Label" parent="EquippedGunsPreview/subCursor"]
-margin_left = -16.0
-margin_top = 59.0
-margin_right = -6.0
-margin_bottom = 78.0
-custom_fonts/font = SubResource( 5 )
-text = ">"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="sprite" type="TextureRect" parent="EquippedGunsPreview/subCursor"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="slot1" type="ColorRect" parent="BigAssWrapper/gunSelectionArea/centralizer/buttons/EquippedGunsPreview"]
 margin_right = 76.0
 margin_bottom = 45.0
-expand = true
-stretch_mode = 6
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="slot1" type="ColorRect" parent="EquippedGunsPreview"]
-anchor_right = 0.333
-anchor_bottom = 1.0
-margin_right = 0.0759964
-margin_bottom = 4.57764e-05
+rect_min_size = Vector2( 76, 45 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
 color = Color( 0.517647, 0.517647, 0.517647, 0.478431 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="sprite" type="TextureRect" parent="EquippedGunsPreview/slot1"]
+[node name="sprite" type="TextureRect" parent="BigAssWrapper/gunSelectionArea/centralizer/buttons/EquippedGunsPreview/slot1"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_bottom = -3.05176e-05
@@ -176,17 +130,54 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="slot2" type="ColorRect" parent="EquippedGunsPreview"]
-anchor_left = 0.667
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -0.0760193
+[node name="subCursor" type="VBoxContainer" parent="BigAssWrapper/gunSelectionArea/centralizer/buttons/EquippedGunsPreview/slot1"]
+visible = false
+margin_left = -1.0
+margin_top = -50.0
+margin_right = 77.0
+margin_bottom = 46.0
+grow_horizontal = 2
+grow_vertical = 0
+rect_min_size = Vector2( 78, 96 )
+rect_pivot_offset = Vector2( 1, 50 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="gunToSub" type="TextureRect" parent="BigAssWrapper/gunSelectionArea/centralizer/buttons/EquippedGunsPreview/slot1/subCursor"]
+margin_right = 76.0
+margin_bottom = 45.0
+rect_min_size = Vector2( 76, 45 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+expand = true
+stretch_mode = 5
+
+[node name="selector" type="TextureRect" parent="BigAssWrapper/gunSelectionArea/centralizer/buttons/EquippedGunsPreview/slot1/subCursor"]
+margin_top = 49.0
+margin_right = 78.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 78, 47 )
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="slot2" type="ColorRect" parent="BigAssWrapper/gunSelectionArea/centralizer/buttons/EquippedGunsPreview"]
+margin_left = 80.0
+margin_right = 156.0
+margin_bottom = 45.0
+rect_min_size = Vector2( 76, 45 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
 color = Color( 0.517647, 0.517647, 0.517647, 0.478431 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="sprite" type="TextureRect" parent="EquippedGunsPreview/slot2"]
+[node name="sprite" type="TextureRect" parent="BigAssWrapper/gunSelectionArea/centralizer/buttons/EquippedGunsPreview/slot2"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_bottom = 3.8147e-06
@@ -196,6 +187,110 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="item_selected" from="GunList" to="." method="_on_GunList_item_selected"]
-[connection signal="pressed" from="GoBack" to="." method="_on_GoBack_pressed"]
-[connection signal="pressed" from="EquipGun" to="." method="_on_EquipGun_pressed"]
+[node name="subCursor" type="VBoxContainer" parent="BigAssWrapper/gunSelectionArea/centralizer/buttons/EquippedGunsPreview/slot2"]
+visible = false
+margin_left = -1.0
+margin_top = -50.0
+margin_right = 77.0
+margin_bottom = 46.0
+grow_horizontal = 2
+grow_vertical = 0
+rect_min_size = Vector2( 78, 96 )
+rect_pivot_offset = Vector2( 1, 50 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="gunToSub" type="TextureRect" parent="BigAssWrapper/gunSelectionArea/centralizer/buttons/EquippedGunsPreview/slot2/subCursor"]
+margin_right = 76.0
+margin_bottom = 45.0
+rect_min_size = Vector2( 76, 45 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+expand = true
+stretch_mode = 5
+
+[node name="selector" type="TextureRect" parent="BigAssWrapper/gunSelectionArea/centralizer/buttons/EquippedGunsPreview/slot2/subCursor"]
+margin_top = 49.0
+margin_right = 78.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 78, 47 )
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EquipGun" type="Button" parent="BigAssWrapper/gunSelectionArea/centralizer/buttons"]
+visible = false
+margin_left = 742.0
+margin_right = 754.0
+margin_bottom = 56.0
+custom_fonts/font = SubResource( 2 )
+disabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="gunInfoArea" type="VBoxContainer" parent="BigAssWrapper"]
+margin_left = 874.0
+margin_right = 1270.0
+margin_bottom = 710.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GunID" type="Label" parent="BigAssWrapper/gunInfoArea"]
+margin_right = 396.0
+margin_bottom = 38.0
+custom_fonts/font = SubResource( 3 )
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="previewSprite" type="TextureRect" parent="BigAssWrapper/gunInfoArea"]
+margin_top = 42.0
+margin_right = 396.0
+margin_bottom = 294.0
+rect_min_size = Vector2( 396, 252 )
+size_flags_vertical = 0
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GunName" type="Label" parent="BigAssWrapper/gunInfoArea"]
+margin_top = 298.0
+margin_right = 396.0
+margin_bottom = 336.0
+custom_fonts/font = SubResource( 3 )
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="BigAssWrapper/gunInfoArea"]
+margin_top = 340.0
+margin_right = 396.0
+margin_bottom = 710.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
+
+[node name="GunDesc" type="Label" parent="BigAssWrapper/gunInfoArea/ScrollContainer"]
+margin_right = 396.0
+margin_bottom = 370.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 4 )
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="item_selected" from="BigAssWrapper/gunSelectionArea/GunList" to="." method="_on_GunList_item_selected"]
+[connection signal="pressed" from="BigAssWrapper/gunSelectionArea/centralizer/buttons/GoBack" to="." method="_on_GoBack_pressed"]
+[connection signal="pressed" from="BigAssWrapper/gunSelectionArea/centralizer/buttons/EquipGun" to="." method="_on_EquipGun_pressed"]

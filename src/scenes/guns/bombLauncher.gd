@@ -4,7 +4,6 @@ var bombExists = false
 var bom
 
 func _ready():
-	position = get_node("../gunPos").position
 	bom = projectile.instance()
 	add_child(bom)
 	bom.position = $bombPos.position
@@ -22,7 +21,7 @@ func _process(_delta):
 		
 	
 func _input(Event):
-	if GameManager.currentScene.playerInst.isInputWorking == true:
+	if GameManager.currentScene.inputWorking == true:
 		if active == true:
 			if Event.is_action_pressed("ui_accept"):
 				if !cooldown:

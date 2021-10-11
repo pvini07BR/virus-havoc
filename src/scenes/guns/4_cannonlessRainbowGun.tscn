@@ -162,10 +162,8 @@ shader_param/Shift_Hue = null
 script = ExtResource( 4 )
 projectile = ExtResource( 1 )
 previewSprite = ExtResource( 3 )
-namePTBR = "Arma Laser Arco-Íris sem canhão"
-nameEng = "Cannonless Rainbow Laser Gun"
-descPTBR = "Definitivamente a arma mais GAMER que você já viu."
-descEng = "Definitely the most GAMER gun you have ever seen."
+gunName = "GUNNAME_CANNONLESS_RAINBOW_GUN"
+gunDesc = "GUNDESC_CANNONLESS_RAINBOW_GUN"
 damage = 2.0
 
 [node name="ray" type="AnimatedSprite" parent="."]

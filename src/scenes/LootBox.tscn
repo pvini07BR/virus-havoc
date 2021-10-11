@@ -111,5 +111,6 @@ anims/lootBox_vanish = SubResource( 5 )
 
 [node name="randomPointPos" type="Position2D" parent="."]
 
+[connection signal="area_entered" from="." to="." method="_on_LootBox_area_entered"]
 [connection signal="animation_finished" from="col/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="timeout" from="hasJustSpawnedTimer" to="." method="_on_hasJustSpawnedTimer_timeout"]

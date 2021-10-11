@@ -13,10 +13,8 @@ position = Vector2( 0, 1 )
 script = ExtResource( 2 )
 projectile = ExtResource( 3 )
 previewSprite = ExtResource( 4 )
-namePTBR = "Arma Laser Dupla Diagonal"
-nameEng = "Dual-Cannon Diagonal Laser Gun"
-descPTBR = "Você é fã de ping-pong? Se sim, você certamente vai amar esta arma."
-descEng = "Are you a ping-pong fan? If yes, then you will definitively love this gun."
+gunName = "GUNNAME_DUAL_DIAGONAL_LASER_GUN"
+gunDesc = "GUNDESC_DUAL_DIAGONAL_LASER_GUN"
 shootingSound = ExtResource( 5 )
 
 [node name="sprite" type="Sprite" parent="."]

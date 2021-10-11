@@ -57,13 +57,12 @@ margin_top = 670.811
 margin_right = 137.392
 margin_bottom = 720.811
 custom_fonts/font = SubResource( 1 )
-text = "1a Onda"
+text = "Onda: 1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="CanvasModulate" type="CanvasModulate" parent="CanvasLayer"]
-color = Color( 1, 1, 1, 0 )
 
 [node name="Tween" type="Tween" parent="CanvasLayer"]
 

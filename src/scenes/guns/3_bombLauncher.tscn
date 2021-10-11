@@ -14,10 +14,8 @@
 script = ExtResource( 2 )
 projectile = ExtResource( 3 )
 previewSprite = ExtResource( 4 )
-namePTBR = "Arma Lançadora de Bombas"
-nameEng = "Bomb Launcher Gun"
-descPTBR = "Lança uma bomba que explode e afeta vários inimigos ao redor. Só tome cuidado para não se aproximar muito da explosão!"
-descEng = "Launches a bomb that explodes and affects various enemies around it. But be careful to not get too close to the explosion!"
+gunName = "GUNNAME_BOMB_LAUNCHER"
+gunDesc = "GUNDESC_BOMB_LAUNCHER"
 shootingSound = ExtResource( 7 )
 
 [node name="Sprite" type="Sprite" parent="."]

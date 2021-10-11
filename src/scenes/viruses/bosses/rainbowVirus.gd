@@ -188,7 +188,7 @@ func hit(damage : int, cooldown : bool):
 			GameManager.currentScene.add_child(damageIndInst)
 			damageIndInst.global_position = global_position
 			rng.randomize()
-			SoundManager.playSound(damageSound, -10, rng.randf_range(0.9,1.1))
+			SoundManager.playSound(damageSound, 0, rng.randf_range(0.9,1.1))
 			
 		if cooldown == true:
 			canTakeDamage = false

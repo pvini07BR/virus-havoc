@@ -1,4 +1,4 @@
-extends Area2D
+extends VirusBullet
 
 var isShooted = false
 var isReady = false

@@ -48,6 +48,7 @@ config/name="VIRUS HAVOC!"
 run/main_scene="res://scenes/runnables/menus/intro.tscn"
 boot_splash/image="res://assets/images/splash.png"
 boot_splash/use_filter=false
+boot_splash/bg_color=Color( 0, 0, 0, 1 )
 config/icon="res://assets/icons/icon-hd.png"
 config/windows_native_icon="res://assets/icons/favicon.ico"
 
@@ -60,6 +61,7 @@ SoundManager="*res://scenes/managers/SoundManager.tscn"
 
 settings/fps/force_fps=120
 settings/stdout/print_fps=true
+shapes/collision/shape_color=Color( 0, 0.6, 0.7, 0.3 )
 
 [display]
 
@@ -160,7 +162,7 @@ pointing/emulate_touch_from_mouse=true
 [locale]
 
 locale_filter=[ 1, [ "en", "pt" ] ]
-translations=PoolStringArray( "res://translations/locales.pt.translation", "res://translations/locales.en.translation" )
+translations=PoolStringArray( "res://resources/locales/locales.pt.translation", "res://resources/locales/locales.en.translation" )
 
 [network]
 
