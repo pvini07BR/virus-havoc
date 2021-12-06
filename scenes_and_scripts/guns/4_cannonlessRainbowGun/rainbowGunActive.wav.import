@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/rainbowGunActive.wav-43246116396424b7c5497f950cefbc67.sample"
+
+[deps]
+
+source_file="res://scenes_and_scripts/guns/4_cannonlessRainbowGun/rainbowGunActive.wav"
+dest_files=[ "res://.import/rainbowGunActive.wav-43246116396424b7c5497f950cefbc67.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

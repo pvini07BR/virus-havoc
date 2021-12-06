@@ -1,0 +1,11 @@
+[gd_resource type="SpatialMaterial" load_steps=2 format=2]
+
+[ext_resource path="res://scenes_and_scripts/runnables/stages/stage_2/backgrounds/bg1/groundTile.png" type="Texture" id=1]
+
+[resource]
+flags_unshaded = true
+albedo_texture = ExtResource( 1 )
+uv1_scale = Vector3( 25, 10, 0 )
+uv1_offset = Vector3( 1, 0, 0 )
+uv2_scale = Vector3( 1, 0, 1 )
+uv2_offset = Vector3( 0, 1, 0 )

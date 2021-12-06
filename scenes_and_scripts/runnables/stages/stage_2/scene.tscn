@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scenes_and_scripts/runnables/stages/stage_2/code.gd" type="Script" id=1]
+[ext_resource path="res://scenes_and_scripts/runnables/stages/stage_2/backgrounds/bg1/scene.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes_and_scripts/runnables/stages/stage_2/music/music.ogg" type="AudioStream" id=3]
+[ext_resource path="res://scenes_and_scripts/runnables/stages/stage_2/viruses/paperPlaneBomber/scene.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes_and_scripts/runnables/stages/stage_2/viruses/shootingFolder/scene.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes_and_scripts/runnables/stages/stage_2/viruses/spammerTrashBin/scene.tscn" type="PackedScene" id=6]
+
+[sub_resource type="StyleBoxFlat" id=1]
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="Stage2" type="Node2D"]
+script = ExtResource( 1 )
+namePTBR = "Nível 2"
+nameEng = "Stage 2"
+titlePTBR = "sei la bro"
+titleEng = "grgr"
+descPTBR = "grgr"
+descEng = "grgr"
+music = ExtResource( 3 )
+viruses = [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ]
+background = ExtResource( 2 )
+
+[node name="paperPlaneSpawning" type="Timer" parent="."]
+wait_time = 10.0
+
+[node name="shootingFolderSpawning" type="Timer" parent="."]
+wait_time = 5.0
+
+[node name="trashBinSpawner" type="Timer" parent="."]
+wait_time = 20.0
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+margin_right = 31.0
+margin_bottom = 14.0
+custom_styles/bg = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="timeout" from="paperPlaneSpawning" to="." method="_on_paperPlaneSpawning_timeout"]
+[connection signal="timeout" from="shootingFolderSpawning" to="." method="_on_shootingFolderSpawning_timeout"]
+[connection signal="timeout" from="trashBinSpawner" to="." method="_on_trashBinSpawner_timeout"]

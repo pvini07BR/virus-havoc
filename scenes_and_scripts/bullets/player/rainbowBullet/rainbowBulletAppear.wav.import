@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/rainbowBulletAppear.wav-5889c47b378e60434a942a8259b870a9.sample"
+
+[deps]
+
+source_file="res://scenes_and_scripts/bullets/player/rainbowBullet/rainbowBulletAppear.wav"
+dest_files=[ "res://.import/rainbowBulletAppear.wav-5889c47b378e60434a942a8259b870a9.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

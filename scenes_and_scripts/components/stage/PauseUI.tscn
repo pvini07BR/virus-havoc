@@ -1,0 +1,117 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://assets/music/pause.ogg" type="AudioStream" id=1]
+[ext_resource path="res://resources/fonts/nokiafc22.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://scenes_and_scripts/components/stage/PauseUI.gd" type="Script" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 80
+outline_size = 5
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+resource_local_to_scene = true
+size = 40
+font_data = ExtResource( 2 )
+
+[sub_resource type="InputEventAction" id=3]
+action = "ui_cancel"
+
+[sub_resource type="ShortCut" id=4]
+shortcut = SubResource( 3 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 40
+font_data = ExtResource( 2 )
+
+[node name="PauseUI" type="CanvasLayer"]
+pause_mode = 2
+layer = 3
+script = ExtResource( 3 )
+
+[node name="bg" type="ColorRect" parent="."]
+margin_right = 1280.0
+margin_bottom = 720.0
+color = Color( 0, 0, 0, 0.501961 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="pauseText" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -640.0
+margin_top = 202.939
+margin_right = 640.0
+margin_bottom = 302.939
+rect_pivot_offset = Vector2( 257, 0 )
+custom_fonts/font = SubResource( 1 )
+text = "STAGE_PAUSE_UI_PAUSED"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="resume" type="Button" parent="."]
+margin_left = 400.0
+margin_top = 318.0
+margin_right = 892.0
+margin_bottom = 374.0
+grow_horizontal = 2
+focus_mode = 0
+custom_fonts/font = SubResource( 2 )
+enabled_focus_mode = 0
+shortcut = SubResource( 4 )
+text = "STAGE_PAUSE_UI_RESUME_GAME"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="restartStage" type="Button" parent="."]
+margin_left = 397.567
+margin_top = 394.727
+margin_right = 889.567
+margin_bottom = 450.727
+grow_horizontal = 2
+focus_mode = 0
+custom_fonts/font = SubResource( 5 )
+enabled_focus_mode = 0
+text = "STAGE_PAUSE_UI_RESTART_STAGE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="goBackButton" type="Button" parent="."]
+margin_left = 398.0
+margin_top = 472.0
+margin_right = 890.0
+margin_bottom = 528.0
+grow_horizontal = 2
+focus_mode = 0
+custom_fonts/font = SubResource( 5 )
+enabled_focus_mode = 0
+text = "STAGE_PAUSE_UI_GO_BACK"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="pauseMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+volume_db = -80.0
+autoplay = true
+
+[node name="pauseMusic_FadeIn" type="Tween" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[connection signal="button_up" from="resume" to="." method="_on_resume_button_up"]
+[connection signal="pressed" from="resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="restartStage" to="." method="_on_restartStage_pressed"]
+[connection signal="pressed" from="goBackButton" to="." method="_on_goBackButton_pressed"]
+[connection signal="finished" from="pauseMusic" to="." method="_on_pauseMusic_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

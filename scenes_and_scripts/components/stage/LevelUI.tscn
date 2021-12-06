@@ -1,0 +1,268 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://scenes_and_scripts/guns/0_commonLaserGun/previewSprite.png" type="Texture" id=1]
+[ext_resource path="res://scenes_and_scripts/components/stage/LevelUI.gd" type="Script" id=2]
+[ext_resource path="res://scenes_and_scripts/components/stage/gunSelector.png" type="Texture" id=3]
+[ext_resource path="res://resources/fonts/nokiafc22.ttf" type="DynamicFontData" id=4]
+
+[sub_resource type="DynamicFont" id=6]
+size = 40
+outline_size = 5
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 40
+outline_size = 5
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 40
+outline_size = 5
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 40
+outline_size = 5
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 4 )
+
+[sub_resource type="Animation" id=5]
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("topLeft/playerHealth:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 0.447059, 0.447059, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="LevelUI" type="CanvasLayer"]
+pause_mode = 2
+script = ExtResource( 2 )
+
+[node name="topRight" type="VBoxContainer" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -400.0
+margin_top = 5.0
+margin_right = -5.0
+margin_bottom = 105.0
+grow_horizontal = 0
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="score" type="Label" parent="topRight"]
+margin_right = 395.0
+margin_bottom = 50.0
+grow_horizontal = 0
+custom_fonts/font = SubResource( 6 )
+text = "Score:"
+align = 2
+valign = 1
+max_lines_visible = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bitcoins" type="Label" parent="topRight"]
+margin_top = 50.0
+margin_right = 395.0
+margin_bottom = 100.0
+grow_horizontal = 0
+custom_fonts/font = SubResource( 7 )
+text = "Bitcoins Earned:"
+align = 2
+valign = 1
+max_lines_visible = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="topLeft" type="VBoxContainer" parent="."]
+margin_left = 15.0
+margin_top = 10.0
+margin_right = 185.0
+margin_bottom = 114.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="playerHealth" type="Label" parent="topLeft"]
+margin_right = 170.0
+margin_bottom = 50.0
+custom_fonts/font = SubResource( 8 )
+text = "Health:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="virusesKilled" type="Label" parent="topLeft"]
+margin_top = 54.0
+margin_right = 170.0
+margin_bottom = 104.0
+custom_fonts/font = SubResource( 8 )
+text = "Killed:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bottomRight" type="VBoxContainer" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -144.0
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="bottomRight"]
+margin_right = 1280.0
+margin_bottom = 90.0
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="gunPreview" type="TextureRect" parent="bottomRight/HBoxContainer"]
+margin_left = 1128.0
+margin_right = 1280.0
+margin_bottom = 90.0
+grow_horizontal = 0
+grow_vertical = 0
+rect_min_size = Vector2( 152, 90 )
+rect_pivot_offset = Vector2( 152, 0 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource( 1 )
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="gunEquipped" type="Label" parent="bottomRight"]
+margin_top = 94.0
+margin_right = 1280.0
+margin_bottom = 144.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 4 )
+text = "Testing 1 2 3!"
+align = 2
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bossHealth" type="Label" parent="."]
+visible = false
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 7.0
+margin_top = -52.0
+margin_right = 132.0
+margin_bottom = -2.0
+custom_fonts/font = SubResource( 8 )
+text = "STAGE_UI_BOSS_HEALTH:"
+valign = 2
+max_lines_visible = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="critic" type="AnimationPlayer" parent="."]
+playback_speed = 3.0
+anims/healthCritic = SubResource( 5 )
+
+[node name="guns" type="HBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -203.5
+margin_top = 6.0
+margin_right = 203.5
+margin_bottom = 51.0
+rect_min_size = Vector2( 0, 45 )
+custom_constants/separation = 50
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="slot1" type="ColorRect" parent="guns"]
+margin_left = 102.0
+margin_right = 178.0
+margin_bottom = 45.0
+rect_min_size = Vector2( 76, 45 )
+color = Color( 0.517647, 0.517647, 0.517647, 0.478431 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="sprite" type="TextureRect" parent="guns/slot1"]
+margin_top = 0.44545
+margin_right = 76.0
+margin_bottom = 45.4454
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="selector" type="TextureRect" parent="guns/slot1"]
+visible = false
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 77.0
+margin_bottom = 46.0
+rect_min_size = Vector2( 76, 45 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="slot2" type="ColorRect" parent="guns"]
+margin_left = 228.0
+margin_right = 304.0
+margin_bottom = 45.0
+rect_min_size = Vector2( 76, 45 )
+color = Color( 0.517647, 0.517647, 0.517647, 0.478431 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="sprite" type="TextureRect" parent="guns/slot2"]
+margin_top = 0.44545
+margin_right = 76.0
+margin_bottom = 45.4454
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="selector" type="TextureRect" parent="guns/slot2"]
+visible = false
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 77.0
+margin_bottom = 46.0
+rect_min_size = Vector2( 76, 45 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="appearingTween" type="Tween" parent="."]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]

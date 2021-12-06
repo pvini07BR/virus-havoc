@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/heartGet.wav-e6a471d8f6fae40290a41ea6930f4e29.sample"
+
+[deps]
+
+source_file="res://scenes_and_scripts/entities/pickups/healthHeart/heartGet.wav"
+dest_files=[ "res://.import/heartGet.wav-e6a471d8f6fae40290a41ea6930f4e29.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

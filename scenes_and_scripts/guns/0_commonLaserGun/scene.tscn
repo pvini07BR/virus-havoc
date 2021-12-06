@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes_and_scripts/guns/0_commonLaserGun/code.gd" type="Script" id=1]
+[ext_resource path="res://scenes_and_scripts/guns/0_commonLaserGun/sprite.png" type="Texture" id=2]
+[ext_resource path="res://scenes_and_scripts/bullets/player/defaultSingleLaserBullet/defaultSingleLaserBullet.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes_and_scripts/guns/0_commonLaserGun/previewSprite.png" type="Texture" id=4]
+[ext_resource path="res://assets/sounds/laser.wav" type="AudioStream" id=5]
+
+[node name="commonLaserGun" type="Node2D" groups=[
+"gun",
+]]
+script = ExtResource( 1 )
+projectile = ExtResource( 3 )
+previewSprite = ExtResource( 4 )
+gunName = "GUNNAME_COMMON_LASER_GUN"
+gunDesc = "GUNDESC_COMMON_LASER_GUN"
+damage = 1.0
+shootingSound = ExtResource( 5 )
+
+[node name="sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+centered = false
+
+[node name="pos" type="Position2D" parent="."]
+position = Vector2( 36, 18 )
+
+[node name="cooldown" type="Timer" parent="."]
+wait_time = 0.3

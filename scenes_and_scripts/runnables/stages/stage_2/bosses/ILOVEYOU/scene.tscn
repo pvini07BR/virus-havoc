@@ -1,0 +1,462 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://scenes_and_scripts/runnables/stages/stage_2/bosses/ILOVEYOU/head.png" type="Texture" id=1]
+[ext_resource path="res://scenes_and_scripts/runnables/stages/stage_2/bosses/ILOVEYOU/chest.png" type="Texture" id=2]
+[ext_resource path="res://scenes_and_scripts/runnables/stages/stage_2/bosses/ILOVEYOU/core.png" type="Texture" id=3]
+[ext_resource path="res://scenes_and_scripts/runnables/stages/stage_2/bosses/ILOVEYOU/eye.png" type="Texture" id=4]
+[ext_resource path="res://scenes_and_scripts/runnables/stages/stage_2/bosses/ILOVEYOU/hipsBack.png" type="Texture" id=5]
+[ext_resource path="res://scenes_and_scripts/runnables/stages/stage_2/bosses/ILOVEYOU/hipsFront.png" type="Texture" id=6]
+[ext_resource path="res://scenes_and_scripts/runnables/stages/stage_2/bosses/ILOVEYOU/leg.png" type="Texture" id=7]
+[ext_resource path="res://scenes_and_scripts/runnables/stages/stage_2/bosses/ILOVEYOU/left_arm2.png" type="Texture" id=8]
+[ext_resource path="res://scenes_and_scripts/runnables/stages/stage_2/bosses/ILOVEYOU/left_arm.png" type="Texture" id=9]
+[ext_resource path="res://scenes_and_scripts/runnables/stages/stage_2/bosses/ILOVEYOU/leg2.png" type="Texture" id=10]
+[ext_resource path="res://scenes_and_scripts/runnables/stages/stage_2/bosses/ILOVEYOU/hand_left.png" type="Texture" id=11]
+[ext_resource path="res://scenes_and_scripts/runnables/stages/stage_2/bosses/ILOVEYOU/right_arm2.png" type="Texture" id=12]
+[ext_resource path="res://scenes_and_scripts/runnables/stages/stage_2/bosses/ILOVEYOU/right_arm.png" type="Texture" id=13]
+[ext_resource path="res://scenes_and_scripts/runnables/stages/stage_2/bosses/ILOVEYOU/hand_right.png" type="Texture" id=14]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Idle"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("core:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 0,
+"values": [  ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("core/hip:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 0,
+"values": [  ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("core/hip/leg_right:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -165.706 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("core/hip/leg_right/anotherleg_right:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -38.165 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("core/hip/leg_left:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 171.594 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("core/hip/leg_left/anotherleg_left:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -23.8848 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("core/chest/arm_right:rotation_degrees")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -171.232 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("core/chest/arm_left:rotation_degrees")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 150.342 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("core/chest/arm_left/hand_left:rotation_degrees")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 15.542 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("core/chest/head:rotation_degrees")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("core/chest/arm_right/hand_right:rotation_degrees")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 25.3583 ]
+}
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("core:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -89.9996 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("core/hip:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("core/hip/leg_right:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -180.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("core/hip/leg_right/anotherleg_right:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("core/hip/leg_left:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 180.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("core/hip/leg_left/anotherleg_left:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("core/chest/arm_right:rotation_degrees")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -180.0 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("core/chest/arm_left:rotation_degrees")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 180.0 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("core/chest/arm_left/hand_left:rotation_degrees")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("core/chest/head:rotation_degrees")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("core/chest/arm_right/hand_right:rotation_degrees")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[node name="ILOVEYOU" type="Skeleton2D"]
+rotation = -0.00171733
+
+[node name="core" type="Bone2D" parent="."]
+position = Vector2( 2, 26.0017 )
+rotation = -1.57079
+rest = Transform2D( 6.27438e-06, -1, 1, 6.27438e-06, 2, 26.0017 )
+
+[node name="hip" type="Bone2D" parent="core"]
+position = Vector2( 26.0017, -2.00016 )
+rest = Transform2D( 0.99995, -0.00999247, 0.00999247, 0.99995, 26.0017, -2.00016 )
+
+[node name="HipsBack" type="Sprite" parent="core/hip"]
+position = Vector2( -21.4995, 1.91817 )
+rotation = 1.57079
+z_index = -1
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_ik_": true
+}
+
+[node name="leg_right" type="Bone2D" parent="core/hip"]
+position = Vector2( -22.9925, -8.29991 )
+rotation = -3.14159
+z_index = -3
+rest = Transform2D( -1, -2.53518e-06, 2.53518e-06, -1, -22.9925, -8.29991 )
+
+[node name="anotherleg_right" type="Bone2D" parent="core/hip/leg_right"]
+position = Vector2( 79.8491, -0.348877 )
+rest = Transform2D( 1, 0, 0, 1, 79.8491, -0.348877 )
+default_length = 70.0
+
+[node name="Leg2" type="Sprite" parent="core/hip/leg_right/anotherleg_right"]
+position = Vector2( -0.687073, -0.726608 )
+rotation = -1.55517
+texture = ExtResource( 10 )
+offset = Vector2( 6, 36 )
+
+[node name="Leg" type="Sprite" parent="core/hip/leg_right"]
+position = Vector2( 0.4935, 0.800022 )
+rotation = -1.54322
+texture = ExtResource( 7 )
+offset = Vector2( -3.82738, 38.777 )
+
+[node name="leg_left" type="Bone2D" parent="core/hip"]
+position = Vector2( -31.0216, 8.68638 )
+rotation = 3.14159
+rest = Transform2D( -1, 2.53518e-06, -2.53518e-06, -1, -31.0216, 8.68638 )
+
+[node name="anotherleg_left" type="Bone2D" parent="core/hip/leg_left"]
+position = Vector2( 80.2254, 0.94458 )
+rest = Transform2D( 1, 0, 0, 1, 80.2254, 0.94458 )
+default_length = 70.0
+
+[node name="Leg2" type="Sprite" parent="core/hip/leg_left/anotherleg_left"]
+position = Vector2( -1.52588e-05, 0 )
+rotation = -1.55517
+texture = ExtResource( 10 )
+offset = Vector2( 6, 36 )
+
+[node name="Leg" type="Sprite" parent="core/hip/leg_left"]
+position = Vector2( 0.4935, 0.800022 )
+rotation = -1.54322
+texture = ExtResource( 7 )
+offset = Vector2( -3.82738, 38.777 )
+
+[node name="HipsFront" type="Sprite" parent="core/hip"]
+position = Vector2( -21.4995, 1.91817 )
+rotation = 1.57079
+z_index = 1
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_ik_": true
+}
+
+[node name="chest" type="Bone2D" parent="core"]
+position = Vector2( 27, -0.998459 )
+rest = Transform2D( 1, 0, 0, 1, 27, -0.998459 )
+
+[node name="arm_right" type="Bone2D" parent="core/chest"]
+position = Vector2( 74.9999, -22.0005 )
+rotation = -3.14159
+z_index = -2
+rest = Transform2D( -1, -2.53518e-06, 2.53518e-06, -1, 74.9999, -22.0005 )
+
+[node name="hand_right" type="Bone2D" parent="core/chest/arm_right"]
+position = Vector2( 62.2441, -1.5829 )
+z_index = -2
+rest = Transform2D( 1, 0, 0, 1, 62.2441, -1.5829 )
+default_length = 50.0
+
+[node name="Arm2" type="Sprite" parent="core/chest/arm_right/hand_right"]
+position = Vector2( -0.0327339, -0.0754309 )
+rotation = -1.51764
+texture = ExtResource( 12 )
+offset = Vector2( 1.34262, 26.6808 )
+
+[node name="HandRight" type="Sprite" parent="core/chest/arm_right/hand_right/Arm2"]
+position = Vector2( 9.78858, 66.3381 )
+texture = ExtResource( 14 )
+
+[node name="Arm" type="Sprite" parent="core/chest/arm_right"]
+position = Vector2( -0.297092, 0.0516396 )
+rotation = -1.59771
+texture = ExtResource( 13 )
+offset = Vector2( 5.90618, 31.2805 )
+
+[node name="chest" type="Sprite" parent="core/chest"]
+position = Vector2( 43, -4.00027 )
+rotation = 1.57079
+z_index = 1
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_ik_": true
+}
+
+[node name="arm_left" type="Bone2D" parent="core/chest"]
+position = Vector2( 60, 0.999618 )
+rotation = 3.14159
+z_index = 2
+rest = Transform2D( -1, 2.53518e-06, -2.53518e-06, -1, 60, 0.999618 )
+
+[node name="hand_left" type="Bone2D" parent="core/chest/arm_left"]
+position = Vector2( 62.3597, -3.10755 )
+rest = Transform2D( 1, 0, 0, 1, 62.3597, -3.10755 )
+default_length = 50.0
+
+[node name="Arm2" type="Sprite" parent="core/chest/arm_left/hand_left"]
+position = Vector2( 0.138893, -0.219749 )
+rotation = -1.55883
+z_index = 2
+texture = ExtResource( 8 )
+offset = Vector2( 0.710884, 26.9086 )
+
+[node name="HandLeft" type="Sprite" parent="core/chest/arm_left/hand_left/Arm2"]
+position = Vector2( -3.65982, 65.5498 )
+texture = ExtResource( 11 )
+
+[node name="Arm" type="Sprite" parent="core/chest/arm_left"]
+position = Vector2( -0.0415001, 0.069746 )
+rotation = -1.62746
+z_index = 2
+texture = ExtResource( 9 )
+offset = Vector2( 5.79319, 31.0565 )
+
+[node name="head" type="Bone2D" parent="core/chest"]
+position = Vector2( 81, -0.000511169 )
+z_index = 2
+rest = Transform2D( 1, 0, 0, 1, 81, -0.000511169 )
+
+[node name="Head" type="Sprite" parent="core/chest/head"]
+position = Vector2( 32, -4.0002 )
+rotation = 1.57079
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_ik_": true
+}
+
+[node name="Eye" type="Sprite" parent="core/chest/head/Head"]
+position = Vector2( 6, 7 )
+texture = ExtResource( 4 )
+
+[node name="Core" type="Sprite" parent="core"]
+position = Vector2( 26, -2 )
+rotation = 1.57079
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_ik_": true
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Idle"
+anims/Idle = SubResource( 1 )
+anims/RESET = SubResource( 2 )
