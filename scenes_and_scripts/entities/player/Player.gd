@@ -1,9 +1,9 @@
 extends KinematicBody2D 
 
-var hitSound = preload("res://assets/sounds/playerDamage.wav")
-var getHeartSound = preload("res://scenes_and_scripts/entities/pickups/healthHeart/heartGet.wav")
-var damageIndicator = preload("res://scenes_and_scripts/entities/damageIndicator.tscn")
-var victorySprite = preload("res://scenes_and_scripts/entities/player/jogadorYeah.png")
+var hitSound = preload("res://assets/sounds/entities/player/playerDamage.wav")
+var getHeartSound = preload("res://assets/sounds/entities/pickups/heartGet.wav")
+var damageIndicator = preload("res://scenes_and_scripts/components/stage/damageIndicator.tscn")
+var victorySprite = preload("res://assets/sprites/entities/player/jogadorYeah.png")
 
 var rng = RandomNumberGenerator.new()
 

@@ -1,14 +1,14 @@
 [gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://scenes_and_scripts/components/stage/StageTouchscreenUI/touchscreenJoystickBase.png" type="Texture" id=1]
-[ext_resource path="res://scenes_and_scripts/components/stage/StageTouchscreenUI/touchscreenJoystickButton.png" type="Texture" id=2]
-[ext_resource path="res://scenes_and_scripts/components/stage/StageTouchscreenUI/touchscreenJoystickButtonPressed.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/UI/StageTouchscreenUI/touchscreenJoystickBase.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/UI/StageTouchscreenUI/touchscreenJoystickButton.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/UI/StageTouchscreenUI/touchscreenJoystickButtonPressed.png" type="Texture" id=3]
 [ext_resource path="res://scenes_and_scripts/components/stage/StageTouchscreenUI/joystick_button.gd" type="Script" id=4]
 [ext_resource path="res://scenes_and_scripts/components/stage/StageTouchscreenUI/StageTouchscreenUI.gd" type="Script" id=5]
-[ext_resource path="res://scenes_and_scripts/components/stage/StageTouchscreenUI/touchscreenSwitchGunLeft.png" type="Texture" id=9]
-[ext_resource path="res://scenes_and_scripts/components/stage/StageTouchscreenUI/touchscreenSwitchGunLeftPressed.png" type="Texture" id=10]
-[ext_resource path="res://scenes_and_scripts/components/stage/StageTouchscreenUI/touchscreenPauseButton.png" type="Texture" id=14]
-[ext_resource path="res://scenes_and_scripts/components/stage/StageTouchscreenUI/touchscreenPauseButtonPressed.png" type="Texture" id=15]
+[ext_resource path="res://assets/sprites/UI/StageTouchscreenUI/touchscreenSwitchGunLeft.png" type="Texture" id=9]
+[ext_resource path="res://assets/sprites/UI/StageTouchscreenUI/touchscreenSwitchGunLeftPressed.png" type="Texture" id=10]
+[ext_resource path="res://assets/sprites/UI/StageTouchscreenUI/touchscreenPauseButton.png" type="Texture" id=14]
+[ext_resource path="res://assets/sprites/UI/StageTouchscreenUI/touchscreenPauseButtonPressed.png" type="Texture" id=15]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 50.0

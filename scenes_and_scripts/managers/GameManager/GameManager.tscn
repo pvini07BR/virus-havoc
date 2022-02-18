@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://scenes_and_scripts/managers/GameManager/GameManager.gd" type="Script" id=1]
-[ext_resource path="res://scenes_and_scripts/components/Fade.tscn" type="PackedScene" id=2]
 
 [node name="GameManager" type="Node"]
 pause_mode = 2
@@ -10,5 +9,15 @@ script = ExtResource( 1 )
 [node name="musicChannel" type="AudioStreamPlayer" parent="."]
 pause_mode = 1
 
-[node name="Fade" parent="." instance=ExtResource( 2 )]
-pause_mode = 2
+[node name="fadeLayer" type="CanvasLayer" parent="."]
+layer = 10
+offset = Vector2( -1280, -720 )
+transform = Transform2D( 1, 0, 0, 1, -1280, -720 )
+
+[node name="fade" type="ColorRect" parent="fadeLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

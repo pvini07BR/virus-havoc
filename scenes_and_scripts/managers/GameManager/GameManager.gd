@@ -5,6 +5,16 @@ enum PLATFORMS {
 	MOBILE
 }
 
+var menus = {
+	"debug_menu": preload("res://scenes_and_scripts/runnables/menus/DebugMenu/DebugMenu.tscn"),
+	"game_over": preload("res://scenes_and_scripts/runnables/menus/GameOverScreen/GameOverScreen.tscn"),
+	"gundex": preload("res://scenes_and_scripts/runnables/menus/Gundex/Gundex.tscn"),
+	"touchscreen_ui_settings": preload("res://scenes_and_scripts/runnables/menus/TouchscreenUISettings/TouchscreenUISettings.tscn"),
+	"intro": preload("res://scenes_and_scripts/runnables/menus/intro/intro.tscn"),
+	"loading": preload("res://scenes_and_scripts/runnables/menus/loading/loading.tscn"),
+	"mods": preload("res://scenes_and_scripts/runnables/menus/mods/mods.tscn")
+}
+
 export(Array, PackedScene) var equippedGuns = [null, null]
 var languageTemp := "pt"
 var platform = PLATFORMS.MOBILE
@@ -52,13 +62,19 @@ func loadGuns():
 	var next_file := gunsDir.get_next()
 	while next_file != "":
 		if gunsDir.current_is_dir():
-			var try = load(dir + next_file + "/scene.tscn")
+			var try = load(dir + next_file + "/" + next_file +".tscn")
 			if try:
 				guns.push_back(try)
 				print("Succefully loaded gun located at: " + dir + next_file + "/scene.tscn.")
 			else:
 				printerr("Could not load gun located at: " + dir + next_file + "/scene.tscn.")
 		next_file = gunsDir.get_next()
+	guns.sort_custom(self, "sortGunsByID")
+		
+func sortGunsByID(a, b):
+	if a.instance().ID < b.instance().ID:
+		return true
+	return false
 	
 func loadStages():
 	var dir = "res://scenes_and_scripts/runnables/stages/"
@@ -72,7 +88,7 @@ func loadStages():
 	var next_file := stagesDir.get_next()
 	while next_file != "":
 		if stagesDir.current_is_dir():
-			var dirToTry = dir + next_file + "/scene.tscn"
+			var dirToTry = dir + next_file + "/" + next_file + ".tscn"
 			var try = load(dirToTry)
 			if try:
 				stages.push_back(try)
@@ -136,25 +152,27 @@ func save_equippedGuns(ifFileFound : bool):
 			file.close()
 	
 func goto_scene(path):
-	if int(typeof(path)) == 17:
-		call_deferred("_deferred_goto_packedScene", path)
+	var fadeTime = 0.25
+	var fadeTween = Tween.new()
+	add_child(fadeTween)
+	
+	$fadeLayer.offset = Vector2(0, 0)
+	fadeTween.interpolate_property($fadeLayer/fade, "modulate", Color(0,0,0,0), Color(0,0,0,1), fadeTime, Tween.TRANS_LINEAR)
+	fadeTween.start()
+	yield(fadeTween, "tween_all_completed")
+	currentScene.free()
+	if not int(typeof(path)) == 17:
+		var s = ResourceLoader.load(path)
+		currentScene = s.instance()
 	else:
-		call_deferred("_deferred_goto_scene", path)
-	
-func _deferred_goto_scene(path):
-	currentScene.free()
-	var s = ResourceLoader.load(path)
-	currentScene = s.instance()
+		currentScene = path.instance()
 	get_tree().get_root().add_child(currentScene)
 	get_tree().set_current_scene(currentScene)
-	get_node("Fade/layer/anim").play("fadeIn")
-	
-func _deferred_goto_packedScene(path):
-	currentScene.free()
-	currentScene = path.instance()
-	get_tree().get_root().add_child(currentScene)
-	get_tree().set_current_scene(currentScene)
-	get_node("Fade/layer/anim").play("fadeIn")
+	fadeTween.interpolate_property($fadeLayer/fade, "modulate", Color(0,0,0,1), Color(0,0,0,0), fadeTime, Tween.TRANS_LINEAR)
+	fadeTween.start()
+	yield(fadeTween, "tween_all_completed")
+	$fadeLayer.offset = Vector2(-1280, -720)
+	fadeTween.queue_free()
 	
 func _notification(what):
 	match what:

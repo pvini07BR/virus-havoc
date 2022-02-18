@@ -33,13 +33,11 @@ func _on_restartStage_pressed():
 	GameManager.storedScore = 0
 	GameManager.wasInBossBattle = false
 	GameManager.lastStagePlayed = GameManager.lastStagePlayed
-	GameManager.get_node("Fade").path = GameManager.stages[GameManager.lastStagePlayed]
-	GameManager.get_node("Fade/layer/anim").play("fadeOut")
+	GameManager.goto_scene(GameManager.stages[GameManager.lastStagePlayed])
 
 func _on_goBackButton_pressed():
 	GameManager.currentScene.inputWorking = false
-	GameManager.get_node("Fade").path = "res://scenes_and_scripts/runnables/menus/DebugMenu.tscn"
-	GameManager.get_node("Fade/layer/anim").play("fadeOut")
+	GameManager.goto_scene(GameManager.menus["debug_menu"])
 	get_tree().get_root().get_node("GameManager/musicChannel").set_stream(null)
 
 func _on_Timer_timeout():

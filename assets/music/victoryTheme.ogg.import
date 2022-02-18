@@ -11,5 +11,5 @@ dest_files=[ "res://.import/victoryTheme.ogg-5311a23a5cc3b480aab350f312635560.og
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0

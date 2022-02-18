@@ -9,7 +9,7 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Node2D",
+"base": "Area2D",
 "class": "Bullet",
 "language": "GDScript",
 "path": "res://scenes_and_scripts/classes/bullet.gd"
@@ -28,25 +28,19 @@ _global_script_classes=[ {
 "class": "Virus",
 "language": "GDScript",
 "path": "res://scenes_and_scripts/classes/virus.gd"
-}, {
-"base": "Area2D",
-"class": "VirusBullet",
-"language": "GDScript",
-"path": "res://scenes_and_scripts/classes/virusBullet.gd"
 } ]
 _global_script_class_icons={
 "Bullet": "",
 "Gun": "",
 "Stage": "",
-"Virus": "",
-"VirusBullet": ""
+"Virus": ""
 }
 
 [application]
 
 config/name="VIRUS HAVOC!"
 run/main_scene="res://scenes_and_scripts/runnables/menus/intro/intro.tscn"
-boot_splash/image="res://scenes_and_scripts/runnables/menus/splash.png"
+boot_splash/image="res://assets/sprites/menus/splash.png"
 boot_splash/use_filter=false
 boot_splash/bg_color=Color( 0, 0, 0, 1 )
 config/icon="res://assets/icons/icon-hd.png"

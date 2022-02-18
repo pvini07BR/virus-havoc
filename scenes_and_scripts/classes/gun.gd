@@ -2,13 +2,14 @@ extends Node2D
 
 class_name Gun
 
+export(int) var ID
 export(PackedScene) var projectile
 export(Texture) var previewSprite
 export(String) var gunName
 export(String) var gunDesc
 export(float) var damage
 export(AudioStreamSample) var shootingSound
-var gunNotFoundSprite : Texture = preload("res://scenes_and_scripts/guns/previewSprite_gunNotFound.png")
+var gunNotFoundSprite : Texture = preload("res://assets/sprites/guns/preview/gunNotFound_preview.png")
 var cooldown = false
 var rng = RandomNumberGenerator.new()
 var active = false

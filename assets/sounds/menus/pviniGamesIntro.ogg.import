@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/pviniGamesIntro.ogg-d02eac722d253eec77db307c94002aa1.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/menus/pviniGamesIntro.ogg"
+dest_files=[ "res://.import/pviniGamesIntro.ogg-d02eac722d253eec77db307c94002aa1.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/bombLauncher_launch.wav-603d737932f28eabc042ffc5c63874a8.sample"
+
+[deps]
+
+source_file="res://assets/sounds/guns/bombLauncher_launch.wav"
+dest_files=[ "res://.import/bombLauncher_launch.wav-603d737932f28eabc042ffc5c63874a8.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

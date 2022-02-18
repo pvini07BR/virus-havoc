@@ -1,0 +1,123 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://scenes_and_scripts/runnables/menus/mods/mods.gd" type="Script" id=1]
+[ext_resource path="res://resources/fonts/nokiafc22.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://scenes_and_scripts/backgrounds/menu/MenuBackground.tscn" type="PackedScene" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+resource_local_to_scene = true
+size = 20
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+resource_local_to_scene = true
+size = 30
+outline_size = 5
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 25
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=4]
+resource_local_to_scene = true
+size = 40
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=5]
+resource_local_to_scene = true
+size = 40
+outline_size = 5
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[node name="mods" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="MenuBackground" parent="." instance=ExtResource( 3 )]
+
+[node name="modsList" type="ItemList" parent="."]
+margin_right = 201.0
+margin_bottom = 630.0
+focus_mode = 0
+custom_fonts/font = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="modIcon" type="TextureRect" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = 201.0
+margin_right = 457.0
+margin_bottom = 256.0
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="modTitle" type="Label" parent="."]
+margin_left = 464.0
+margin_top = 4.0
+margin_right = 1276.0
+margin_bottom = 42.0
+custom_fonts/font = SubResource( 2 )
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="modDesc" type="RichTextLabel" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 201.0
+margin_top = 256.0
+margin_right = 1270.0
+margin_bottom = 715.0
+grow_vertical = 0
+custom_fonts/normal_font = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GoBack" type="Button" parent="."]
+margin_left = 18.0
+margin_top = 646.0
+margin_right = 185.0
+margin_bottom = 702.0
+custom_fonts/font = SubResource( 4 )
+align = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ActivateMod" type="Button" parent="."]
+margin_left = 947.0
+margin_top = 646.0
+margin_right = 1259.0
+margin_bottom = 702.0
+custom_fonts/font = SubResource( 4 )
+disabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ErrorText" type="Label" parent="."]
+visible = false
+margin_left = 201.0
+margin_top = 256.0
+margin_right = 1280.0
+margin_bottom = 306.0
+custom_fonts/font = SubResource( 5 )
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="item_selected" from="modsList" to="." method="_on_modsList_item_selected"]
+[connection signal="pressed" from="GoBack" to="." method="_on_GoBack_pressed"]
+[connection signal="pressed" from="ActivateMod" to="." method="_on_ActivateMod_pressed"]

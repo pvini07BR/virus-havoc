@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://scenes_and_scripts/entities/pickups/healthHeart/healthHeart.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/entities/pickups/healthHeart/healthHeart.png" type="Texture" id=1]
 [ext_resource path="res://scenes_and_scripts/entities/pickups/healthHeart/healthHeart.gd" type="Script" id=2]
-[ext_resource path="res://scenes_and_scripts/entities/pickups/healthHeart/healthHeart2.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/entities/pickups/healthHeart/healthHeart2.png" type="Texture" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 18.0

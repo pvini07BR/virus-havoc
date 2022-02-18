@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://scenes_and_scripts/guns/0_commonLaserGun/previewSprite.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/guns/preview/commonLaserGun_preview.png" type="Texture" id=1]
 [ext_resource path="res://scenes_and_scripts/components/stage/LevelUI.gd" type="Script" id=2]
-[ext_resource path="res://scenes_and_scripts/components/stage/gunSelector.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/UI/gunSelector.png" type="Texture" id=3]
 [ext_resource path="res://resources/fonts/nokiafc22.ttf" type="DynamicFontData" id=4]
 
 [sub_resource type="DynamicFont" id=6]

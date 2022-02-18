@@ -2,6 +2,7 @@ extends Area2D
 
 class_name Virus
 
+export(bool) var isBoss
 export(int) var scoreValue
 export(float) var maxHealth
 export(float) var shootingCooldownFrom
@@ -22,9 +23,9 @@ var canTakeDamage = true
 var heartDropProbability = 0
 var health : float
 var heartDrop = preload("res://scenes_and_scripts/entities/pickups/healthHeart/healthHeart.tscn")
-var damageIndicator = preload("res://scenes_and_scripts/entities/damageIndicator.tscn")
+var damageIndicator = preload("res://scenes_and_scripts/components/stage/damageIndicator.tscn")
 var droppedHeart = false
-var healthBar = ProgressBar.new()
+var healthBar : ProgressBar
 var virusEffects = AnimationPlayer.new()
 var shootingCooldown = Timer.new()
 
@@ -37,29 +38,32 @@ func _ready():
 		shootingCooldown.connect("timeout", self, "_on_ShootTimer_timeout")
 		add_child(shootingCooldown)
 	
-	healthBar.visible = false
-	healthBar.percent_visible = false
-	healthBar.max_value = maxHealth
-	healthBar.rect_position = Vector2(-25, 25)
-	healthBar.rect_size = Vector2(50, 5)
-	add_child(healthBar)
-	var styleBoxFlat = StyleBoxFlat.new()
-	var styleBoxFlat2 = StyleBoxFlat.new()
-	
-	styleBoxFlat.corner_radius_bottom_left = 5
-	styleBoxFlat.corner_radius_bottom_right = 5
-	styleBoxFlat.corner_radius_top_left = 5
-	styleBoxFlat.corner_radius_top_right = 5
-	
-	styleBoxFlat2.corner_radius_bottom_left = 5
-	styleBoxFlat2.corner_radius_bottom_right = 5
-	styleBoxFlat2.corner_radius_top_left = 5
-	styleBoxFlat2.corner_radius_top_right = 5
-	
-	styleBoxFlat2.bg_color = Color(0, 1, 0, 1)
-	
-	healthBar.set("custom_styles/bg", styleBoxFlat)
-	healthBar.set("custom_styles/fg", styleBoxFlat2)
+	if !isBoss:
+		healthBar = ProgressBar.new()
+		
+		healthBar.visible = false
+		healthBar.percent_visible = false
+		healthBar.max_value = maxHealth
+		healthBar.rect_position = Vector2(-25, 25)
+		healthBar.rect_size = Vector2(50, 5)
+		add_child(healthBar)
+		var styleBoxFlat = StyleBoxFlat.new()
+		var styleBoxFlat2 = StyleBoxFlat.new()
+		
+		styleBoxFlat.corner_radius_bottom_left = 5
+		styleBoxFlat.corner_radius_bottom_right = 5
+		styleBoxFlat.corner_radius_top_left = 5
+		styleBoxFlat.corner_radius_top_right = 5
+		
+		styleBoxFlat2.corner_radius_bottom_left = 5
+		styleBoxFlat2.corner_radius_bottom_right = 5
+		styleBoxFlat2.corner_radius_top_left = 5
+		styleBoxFlat2.corner_radius_top_right = 5
+		
+		styleBoxFlat2.bg_color = Color(0, 1, 0, 1)
+		
+		healthBar.set("custom_styles/bg", styleBoxFlat)
+		healthBar.set("custom_styles/fg", styleBoxFlat2)
 	
 	if !damageAnimation == null:
 		virusEffects.add_animation("virusHit", damageAnimation)
@@ -77,6 +81,8 @@ func _ready():
 	z_as_relative = false
 	
 	add_to_group("virus")
+	if isBoss:
+		add_to_group("boss")
 	self.connect("area_entered", self, "_on_virus_area_entered")
 		
 func hit(damage : int, cooldown : bool):
@@ -95,7 +101,8 @@ func hit(damage : int, cooldown : bool):
 				randomize()
 				rng.randomize()
 				SoundManager.playSound(damageSounds[[0,damageSounds.size() - 1][randi() % 2]], -10, rng.randf_range(0.9,1.1))
-			healthBar.visible = true
+			if !isBoss:
+				healthBar.visible = true
 			
 		if cooldown == true:
 			canTakeDamage = false
@@ -111,7 +118,8 @@ func _on_virus_area_entered(area):
 			hit(area.damage, true)
 		
 func _process(_delta):
-	healthBar.value = health
+	if !isBoss:
+		healthBar.value = health
 	
 	if health <= 0:
 		if vulnerable == true:
@@ -119,22 +127,21 @@ func _process(_delta):
 				virusEffects.play("virusDeath")
 			else:
 				emit_signal("onDeath")
-			healthBar.visible = false
-		
-			if heartDropProbability >= HeartDropChance and !droppedHeart:
-				var heart = heartDrop.instance()
-				heart.global_position = global_position
-				get_tree().get_nodes_in_group("stage")[0].add_child(heart)
-				droppedHeart = true
+			if !isBoss:
+				healthBar.visible = false
+				if heartDropProbability >= HeartDropChance and !droppedHeart:
+					var heart = heartDrop.instance()
+					heart.global_position = global_position
+					get_tree().get_nodes_in_group("stage")[0].add_child(heart)
+					droppedHeart = true
 			vulnerable = false
 			
 func _on_virusEffects_animation_finished(anim_name):
 	if anim_name == "virusDeath":
+		kill()
+			
+func kill():
+	if !isBoss:
 		get_tree().get_nodes_in_group("stage")[0].virusesKilled += 1
 		get_tree().get_nodes_in_group("stage")[0].score += scoreValue
-		queue_free()
-			
-func _onDeath_triggered():
-	get_tree().get_nodes_in_group("stage")[0].virusesKilled += 1
-	get_tree().get_nodes_in_group("stage")[0].score += scoreValue
 	queue_free()

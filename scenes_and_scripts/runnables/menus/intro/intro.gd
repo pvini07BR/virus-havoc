@@ -8,5 +8,4 @@ func _input(event):
 		go()
 		
 func go():
-	GameManager.get_node("Fade").path = "res://scenes_and_scripts/runnables/menus/DebugMenu.tscn"
-	GameManager.get_node("Fade/layer/anim").play("fadeOut")
+	GameManager.goto_scene(GameManager.menus["debug_menu"])

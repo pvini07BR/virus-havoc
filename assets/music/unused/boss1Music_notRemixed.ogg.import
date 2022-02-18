@@ -12,4 +12,4 @@ dest_files=[ "res://.import/boss1Music_notRemixed.ogg-3fdbcea193d4af868b9412e888
 [params]
 
 loop=true
-loop_offset=12.04
+loop_offset=0

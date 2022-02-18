@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/beamRiser.wav-0c2f24309cfea850c3e1175067161d28.sample"
+
+[deps]
+
+source_file="res://assets/sounds/bullets/beamRiser.wav"
+dest_files=[ "res://.import/beamRiser.wav-0c2f24309cfea850c3e1175067161d28.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

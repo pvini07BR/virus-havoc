@@ -41,16 +41,14 @@ func _on_BrokenShip_Anim_animation_finished(anim_name):
 	if anim_name == "gameOver_recovering":
 		$BrokenShip_Anim.play("gameOver_recovered")
 	if anim_name == "gameOver_recovered":
-		GameManager.get_node("Fade").path = GameManager.stages[GameManager.lastStagePlayed]
-		GameManager.get_node("Fade/layer/anim").play("fadeOut")
+		GameManager.goto_scene(GameManager.stages[GameManager.lastStagePlayed])
 
 func _on_exit_pressed():
 	$areYouSure.offset.x = 0
 	$areYouSure.offset.y = 0
 
 func _on_yes_pressed():
-	GameManager.get_node("Fade").path = "res://scenes_and_scripts/runnables/menus/DebugMenu.tscn"
-	GameManager.get_node("Fade/layer/anim").play("fadeOut")
+	GameManager.goto_scene(GameManager.menus["debug_menu"])
 
 func _on_no_pressed():
 	$areYouSure.offset.x = -1280

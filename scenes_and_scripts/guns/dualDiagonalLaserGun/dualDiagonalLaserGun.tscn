@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/sprites/guns/dualDiagonalLaserGun.png" type="Texture" id=1]
+[ext_resource path="res://scenes_and_scripts/guns/dualDiagonalLaserGun/dualDiagonalLaserGun.gd" type="Script" id=2]
+[ext_resource path="res://scenes_and_scripts/bullets/diagonalLaserBall/diagonalLaserBall.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/sprites/guns/preview/dualDiagonalLaserGun_preview.png" type="Texture" id=4]
+[ext_resource path="res://assets/sounds/bullets/laser.wav" type="AudioStream" id=5]
+
+[node name="dualDiagonalLaserGun" type="Node2D" groups=["gun"]]
+position = Vector2( 0, 1 )
+script = ExtResource( 2 )
+ID = 2
+projectile = ExtResource( 3 )
+previewSprite = ExtResource( 4 )
+gunName = "GUNNAME_DUAL_DIAGONAL_LASER_GUN"
+gunDesc = "GUNDESC_DUAL_DIAGONAL_LASER_GUN"
+shootingSound = ExtResource( 5 )
+
+[node name="sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+centered = false
+
+[node name="pos" type="Position2D" parent="."]
+position = Vector2( 38, 21 )
+
+[node name="pos2" type="Position2D" parent="."]
+position = Vector2( 38, 2 )
+
+[node name="cooldown" type="Timer" parent="."]
+wait_time = 1.5
+
+[connection signal="timeout" from="cooldown" to="." method="_on_cooldown_timeout"]

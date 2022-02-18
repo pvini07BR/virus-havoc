@@ -8,9 +8,8 @@ onready var UI = preload("res://scenes_and_scripts/components/stage/LevelUI.tscn
 onready var UInst
 onready var TouchUI
 onready var TouchUInst
-onready var barrier = preload("res://scenes_and_scripts/components/stage/barrier.tscn")
+onready var barrier = preload("res://scenes_and_scripts/components/stage/stageBarrier.tscn")
 onready var lootBox = preload("res://scenes_and_scripts/entities/pickups/LootBox/LootBox.tscn")
-onready var gameOver = preload("res://scenes_and_scripts/runnables/menus/GameOverScreen/GameOverScreen.tscn")
 onready var pauseUI = preload("res://scenes_and_scripts/components/stage/PauseUI.tscn")
 onready var finishedUI = preload("res://scenes_and_scripts/components/stage/LevelFinishedUI.tscn")
 onready var gunReplacementUI = preload("res://scenes_and_scripts/components/stage/GunReplacingUI.tscn")
@@ -34,7 +33,7 @@ export(PackedScene) var background
 signal stage_started
 signal stage_ended
 
-var gunSwitchingSound = preload("res://assets/sounds/gunEquip.wav")
+var gunSwitchingSound = preload("res://assets/sounds/entities/player/gunEquip.wav")
 var gunSwitchingStreamPlayer := AudioStreamPlayer.new()
 
 var virusesKilled = 0
@@ -180,7 +179,7 @@ func _process(_delta):
 		bitcoins = 0
 		
 	if playerInst.hp <= 0:
-		GameManager.goto_scene(gameOver)
+		GameManager.goto_scene(GameManager.menus["game_over"])
 	
 func spawnLootBox(force : bool):
 	if force == false:

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/GameOver_recovered.wav-c0006b54964a09e0f09c9e522db844d8.sample"
+
+[deps]
+
+source_file="res://assets/sounds/menus/GameOver_recovered.wav"
+dest_files=[ "res://.import/GameOver_recovered.wav-c0006b54964a09e0f09c9e522db844d8.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

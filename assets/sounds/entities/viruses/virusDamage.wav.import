@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/virusDamage.wav-7345ba9b757175b12c72d92c54d6d7f9.sample"
+
+[deps]
+
+source_file="res://assets/sounds/entities/viruses/virusDamage.wav"
+dest_files=[ "res://.import/virusDamage.wav-7345ba9b757175b12c72d92c54d6d7f9.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
