@@ -68,7 +68,7 @@ Eu decidi deixar este jogo disponível ao público, pois o desenvolvimento infel
 
 Antes estava fazendo o jogo ser privado pra fazer meio que uma espécie de "surpresa" para todo mundo, mas essa ideia estava errada desde o ínicio.
 
-Aliás, eu pretendo deixar o jogo ser gratuito e de código aberto. Fiz essa decisão para deixar o jogo acessível e poder contribuir junto com a comunidade. Infelizmente o código deste jogo não está disponibilizado agora, pois, a versão de protótipo que foi enviada, é na verdade desatualizada, e não está meio que "sincronizada" com o verdadeiro código fonte. Mas claro, pretendo deixar o jogo código aberto eventualmente, e também depende da demanda que esse jogo conseguir.
+Aliás, eu pretendo deixar o jogo ser gratuito e de código aberto. Fiz essa decisão para deixar o jogo acessível e poder contribuir junto com a comunidade. E você já está aqui! Você também pode visitar a página do itch.io aqui: https://pvini-games.itch.io/virus-havoc
 
 Sobre a música utilizada neste jogo: TODAS AS MÚSICAS SÃO ORIGINAIS E FEITAS PARA ESTE JOGO. Não são músicas retiradas de sites tipo YouTube, Soundcloud ou sites de músicas copyright-free. ESTAS MÚSICAS NÃO EXISTEM EM LUGAR NENHUM EXCETO NESTE JOGO. Elas foram feitas por um amigo meu, chamado "²He", ou "Helium". Eu também fiz protótipos de músicas, mas ele fez todo o trabalho pra mim.
 
@@ -156,7 +156,7 @@ I decided to make this game available to the public, because the development has
 
 Before, I was making the game private to make it sort of a "surprise" for everyone, but that idea was wrong from the start.
 
-By the way, I intend to make the game free and open source. I made this decision to make the game accessible and to be able to contribute together with the community. Unfortunately the source code for this game is not available right now, as the prototype version that was uploaded is actually outdated, and not sort of "in sync" with the actual source code, because some code has been changed in the original source code and it's not finished yet. But of course, I intend to make the game open source eventually, and it also depends on the demand this game gets.
+By the way, I intend to make the game free and open source. I made this decision to make the game accessible and to be able to contribute together with the community. And you're already here! You can also visit the itch.io page of the game here: https://pvini-games.itch.io/virus-havoc
 
 About the music used in this game: ALL THE MUSIC ARE ORIGINAL AND MADE FOR THIS GAME. These are not songs taken from sites like YouTube, Soundcloud or these copyright-free sites that offers these songs. THE MUSIC OF THIS GAME DOES NOT EXIST ANYWHERE EXCEPT ON THIS GAME. They were made by a friend of mine called "²He", or "Helium". I also prototyped songs, but he did all the work for me.
 
